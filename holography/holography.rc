@@ -52,8 +52,11 @@ END
 
 IDR_MAIN_MENU MENU
 BEGIN
-    MENUITEM "File",                        40001
-    MENUITEM "Hologram",                    40002
+    POPUP "File"
+    BEGIN
+        MENUITEM "Exit",                        ID_FILE_EXIT
+    END
+    MENUITEM "Hologram",                    ID_HOLOGRAM
     MENUITEM "About",                       40003
 END
 

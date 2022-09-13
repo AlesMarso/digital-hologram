@@ -19,28 +19,25 @@ bool gui::Window::Init(HINSTANCE hInst)
 	WNDCLASSEXA wndClass;
 	ZeroMemory(&wndClass, sizeof(wndClass));
 
-	m_hInstance = hInst;
-
 	wndClass.cbSize = sizeof(WNDCLASSEXA);
 	wndClass.hInstance = hInst;
 	wndClass.lpfnWndProc = MessageHandlerSetup;
 	wndClass.lpszClassName = "HologramWindowClass";
 	wndClass.lpszMenuName = MAKEINTRESOURCEA(IDR_MAIN_MENU);
 
-	return RegisterClassExA(&wndClass);
+	bool res = RegisterClassExA(&wndClass);
+
+	if (res)
+		InitializeComponents();
+
+	return res;
 }
 
 bool gui::Window::Create(const char* title, uint32_t width, uint32_t height)
 {
 	m_hWnd = CreateWindowA("HologramWindowClass", title, WS_CAPTION | WS_OVERLAPPEDWINDOW | WS_SYSMENU | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, width, height, nullptr, nullptr, m_hInstance, this);
 
-	if (!m_hWnd)
-		return false;
-
-	m_Width = width;
-	m_Height = height;
-
-	return true;
+	return m_hWnd != nullptr;
 }
 
 LRESULT gui::Window::OnCreate(const EventArgs& args)
@@ -52,7 +49,7 @@ LRESULT gui::Window::OnPaint(const EventArgs& args)
 {
 	m_RenderContext->Draw(args.hWnd);
 
-	return false;
+	return true;
 }
 
 LRESULT gui::Window::OnSize(const EventArgs& args)
@@ -82,6 +79,16 @@ LRESULT gui::Window::OnSizing(const EventArgs& args)
 	return true;
 }
 
+void gui::Window::SetEvent(uint32_t event_id, uint32_t action_id, Event func)
+{
+	m_Events.SetEvent(event_id, action_id, func);
+}
+
+LRESULT gui::Window::OnFileExitMainMenu(const EventArgs& args)
+{
+	return OnClose(args);
+}
+
 LRESULT gui::Window::MessageHandlerSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	if (msg == WM_NCCREATE)
@@ -107,6 +114,11 @@ LRESULT gui::Window::MessageHandlerThunk(HWND hWnd, UINT msg, WPARAM wParam, LPA
 	return DefWindowProcA(hWnd, msg, wParam, lParam);
 }
 
+void gui::Window::InitializeComponents()
+{
+	SetEvent(ID_FILE_EXIT, ID_ACTION_MAIN_MENU, BIND_EVENT(gui::Window::OnFileExitMainMenu));
+}
+
 LRESULT gui::Window::MessageHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	EventArgs args = { hWnd, wParam, lParam };
@@ -130,6 +142,9 @@ LRESULT gui::Window::MessageHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
 
 	case WM_CLOSE:
 		return OnClose(args);
+
+	case WM_COMMAND:
+		return m_Events(CONTROL_ID, ACTION_ID, args);
 
 	default:
 		break;
