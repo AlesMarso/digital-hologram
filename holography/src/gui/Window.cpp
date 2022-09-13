@@ -60,12 +60,12 @@ LRESULT gui::Window::OnSize(const EventArgs& args)
 	return true;
 }
 
-LRESULT gui::Window::OnDestroy(const EventArgs&)
+LRESULT gui::Window::OnDestroy(const EventArgs& args)
 {
 	return LRESULT();
 }
 
-LRESULT gui::Window::OnClose(const EventArgs&)
+LRESULT gui::Window::OnClose(const EventArgs& args)
 {
 	PostQuitMessage(0);
 	return true;

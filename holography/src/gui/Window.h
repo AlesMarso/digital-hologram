@@ -22,27 +22,116 @@ namespace gui {
 		Window();
 		~Window();
 
-		bool Init(HINSTANCE);
-		bool Create(const char*, uint32_t width = DEF_WINDOW_WIDTH, uint32_t height = DEF_WINDOW_HEIGHT);
-		void SetEvent(uint32_t, uint32_t, Event);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="hInst"></param>
+		/// <returns></returns>
+		bool Init(HINSTANCE hInst);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="title"></param>
+		/// <param name="width"></param>
+		/// <param name="height"></param>
+		/// <returns></returns>
+		bool Create(const char* title, uint32_t width = DEF_WINDOW_WIDTH, uint32_t height = DEF_WINDOW_HEIGHT);
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="event_id"></param>
+		/// <param name="action_id"></param>
+		/// <param name="func"></param>
+		void SetEvent(uint32_t event_id, uint32_t action_id, Event func);
 
 	public:
-		LRESULT OnFileExitMainMenu(const EventArgs&);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		/// <returns></returns>
+		LRESULT OnFileExitMainMenu(const EventArgs& args);
 
 	public:
-		virtual LRESULT OnCreate(const EventArgs&);
-		virtual LRESULT OnPaint(const EventArgs&);
-		virtual LRESULT OnSize(const EventArgs&);
-		virtual LRESULT OnDestroy(const EventArgs&);
-		virtual LRESULT OnClose(const EventArgs&);
-		virtual LRESULT OnSizing(const EventArgs&);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		/// <returns></returns>
+		virtual LRESULT OnCreate(const EventArgs& args);
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		/// <returns></returns>
+		virtual LRESULT OnPaint(const EventArgs& args);
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		/// <returns></returns>
+		virtual LRESULT OnSize(const EventArgs& args);
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		/// <returns></returns>
+		virtual LRESULT OnDestroy(const EventArgs& args);
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		/// <returns></returns>
+		virtual LRESULT OnClose(const EventArgs& args);
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		/// <returns></returns>
+		virtual LRESULT OnSizing(const EventArgs& args);
 
 	protected:
-		virtual LRESULT MessageHandler(HWND, UINT, WPARAM, LPARAM);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="hWnd"></param>
+		/// <param name="msg"></param>
+		/// <param name="wParam"></param>
+		/// <param name="lParam"></param>
+		/// <returns></returns>
+		virtual LRESULT MessageHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 	private:
-		static LRESULT MessageHandlerSetup(HWND, UINT, WPARAM, LPARAM);
-		static LRESULT MessageHandlerThunk(HWND, UINT, WPARAM, LPARAM);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="hWnd"></param>
+		/// <param name="msg"></param>
+		/// <param name="wParam"></param>
+		/// <param name="lParam"></param>
+		/// <returns></returns>
+		static LRESULT MessageHandlerSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="hWnd"></param>
+		/// <param name="msg"></param>
+		/// <param name="wParam"></param>
+		/// <param name="lParam"></param>
+		/// <returns></returns>
+		static LRESULT MessageHandlerThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+		
+		/// <summary>
+		/// 
+		/// </summary>
 		virtual void InitializeComponents();
 
 	private:
