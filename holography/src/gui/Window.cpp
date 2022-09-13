@@ -1,7 +1,11 @@
 #include "Window.h"
 
 gui::Window::Window()
-	: m_Width(DEF_WINDOW_WIDTH), m_Height(DEF_WINDOW_HEIGHT), m_hWnd(nullptr), m_hInstance(nullptr)
+	: m_Width(DEF_WINDOW_WIDTH), 
+	m_Height(DEF_WINDOW_HEIGHT), 
+	m_hWnd(nullptr), 
+	m_hInstance(nullptr),
+	m_OGLRenderContext(nullptr)
 {
 }
 
@@ -49,19 +53,74 @@ bool gui::Window::Create(const char* title, uint32_t width, uint32_t height)
 	return true;
 }
 
-LRESULT gui::Window::OnCreate(const EventArgs&)
+LRESULT gui::Window::OnCreate(const EventArgs& args)
 {
-	return LRESULT();
+	PIXELFORMATDESCRIPTOR ppx;
+
+	ZeroMemory(&ppx, sizeof(PIXELFORMATDESCRIPTOR));
+
+	ppx.nSize = sizeof(PIXELFORMATDESCRIPTOR);
+	ppx.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+	ppx.cColorBits = 32;
+	ppx.cDepthBits = 32;
+	ppx.nVersion = 1;
+	ppx.iPixelType = PFD_TYPE_RGBA;
+
+	HDC dc = GetWindowDC(args.hWnd);
+
+	int iPixelFormat = ChoosePixelFormat(dc, &ppx);
+
+	if (!iPixelFormat)
+		return false;
+
+	if (!SetPixelFormat(dc, iPixelFormat, &ppx))
+		return false;
+
+	m_OGLRenderContext = wglCreateContext(dc);
+
+	if (!m_OGLRenderContext)
+		return false;
+
+	wglMakeCurrent(dc, m_OGLRenderContext);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearDepth(1.0f);
+
+	return true;
 }
 
-LRESULT gui::Window::OnPaint(const EventArgs&)
+LRESULT gui::Window::OnPaint(const EventArgs& args)
 {
-	return LRESULT();
+	PAINTSTRUCT paint;
+
+	BeginPaint(args.hWnd, &paint);
+
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	glBegin(GL_LINE_LOOP);
+	{
+		glVertex2f(-0.95f, -0.95f);
+		glVertex2f(-0.95f, 0.95f);
+		glVertex2f(0.95f, 0.95f);
+		glVertex2f(0.95f, -0.95f);
+	}
+	glEnd();
+
+	SwapBuffers(paint.hdc);
+
+	EndPaint(args.hWnd, &paint);
+
+	return false;
 }
 
-LRESULT gui::Window::OnSize(const EventArgs&)
+LRESULT gui::Window::OnSize(const EventArgs& args)
 {
-	return LRESULT();
+	RECT clientarea;
+	if (!GetClientRect(args.hWnd, &clientarea))
+		return false;
+
+	glViewport(0, 0, clientarea.right - clientarea.left, clientarea.bottom - clientarea.top);
+
+	return true;
 }
 
 LRESULT gui::Window::OnDestroy(const EventArgs&)
@@ -72,6 +131,17 @@ LRESULT gui::Window::OnDestroy(const EventArgs&)
 LRESULT gui::Window::OnClose(const EventArgs&)
 {
 	PostQuitMessage(0);
+	return true;
+}
+
+LRESULT gui::Window::OnSizing(const EventArgs& args)
+{
+	RECT clientarea;
+	if (!GetClientRect(args.hWnd, &clientarea))
+		return false;
+
+	glViewport(0, 0, clientarea.right - clientarea.left, clientarea.bottom - clientarea.top);
+
 	return true;
 }
 
@@ -89,6 +159,9 @@ LRESULT gui::Window::MessageHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
 
 	case WM_SIZE:
 		return OnSize(args);
+
+	case WM_SIZING:
+		return OnSizing(args);
 
 	case WM_DESTROY:
 		return OnDestroy(args);

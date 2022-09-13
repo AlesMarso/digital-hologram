@@ -4,6 +4,9 @@
 #include <cstdint>
 #include <share/const.h>
 
+#include <gl/GLU.h>
+#include <gl/GL.h>
+
 #include "resource.h"
 
 namespace gui {
@@ -27,11 +30,12 @@ namespace gui {
 		bool Init(HINSTANCE);
 		bool Create(const char*, uint32_t width = DEF_WINDOW_WIDTH, uint32_t height = DEF_WINDOW_HEIGHT);
 
-		LRESULT OnCreate(const EventArgs&);
-		LRESULT OnPaint(const EventArgs&);
-		LRESULT OnSize(const EventArgs&);
-		LRESULT OnDestroy(const EventArgs&);
-		LRESULT OnClose(const EventArgs&);
+		virtual LRESULT OnCreate(const EventArgs&);
+		virtual LRESULT OnPaint(const EventArgs&);
+		virtual LRESULT OnSize(const EventArgs&);
+		virtual LRESULT OnDestroy(const EventArgs&);
+		virtual LRESULT OnClose(const EventArgs&);
+		virtual LRESULT OnSizing(const EventArgs&);
 
 	protected:
 		virtual LRESULT MessageHandler(HWND, UINT, WPARAM, LPARAM);
@@ -45,5 +49,6 @@ namespace gui {
 		uint32_t m_Height;
 		HWND m_hWnd;
 		HINSTANCE m_hInstance;
+		HGLRC m_OGLRenderContext;
 	};
 }
