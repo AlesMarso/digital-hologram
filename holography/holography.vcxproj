@@ -159,6 +159,9 @@
   <ItemGroup>
     <ResourceCompile Include="holography.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ribbon1.mfcribbon-ms" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
