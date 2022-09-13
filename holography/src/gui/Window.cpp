@@ -32,18 +32,7 @@ bool gui::Window::Init(HINSTANCE hInst)
 
 bool gui::Window::Create(const char* title, uint32_t width, uint32_t height)
 {
-	m_hWnd = CreateWindowA(
-		"HologramWindowClass",
-		title,
-		WS_CAPTION | WS_OVERLAPPEDWINDOW | WS_SYSMENU | WS_VISIBLE,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		width,
-		height,
-		nullptr,
-		nullptr,
-		m_hInstance,
-		this);
+	m_hWnd = CreateWindowA("HologramWindowClass", title, WS_CAPTION | WS_OVERLAPPEDWINDOW | WS_SYSMENU | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, width, height, nullptr, nullptr, m_hInstance, this);
 
 	if (!m_hWnd)
 		return false;
@@ -68,11 +57,7 @@ LRESULT gui::Window::OnPaint(const EventArgs& args)
 
 LRESULT gui::Window::OnSize(const EventArgs& args)
 {
-	RECT clientarea;
-	if (!GetClientRect(args.hWnd, &clientarea))
-		return false;
-
-	glViewport(0, 0, clientarea.right - clientarea.left, clientarea.bottom - clientarea.top);
+	m_RenderContext->Resize(args.hWnd);
 
 	return true;
 }
@@ -90,11 +75,7 @@ LRESULT gui::Window::OnClose(const EventArgs&)
 
 LRESULT gui::Window::OnSizing(const EventArgs& args)
 {
-	RECT clientarea;
-	if (!GetClientRect(args.hWnd, &clientarea))
-		return false;
-
-	glViewport(0, 0, clientarea.right - clientarea.left, clientarea.bottom - clientarea.top);
+	m_RenderContext->Resize(args.hWnd);
 
 	return true;
 }

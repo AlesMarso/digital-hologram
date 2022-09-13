@@ -75,8 +75,11 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 	EndPaint(hWnd, &paint);
 }
 
-void rctx::OpenGLRender::Resize()
+void rctx::OpenGLRender::Resize(HWND hwnd)
 {
+	gui::Rect rect(hwnd);
+
+	glViewport(0, 0, rect.GetWidth(), rect.GetHeight());
 }
 
 void rctx::OpenGLRender::Close()

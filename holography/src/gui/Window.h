@@ -5,10 +5,8 @@
 #include <share/const.h>
 #include <render/OpenGLRender.h>
 
-#include <gl/GLU.h>
-#include <gl/GL.h>
-
 #include "resource.h"
+
 
 namespace gui {
 

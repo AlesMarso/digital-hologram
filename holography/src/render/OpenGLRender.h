@@ -4,6 +4,7 @@
 #include <render/IRender.h>
 #include <gl/GLU.h>
 #include <gl/GL.h>
+#include <gui/Rect.h>
 
 namespace rctx
 {
@@ -16,7 +17,7 @@ namespace rctx
 
 		virtual bool Init(HWND) override;
 		virtual void Draw(HWND) override;
-		virtual void Resize() override;
+		virtual void Resize(HWND) override;
 		virtual void Close() override;
 
 	private:
