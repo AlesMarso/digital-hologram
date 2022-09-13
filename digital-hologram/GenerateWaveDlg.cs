@@ -23,15 +23,10 @@ namespace dholo
             waveType.SelectedIndex = 0;
         }
 
-        private void waveRender_Paint(object sender, PaintEventArgs e)
+        private void OnChartPaint(object sender, PaintEventArgs e)
         {
             DrawGrid(e.Graphics);
             DrawChart(e.Graphics);
-        }
-
-        private void GenerateWaveDlg_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void DrawGrid(Graphics render)
@@ -89,7 +84,7 @@ namespace dholo
             }
         }
 
-        private void waveType_SelectedIndexChanged(object sender, EventArgs e)
+        private void OnWaveTypeSelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -123,7 +118,7 @@ namespace dholo
             }
         }
 
-        private void saveImage_Click(object sender, EventArgs e)
+        private void OnSaveImageClick(object sender, EventArgs e)
         {
             try
             {
@@ -138,7 +133,7 @@ namespace dholo
             }
         }
 
-        private void createImage_Click(object sender, EventArgs e)
+        private void OnCreateImageClick(object sender, EventArgs e)
         {
             try
             {
@@ -157,7 +152,7 @@ namespace dholo
                     }
                 }
 
-                resultImage.Image = image;
+                ResultImageWave.Image = image;
             }
             catch (Exception ex)
             {
@@ -165,9 +160,9 @@ namespace dholo
             }
         }
 
-        private void eraseImage_Click(object sender, EventArgs e)
+        private void OnEraseImageClick(object sender, EventArgs e)
         {
-
+            ResultImageWave.Image = null;
         }
     }
 }
