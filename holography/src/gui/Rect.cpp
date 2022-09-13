@@ -7,7 +7,8 @@ gui::Rect::Rect()
 
 gui::Rect::Rect(HWND hwnd)
 {
-	GetClientRect(hwnd, &m_Rect);
+	GetClientRect(hwnd, &m_ClientRect);
+	GetWindowRect(hwnd, &m_Rect);
 }
 
 gui::Rect::~Rect()
@@ -32,4 +33,24 @@ uint32_t gui::Rect::GetX() const
 uint32_t gui::Rect::GetY() const
 {
 	return m_Rect.top;
+}
+
+uint32_t gui::Rect::GetClientWidth() const
+{
+	return m_ClientRect.right - m_ClientRect.left;
+}
+
+uint32_t gui::Rect::GetClientHeight() const
+{
+	return m_ClientRect.bottom - m_ClientRect.top;
+}
+
+uint32_t gui::Rect::GetClientX() const
+{
+	return m_ClientRect.left;
+}
+
+uint32_t gui::Rect::GetClientY() const
+{
+	return m_ClientRect.top;
 }
