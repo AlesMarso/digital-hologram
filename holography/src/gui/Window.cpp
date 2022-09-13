@@ -80,6 +80,31 @@ LRESULT gui::Window::OnSizing(const EventArgs& args)
 	return true;
 }
 
+LRESULT gui::Window::MessageHandlerSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	if (msg == WM_NCCREATE)
+	{
+		const CREATESTRUCTW* const pCreate = reinterpret_cast<CREATESTRUCTW*>(lParam);
+
+		Window* pWnd = static_cast<Window*>(pCreate->lpCreateParams);
+
+		SetWindowLongPtrA(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pWnd));
+		SetWindowLongPtrA(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&Window::MessageHandlerThunk));
+	}
+
+	return DefWindowProcA(hWnd, msg, wParam, lParam);
+}
+
+LRESULT gui::Window::MessageHandlerThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	Window* const pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+
+	if(pWnd)
+		return pWnd->MessageHandler(hWnd, msg, wParam, lParam);
+
+	return DefWindowProcA(hWnd, msg, wParam, lParam);
+}
+
 LRESULT gui::Window::MessageHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	EventArgs args = { hWnd, wParam, lParam };
@@ -107,31 +132,6 @@ LRESULT gui::Window::MessageHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
 	default:
 		break;
 	}
-
-	return DefWindowProcA(hWnd, msg, wParam, lParam);
-}
-
-LRESULT gui::Window::MessageHandlerSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	if (msg == WM_NCCREATE)
-	{
-		const CREATESTRUCTW* const pCreate = reinterpret_cast<CREATESTRUCTW*>(lParam);
-
-		Window* pWnd = static_cast<Window*>(pCreate->lpCreateParams);
-
-		SetWindowLongPtrA(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pWnd));
-		SetWindowLongPtrA(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&Window::MessageHandlerThunk));
-	}
-
-	return DefWindowProcA(hWnd, msg, wParam, lParam);
-}
-
-LRESULT gui::Window::MessageHandlerThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	Window* const pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
-
-	if(pWnd)
-		return pWnd->MessageHandler(hWnd, msg, wParam, lParam);
 
 	return DefWindowProcA(hWnd, msg, wParam, lParam);
 }
