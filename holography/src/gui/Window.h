@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <cstdint>
 #include <share/const.h>
+#include <render/OpenGLRender.h>
 
 #include <gl/GLU.h>
 #include <gl/GL.h>
@@ -50,5 +51,7 @@ namespace gui {
 		HWND m_hWnd;
 		HINSTANCE m_hInstance;
 		HGLRC m_OGLRenderContext;
+
+		rctx::IRender* m_RenderContext;
 	};
 }

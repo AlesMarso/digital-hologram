@@ -1,11 +1,12 @@
 #include "Window.h"
 
 gui::Window::Window()
-	: m_Width(DEF_WINDOW_WIDTH), 
-	m_Height(DEF_WINDOW_HEIGHT), 
-	m_hWnd(nullptr), 
+	: m_Width(DEF_WINDOW_WIDTH),
+	m_Height(DEF_WINDOW_HEIGHT),
+	m_hWnd(nullptr),
 	m_hInstance(nullptr),
-	m_OGLRenderContext(nullptr)
+	m_OGLRenderContext(nullptr),
+	m_RenderContext(new rctx::OpenGLRender())
 {
 }
 
@@ -55,59 +56,12 @@ bool gui::Window::Create(const char* title, uint32_t width, uint32_t height)
 
 LRESULT gui::Window::OnCreate(const EventArgs& args)
 {
-	PIXELFORMATDESCRIPTOR ppx;
-
-	ZeroMemory(&ppx, sizeof(PIXELFORMATDESCRIPTOR));
-
-	ppx.nSize = sizeof(PIXELFORMATDESCRIPTOR);
-	ppx.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
-	ppx.cColorBits = 32;
-	ppx.cDepthBits = 32;
-	ppx.nVersion = 1;
-	ppx.iPixelType = PFD_TYPE_RGBA;
-
-	HDC dc = GetWindowDC(args.hWnd);
-
-	int iPixelFormat = ChoosePixelFormat(dc, &ppx);
-
-	if (!iPixelFormat)
-		return false;
-
-	if (!SetPixelFormat(dc, iPixelFormat, &ppx))
-		return false;
-
-	m_OGLRenderContext = wglCreateContext(dc);
-
-	if (!m_OGLRenderContext)
-		return false;
-
-	wglMakeCurrent(dc, m_OGLRenderContext);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClearDepth(1.0f);
-
-	return true;
+	return m_RenderContext->Init(args.hWnd);
 }
 
 LRESULT gui::Window::OnPaint(const EventArgs& args)
 {
-	PAINTSTRUCT paint;
-
-	BeginPaint(args.hWnd, &paint);
-
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	glBegin(GL_LINE_LOOP);
-	{
-		glVertex2f(-0.95f, -0.95f);
-		glVertex2f(-0.95f, 0.95f);
-		glVertex2f(0.95f, 0.95f);
-		glVertex2f(0.95f, -0.95f);
-	}
-	glEnd();
-
-	SwapBuffers(paint.hdc);
-
-	EndPaint(args.hWnd, &paint);
+	m_RenderContext->Draw(args.hWnd);
 
 	return false;
 }

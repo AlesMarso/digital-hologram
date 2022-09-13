@@ -144,10 +144,13 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\gui\Window.cpp" />
+    <ClCompile Include="src\render\OpenGLRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\gui\Window.h" />
+    <ClInclude Include="src\render\IRender.h" />
+    <ClInclude Include="src\render\OpenGLRender.h" />
     <ClInclude Include="src\share\const.h" />
     <ClInclude Include="src\share\types.h" />
   </ItemGroup>
