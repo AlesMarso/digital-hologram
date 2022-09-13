@@ -19,6 +19,7 @@ namespace rctx
 		virtual void Draw(HWND) override;
 		virtual void Resize(HWND) override;
 		virtual void Close() override;
+		virtual void Update() override;
 
 	private:
 		HWND m_hWnd;

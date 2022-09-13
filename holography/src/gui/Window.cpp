@@ -58,6 +58,7 @@ LRESULT gui::Window::OnPaint(const EventArgs& args)
 LRESULT gui::Window::OnSize(const EventArgs& args)
 {
 	m_RenderContext->Resize(args.hWnd);
+	m_RenderContext->Update();
 
 	return true;
 }
@@ -76,6 +77,7 @@ LRESULT gui::Window::OnClose(const EventArgs&)
 LRESULT gui::Window::OnSizing(const EventArgs& args)
 {
 	m_RenderContext->Resize(args.hWnd);
+	m_RenderContext->Update();
 
 	return true;
 }

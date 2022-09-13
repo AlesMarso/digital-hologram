@@ -31,6 +31,7 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 	ppx.nVersion = 1;
 	ppx.iPixelType = PFD_TYPE_RGBA;
 
+	m_hWnd = hWnd;
 	HDC dc = GetWindowDC(hWnd);
 
 	int iPixelFormat = ChoosePixelFormat(dc, &ppx);
@@ -47,7 +48,7 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 		return false;
 
 	wglMakeCurrent(dc, m_hGLRC);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClearDepth(1.0f);
 
 	return true;
@@ -59,9 +60,10 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 
 	BeginPaint(hWnd, &paint);
 
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glBegin(GL_LINE_LOOP);
+	glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
+	glBegin(GL_QUADS);
 	{
 		glVertex2f(-0.95f, -0.95f);
 		glVertex2f(-0.95f, 0.95f);
@@ -84,4 +86,9 @@ void rctx::OpenGLRender::Resize(HWND hwnd)
 
 void rctx::OpenGLRender::Close()
 {
+}
+
+void rctx::OpenGLRender::Update()
+{
+	Draw(m_hWnd);
 }
