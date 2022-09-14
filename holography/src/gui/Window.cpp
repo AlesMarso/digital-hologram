@@ -67,6 +67,7 @@ LRESULT gui::Window::OnDestroy(const EventArgs& args)
 
 LRESULT gui::Window::OnClose(const EventArgs& args)
 {
+	m_RenderContext->Close();
 	PostQuitMessage(0);
 	return true;
 }

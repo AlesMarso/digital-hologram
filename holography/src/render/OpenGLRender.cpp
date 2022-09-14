@@ -61,7 +61,6 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 	BeginPaint(hWnd, &paint);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
 	glBegin(GL_QUADS);
 	{
@@ -73,7 +72,6 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 	glEnd();
 
 	SwapBuffers(paint.hdc);
-
 	EndPaint(hWnd, &paint);
 }
 
@@ -86,6 +84,7 @@ void rctx::OpenGLRender::Resize(HWND hwnd)
 
 void rctx::OpenGLRender::Close()
 {
+	wglMakeCurrent(m_hDC, nullptr);
 }
 
 void rctx::OpenGLRender::Update()
