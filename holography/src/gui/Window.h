@@ -135,8 +135,6 @@ namespace gui {
 		virtual void InitializeComponents();
 
 	private:
-		uint32_t m_Width;
-		uint32_t m_Height;
 		HWND m_hWnd;
 		HINSTANCE m_hInstance;
 		HGLRC m_OGLRenderContext;

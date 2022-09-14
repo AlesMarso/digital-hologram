@@ -1,9 +1,7 @@
 #include "Window.h"
 
 gui::Window::Window()
-	: m_Width(DEF_WINDOW_WIDTH),
-	m_Height(DEF_WINDOW_HEIGHT),
-	m_hWnd(nullptr),
+	: m_hWnd(nullptr),
 	m_hInstance(nullptr),
 	m_OGLRenderContext(nullptr),
 	m_RenderContext(new rctx::OpenGLRender())
@@ -69,6 +67,7 @@ LRESULT gui::Window::OnClose(const EventArgs& args)
 {
 	m_RenderContext->Close();
 	PostQuitMessage(0);
+
 	return true;
 }
 
