@@ -36,7 +36,7 @@ namespace dholo
             this.label3 = new System.Windows.Forms.Label();
             this.wavesCnt = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.resultImage = new System.Windows.Forms.PictureBox();
+            this.ResultImageWave = new System.Windows.Forms.PictureBox();
             this.saveImage = new System.Windows.Forms.Button();
             this.createImage = new System.Windows.Forms.Button();
             this.eraseImage = new System.Windows.Forms.Button();
@@ -44,7 +44,7 @@ namespace dholo
             this.label2 = new System.Windows.Forms.Label();
             this.saveImageDlg = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.Chart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.resultImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultImageWave)).BeginInit();
             this.SuspendLayout();
             // 
             // Chart
@@ -54,10 +54,10 @@ namespace dholo
             this.Chart.Location = new System.Drawing.Point(8, 8);
             this.Chart.Margin = new System.Windows.Forms.Padding(0);
             this.Chart.Name = "Chart";
-            this.Chart.Size = new System.Drawing.Size(516, 323);
+            this.Chart.Size = new System.Drawing.Size(558, 323);
             this.Chart.TabIndex = 0;
             this.Chart.TabStop = false;
-            this.Chart.Paint += new System.Windows.Forms.PaintEventHandler(this.waveRender_Paint);
+            this.Chart.Paint += new System.Windows.Forms.PaintEventHandler(this.OnChartPaint);
             // 
             // waveType
             // 
@@ -66,17 +66,17 @@ namespace dholo
             this.waveType.Items.AddRange(new object[] {
             "sin(x)",
             "sin(x)/x"});
-            this.waveType.Location = new System.Drawing.Point(78, 338);
+            this.waveType.Location = new System.Drawing.Point(95, 337);
             this.waveType.Name = "waveType";
-            this.waveType.Size = new System.Drawing.Size(84, 25);
+            this.waveType.Size = new System.Drawing.Size(70, 25);
             this.waveType.TabIndex = 1;
-            this.waveType.SelectedIndexChanged += new System.EventHandler(this.waveType_SelectedIndexChanged);
+            this.waveType.SelectedIndexChanged += new System.EventHandler(this.OnWaveTypeSelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label1.Location = new System.Drawing.Point(7, 341);
+            this.label1.Location = new System.Drawing.Point(12, 340);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 19);
             this.label1.TabIndex = 2;
@@ -85,19 +85,19 @@ namespace dholo
             // phase
             // 
             this.phase.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.phase.Location = new System.Drawing.Point(205, 338);
+            this.phase.Location = new System.Drawing.Point(216, 337);
             this.phase.Name = "phase";
             this.phase.Size = new System.Drawing.Size(48, 25);
             this.phase.TabIndex = 6;
             this.phase.Text = "0,0";
             this.phase.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.phase.TextChanged += new System.EventHandler(this.waveType_SelectedIndexChanged);
+            this.phase.TextChanged += new System.EventHandler(this.OnWaveTypeSelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label3.Location = new System.Drawing.Point(166, 341);
+            this.label3.Location = new System.Drawing.Point(171, 340);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(39, 19);
             this.label3.TabIndex = 5;
@@ -106,84 +106,84 @@ namespace dholo
             // wavesCnt
             // 
             this.wavesCnt.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.wavesCnt.Location = new System.Drawing.Point(337, 338);
+            this.wavesCnt.Location = new System.Drawing.Point(363, 337);
             this.wavesCnt.Name = "wavesCnt";
             this.wavesCnt.Size = new System.Drawing.Size(37, 25);
             this.wavesCnt.TabIndex = 8;
             this.wavesCnt.Text = "1";
             this.wavesCnt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.wavesCnt.TextChanged += new System.EventHandler(this.waveType_SelectedIndexChanged);
+            this.wavesCnt.TextChanged += new System.EventHandler(this.OnWaveTypeSelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label4.Location = new System.Drawing.Point(257, 341);
+            this.label4.Location = new System.Drawing.Point(270, 340);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 19);
             this.label4.TabIndex = 7;
             this.label4.Text = "Кол-во волн";
             // 
-            // resultImage
+            // ResultImageWave
             // 
-            this.resultImage.BackColor = System.Drawing.Color.Silver;
-            this.resultImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.resultImage.Location = new System.Drawing.Point(540, 8);
-            this.resultImage.Name = "resultImage";
-            this.resultImage.Size = new System.Drawing.Size(323, 323);
-            this.resultImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.resultImage.TabIndex = 9;
-            this.resultImage.TabStop = false;
+            this.ResultImageWave.BackColor = System.Drawing.Color.Silver;
+            this.ResultImageWave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ResultImageWave.Location = new System.Drawing.Point(575, 8);
+            this.ResultImageWave.Name = "ResultImageWave";
+            this.ResultImageWave.Size = new System.Drawing.Size(323, 323);
+            this.ResultImageWave.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ResultImageWave.TabIndex = 9;
+            this.ResultImageWave.TabStop = false;
             // 
             // saveImage
             // 
             this.saveImage.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.saveImage.Location = new System.Drawing.Point(540, 335);
+            this.saveImage.Location = new System.Drawing.Point(575, 335);
             this.saveImage.Name = "saveImage";
             this.saveImage.Size = new System.Drawing.Size(85, 26);
             this.saveImage.TabIndex = 14;
             this.saveImage.Text = "Сохранить";
             this.saveImage.UseVisualStyleBackColor = true;
-            this.saveImage.Click += new System.EventHandler(this.saveImage_Click);
+            this.saveImage.Click += new System.EventHandler(this.OnSaveImageClick);
             // 
             // createImage
             // 
             this.createImage.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.createImage.Location = new System.Drawing.Point(662, 335);
+            this.createImage.Location = new System.Drawing.Point(697, 335);
             this.createImage.Name = "createImage";
             this.createImage.Size = new System.Drawing.Size(85, 26);
             this.createImage.TabIndex = 15;
             this.createImage.Text = "Создать";
             this.createImage.UseVisualStyleBackColor = true;
-            this.createImage.Click += new System.EventHandler(this.createImage_Click);
+            this.createImage.Click += new System.EventHandler(this.OnCreateImageClick);
             // 
             // eraseImage
             // 
             this.eraseImage.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.eraseImage.Location = new System.Drawing.Point(778, 335);
+            this.eraseImage.Location = new System.Drawing.Point(813, 335);
             this.eraseImage.Name = "eraseImage";
             this.eraseImage.Size = new System.Drawing.Size(85, 26);
             this.eraseImage.TabIndex = 16;
             this.eraseImage.Text = "Очистить";
             this.eraseImage.UseVisualStyleBackColor = true;
-            this.eraseImage.Click += new System.EventHandler(this.eraseImage_Click);
+            this.eraseImage.Click += new System.EventHandler(this.OnEraseImageClick);
             // 
             // pointsCnt
             // 
             this.pointsCnt.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.pointsCnt.Location = new System.Drawing.Point(464, 338);
+            this.pointsCnt.Location = new System.Drawing.Point(505, 337);
             this.pointsCnt.Name = "pointsCnt";
             this.pointsCnt.Size = new System.Drawing.Size(61, 25);
             this.pointsCnt.TabIndex = 18;
             this.pointsCnt.Text = "1024";
             this.pointsCnt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.pointsCnt.TextChanged += new System.EventHandler(this.waveType_SelectedIndexChanged);
+            this.pointsCnt.TextChanged += new System.EventHandler(this.OnWaveTypeSelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label2.Location = new System.Drawing.Point(379, 341);
+            this.label2.Location = new System.Drawing.Point(406, 340);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 19);
             this.label2.TabIndex = 17;
@@ -193,13 +193,13 @@ namespace dholo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(873, 371);
+            this.ClientSize = new System.Drawing.Size(910, 371);
             this.Controls.Add(this.pointsCnt);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.eraseImage);
             this.Controls.Add(this.createImage);
             this.Controls.Add(this.saveImage);
-            this.Controls.Add(this.resultImage);
+            this.Controls.Add(this.ResultImageWave);
             this.Controls.Add(this.wavesCnt);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.phase);
@@ -211,9 +211,8 @@ namespace dholo
             this.MaximumSize = new System.Drawing.Size(994, 410);
             this.Name = "GenerateWaveDlg";
             this.Text = "GenerateWaveDlg";
-            this.Load += new System.EventHandler(this.GenerateWaveDlg_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Chart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.resultImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultImageWave)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,7 +227,7 @@ namespace dholo
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox wavesCnt;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.PictureBox resultImage;
+        private System.Windows.Forms.PictureBox ResultImageWave;
         private System.Windows.Forms.Button saveImage;
         private System.Windows.Forms.Button createImage;
         private System.Windows.Forms.Button eraseImage;
