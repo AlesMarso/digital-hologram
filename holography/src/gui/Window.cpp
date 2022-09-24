@@ -89,6 +89,13 @@ LRESULT gui::Window::OnFileExitMainMenu(const EventArgs& args)
 	return OnClose(args);
 }
 
+LRESULT gui::Window::OnHelpAboutMainMenu(const EventArgs& args)
+{
+	MessageBoxA(args.hWnd, "About", "About", MB_OK);
+
+	return true;
+}
+
 LRESULT gui::Window::MessageHandlerSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	if (msg == WM_NCCREATE)
@@ -117,6 +124,7 @@ LRESULT gui::Window::MessageHandlerThunk(HWND hWnd, UINT msg, WPARAM wParam, LPA
 void gui::Window::InitializeComponents()
 {
 	SetEvent(ID_FILE_EXIT, ID_ACTION_MAIN_MENU, BIND_EVENT(gui::Window::OnFileExitMainMenu));
+	SetEvent(ID_HELP_ABOUT, ID_ACTION_MAIN_MENU, BIND_EVENT(gui::Window::OnHelpAboutMainMenu));
 }
 
 LRESULT gui::Window::MessageHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

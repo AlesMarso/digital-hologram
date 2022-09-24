@@ -54,6 +54,13 @@ namespace gui {
 		/// <returns></returns>
 		LRESULT OnFileExitMainMenu(const EventArgs& args);
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		/// <returns></returns>
+		LRESULT OnHelpAboutMainMenu(const EventArgs& args);
+
 	public:
 		/// <summary>
 		/// 

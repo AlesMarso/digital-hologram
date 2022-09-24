@@ -5,6 +5,7 @@
 #include <gl/GLU.h>
 #include <gl/GL.h>
 #include <gui/Rect.h>
+#include <gui/Color.h>
 
 namespace rctx
 {

@@ -48,7 +48,8 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 		return false;
 
 	wglMakeCurrent(dc, m_hGLRC);
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	gui::Color lightGray(0xd3d3d3);
+	glClearColor(lightGray.fRed(), lightGray.fGreen(), lightGray.fBlue(), 1.0f);
 	glClearDepth(1.0f);
 
 	return true;
@@ -60,8 +61,10 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 
 	BeginPaint(hWnd, &paint);
 
+	gui::Color white(0xffffff);
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
+	glColor3f(white.fRed(), white.fGreen(), white.fBlue());
 	glBegin(GL_QUADS);
 	{
 		glVertex2f(-0.95f, -0.95f);
