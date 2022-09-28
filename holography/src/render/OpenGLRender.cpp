@@ -48,7 +48,9 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 		return false;
 
 	wglMakeCurrent(dc, m_hGLRC);
-	gui::Color lightGray(0xd3d3d3);
+
+	gui::Color lightGray = 0xd3d3d3;
+	
 	glClearColor(lightGray.fRed(), lightGray.fGreen(), lightGray.fBlue(), 1.0f);
 	glClearDepth(1.0f);
 

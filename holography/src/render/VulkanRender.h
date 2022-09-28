@@ -1,14 +1,15 @@
 #pragma once
 
-#include <windows.h>
+#include <render/IRender.h>
 
 namespace rctx
 {
-	class IRender
+	class VulkanRender : public IRender
 	{
 	public:
-		IRender() = default;
-		virtual ~IRender() = default;
+
+		VulkanRender() = default;
+		~VulkanRender() = default;
 
 		virtual bool Init(HWND) = 0;
 		virtual void Draw(HWND) = 0;

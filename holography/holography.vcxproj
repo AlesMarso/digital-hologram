@@ -78,6 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -148,6 +149,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\gui\Window.cpp" />
     <ClCompile Include="src\render\OpenGLRender.cpp" />
+    <ClCompile Include="src\render\VulkanRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -159,6 +161,7 @@
     <ClInclude Include="src\render\OpenGLRender.h" />
     <ClInclude Include="src\share\const.h" />
     <ClInclude Include="src\share\types.h" />
+    <ClInclude Include="src\render\VulkanRender.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="holography.rc" />
