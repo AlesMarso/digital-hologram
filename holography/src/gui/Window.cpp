@@ -38,6 +38,22 @@ bool gui::Window::Create(const char* title, uint32_t width, uint32_t height)
 	return m_hWnd != nullptr;
 }
 
+int gui::Window::Run()
+{
+	MSG msg = { 0 };
+
+	while (GetMessage(&msg, nullptr, 0, 0) > 0)
+	{
+		if (msg.message == WM_QUIT)
+			break;
+
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	return static_cast<int>(msg.wParam);
+}
+
 LRESULT gui::Window::OnCreate(const EventArgs& args)
 {
 	return m_RenderContext->Init(args.hWnd);

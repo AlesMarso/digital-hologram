@@ -3,7 +3,6 @@
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
-	MSG msg;
 
 	try
 	{
@@ -15,19 +14,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		if (!window.Create("Hologram"))
 			return -1;
 
-		while (GetMessage(&msg, nullptr, 0, 0) > 0)
-		{
-			if (msg.message == WM_QUIT)
-				return static_cast<int>(msg.wParam);
-
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
+		int res = window.Run();
 	}
 	catch (std::exception ex)
 	{
 
 	}
 
-	return static_cast<int>(msg.wParam);
+	return 0;
 }
