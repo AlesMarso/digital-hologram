@@ -37,7 +37,7 @@ namespace gui {
 		/// <param name="height"></param>
 		/// <returns></returns>
 		bool Create(const char* title, uint32_t width = DEF_WINDOW_WIDTH, uint32_t height = DEF_WINDOW_HEIGHT);
-
+		
 		int Run();
 		
 		/// <summary>

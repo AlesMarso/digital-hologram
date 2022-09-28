@@ -3,6 +3,8 @@
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
+	MSG msg;
+
 	try
 	{
 		gui::Window window;
