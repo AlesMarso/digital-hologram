@@ -6,10 +6,12 @@ gui::Window::Window()
 	m_OGLRenderContext(nullptr),
 	m_RenderContext(new rctx::OpenGLRender())
 {
+	Gdiplus::GdiplusStartup(&m_gdiplusToken, &m_gdiplusStartupInput, nullptr);
 }
 
 gui::Window::~Window()
 {
+	Gdiplus::GdiplusShutdown(m_gdiplusToken);
 }
 
 bool gui::Window::Init(HINSTANCE hInst)
@@ -56,6 +58,8 @@ int gui::Window::Run()
 
 LRESULT gui::Window::OnCreate(const EventArgs& args)
 {
+	OnInit(args);
+
 	return m_RenderContext->Init(args.hWnd);
 }
 
@@ -93,6 +97,19 @@ LRESULT gui::Window::OnSizing(const EventArgs& args)
 	m_RenderContext->Update();
 
 	return true;
+}
+
+LRESULT gui::Window::OnInit(const EventArgs& args)
+{
+	string1024 filename = { 0 };
+
+	auto iniHoloFile = m_CurrentDirectory;
+	iniHoloFile.append("holo.ini");
+
+	if (GetPrivateProfileString("Testimage", "ImageFile", "", filename, 256, iniHoloFile.string().data()) != 0)
+		std::cout << "Load file = " << filename << std::endl;
+
+	return LRESULT();
 }
 
 void gui::Window::SetEvent(uint32_t event_id, uint32_t action_id, Event func)
@@ -141,6 +158,13 @@ void gui::Window::InitializeComponents()
 {
 	SetEvent(ID_FILE_EXIT, ID_ACTION_MAIN_MENU, BIND_EVENT(gui::Window::OnFileExitMainMenu));
 	SetEvent(ID_HELP_ABOUT, ID_ACTION_MAIN_MENU, BIND_EVENT(gui::Window::OnHelpAboutMainMenu));
+
+	string1024 filename = { 0 };
+	GetModuleFileName(nullptr, filename, 1024);
+
+	m_CurrentDirectory = std::filesystem::path(filename).parent_path();
+
+	std::cout << "Detected current executable directory = " << m_CurrentDirectory << std::endl;
 }
 
 LRESULT gui::Window::MessageHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

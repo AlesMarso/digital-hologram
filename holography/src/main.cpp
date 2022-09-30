@@ -1,16 +1,9 @@
 #include <iostream>
 #include <gui/Window.h>
-
-#include <vulkan/vulkan.h>
+#include <gdiplus.h>
 
 int main()
 {
-	VkInstanceCreateInfo instacneInfo = {};
-	VkInstance instancevk;
-
-	if (vkCreateInstance(&instacneInfo, nullptr, &instancevk) == VK_SUCCESS)
-		std::cout << "Vulkan is initialized" << std::endl;
-
 	try
 	{
 		gui::Window window;

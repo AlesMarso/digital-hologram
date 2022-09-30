@@ -1,10 +1,15 @@
 #pragma once
 
+#include <iostream>
 #include <windows.h>
 #include <cstdint>
 #include <share/const.h>
 #include <render/OpenGLRender.h>
 #include <gui/event/Functor.h>
+#include <gdiplus.h>
+#include <filesystem>
+
+#include <share/types.h>
 
 #include "resource.h"
 
@@ -106,6 +111,13 @@ namespace gui {
 		/// <returns></returns>
 		virtual LRESULT OnSizing(const EventArgs& args);
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="args"></param>
+		/// <returns></returns>
+		virtual LRESULT OnInit(const EventArgs& args);
+
 	protected:
 		/// <summary>
 		/// 
@@ -151,5 +163,12 @@ namespace gui {
 	private:
 		rctx::IRender* m_RenderContext;
 		Functor m_Events;
+
+	private:
+		ULONG_PTR m_gdiplusToken;
+		Gdiplus::GdiplusStartupInput m_gdiplusStartupInput;
+
+	private:
+		std::filesystem::path m_CurrentDirectory;
 	};
 }

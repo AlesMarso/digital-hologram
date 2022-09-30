@@ -78,5 +78,6 @@
     <None Include="ribbon1.mfcribbon-ms">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="x64\Debug\holo.ini" />
   </ItemGroup>
 </Project>
