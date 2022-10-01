@@ -11,7 +11,7 @@ namespace share
 		~HoloIniFileController() = default;
 
 		std::string GetImageName() const;
-		std::string GetImageFileName() const;
+		std::filesystem::path GetImageFileName() const;
 
 	private:
 		std::string m_HoloIniFileName;

@@ -105,6 +105,11 @@ LRESULT gui::Window::OnInit(const EventArgs& args)
 
 	std::cout << "Load file = " << holoIniFile.GetImageFileName() << std::endl;
 
+	Gdiplus::Image* img = new Gdiplus::Image(holoIniFile.GetImageFileName().generic_wstring().c_str(), FALSE);
+
+	auto width = img->GetWidth();
+	auto height = img->GetHeight();
+
 	return LRESULT();
 }
 
