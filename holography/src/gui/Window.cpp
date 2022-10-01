@@ -101,9 +101,9 @@ LRESULT gui::Window::OnSizing(const EventArgs& args)
 
 LRESULT gui::Window::OnInit(const EventArgs& args)
 {
-	share::IniFileController::getInstance()->SetIniFileName("holo.ini");
+	share::HoloIniFileController holoIniFile;
 
-	std::cout << "Load file = " << share::IniFileController::getInstance()->GetString("Testimage", "ImageFile") << std::endl;
+	std::cout << "Load file = " << holoIniFile.GetImageName() << std::endl;
 
 	return LRESULT();
 }

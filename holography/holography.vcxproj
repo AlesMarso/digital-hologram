@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\share\HoloIniFileController.cpp" />
     <ClCompile Include="src\share\IniFileController.cpp" />
     <ClCompile Include="src\gui\Color.cpp" />
     <ClCompile Include="src\gui\event\Functor.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="src\render\VulkanRender.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\share\HoloIniFileController.h" />
     <ClInclude Include="src\share\IniFileController.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\gui\Color.h" />

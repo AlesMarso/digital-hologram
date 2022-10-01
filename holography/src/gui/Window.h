@@ -9,7 +9,7 @@
 #include <gdiplus.h>
 #include <filesystem>
 
-#include <share/IniFileController.h>
+#include <share/HoloIniFileController.h>
 
 #include "resource.h"
 
