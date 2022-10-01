@@ -103,7 +103,7 @@ LRESULT gui::Window::OnInit(const EventArgs& args)
 {
 	share::HoloIniFileController holoIniFile;
 
-	std::cout << "Load file = " << holoIniFile.GetImageName() << std::endl;
+	std::cout << "Load file = " << holoIniFile.GetImageFileName() << std::endl;
 
 	return LRESULT();
 }
