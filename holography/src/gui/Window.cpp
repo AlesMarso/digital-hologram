@@ -101,16 +101,7 @@ LRESULT gui::Window::OnSizing(const EventArgs& args)
 
 LRESULT gui::Window::OnInit(const EventArgs& args)
 {
-	share::HoloIniFileController holoIniFile;
-
-	std::cout << "Load file = " << holoIniFile.GetImageFileName() << std::endl;
-
-	Gdiplus::Image* img = new Gdiplus::Image(holoIniFile.GetImageFileName().generic_wstring().c_str(), FALSE);
-
-	auto width = img->GetWidth();
-	auto height = img->GetHeight();
-
-	return LRESULT();
+		return LRESULT();
 }
 
 void gui::Window::SetEvent(uint32_t event_id, uint32_t action_id, Event func)

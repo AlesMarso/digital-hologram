@@ -3,14 +3,18 @@
 rctx::OpenGLRender::OpenGLRender()
 	: m_hWnd(nullptr),
 	m_hDC(nullptr),
-	m_hGLRC(nullptr)
+	m_hGLRC(nullptr),
+	m_IsTextureLoad(false),
+	m_Texture(0)
 {
 }
 
 rctx::OpenGLRender::OpenGLRender(HWND hwnd)
 	: m_hWnd(hwnd),
 	m_hDC(nullptr),
-	m_hGLRC(nullptr)
+	m_hGLRC(nullptr),
+	m_IsTextureLoad(false),
+	m_Texture(0)
 {
 }
 
@@ -67,6 +71,15 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3f(white.fRed(), white.fGreen(), white.fBlue());
+
+	if (!m_IsTextureLoad)
+	{
+		share::HoloIniFileController holoIniFile;
+
+		LoadTexture(holoIniFile.GetImageFileName());
+		m_IsTextureLoad = true;
+	}
+
 	glBegin(GL_QUADS);
 	{
 		glVertex2f(-0.95f, -0.95f);
@@ -95,4 +108,32 @@ void rctx::OpenGLRender::Close()
 void rctx::OpenGLRender::Update()
 {
 	Draw(m_hWnd);
+}
+
+void rctx::OpenGLRender::LoadTexture(std::filesystem::path imgPath)
+{
+	std::cout << "Load file = " << imgPath << std::endl;
+
+	Gdiplus::Bitmap* bmp = new Gdiplus::Bitmap(imgPath.generic_wstring().c_str(), FALSE);
+
+	auto imgWidth = bmp->GetWidth();
+	auto imgHeight = bmp->GetHeight();
+
+	glEnable(GL_TEXTURE_2D);
+
+	glGenTextures(1, &m_Texture);
+	glBindTexture(GL_TEXTURE_2D, m_Texture);
+
+	auto bitmapData = new Gdiplus::BitmapData;
+	Gdiplus::Rect rect(0, 0, imgWidth, imgHeight);
+
+	bmp->LockBits(&rect, Gdiplus::ImageLockModeRead, bmp->GetPixelFormat(), bitmapData);
+
+	auto* pixels = static_cast<unsigned*>(bitmapData->Scan0);
+
+	bmp->UnlockBits(bitmapData);
+
+	glDisable(GL_TEXTURE_2D);
+
+	return;
 }

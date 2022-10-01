@@ -6,6 +6,12 @@
 #include <gl/GL.h>
 #include <gui/Rect.h>
 #include <gui/Color.h>
+#include <filesystem>
+#include <gdiplus.h>
+#include <iostream>
+
+#include <share/HoloIniFileController.h>
+
 
 namespace rctx
 {
@@ -22,10 +28,16 @@ namespace rctx
 		virtual void Close() override;
 		virtual void Update() override;
 
+	protected:
+		void LoadTexture(std::filesystem::path);
+
 	private:
 		HWND m_hWnd;
 		HDC  m_hDC;
 		HGLRC m_hGLRC;
+		GLuint m_Texture;
+
+		bool m_IsTextureLoad;
 	};
 }
 
