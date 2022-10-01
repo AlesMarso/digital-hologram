@@ -101,13 +101,9 @@ LRESULT gui::Window::OnSizing(const EventArgs& args)
 
 LRESULT gui::Window::OnInit(const EventArgs& args)
 {
-	string1024 filename = { 0 };
+	share::IniFileController::getInstance()->SetIniFileName("holo.ini");
 
-	auto iniHoloFile = m_CurrentDirectory;
-	iniHoloFile.append("holo.ini");
-
-	if (GetPrivateProfileString("Testimage", "ImageFile", "", filename, 256, iniHoloFile.string().data()) != 0)
-		std::cout << "Load file = " << filename << std::endl;
+	std::cout << "Load file = " << share::IniFileController::getInstance()->GetString("Testimage", "ImageFile") << std::endl;
 
 	return LRESULT();
 }

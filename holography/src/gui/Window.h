@@ -9,7 +9,7 @@
 #include <gdiplus.h>
 #include <filesystem>
 
-#include <share/types.h>
+#include <share/IniFileController.h>
 
 #include "resource.h"
 
