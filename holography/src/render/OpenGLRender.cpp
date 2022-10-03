@@ -80,14 +80,26 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 		m_IsTextureLoad = true;
 	}
 
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, m_Texture);
+
 	glBegin(GL_QUADS);
 	{
+		glTexCoord2d(0.0f, 0.0f);
 		glVertex2f(-0.95f, -0.95f);
+
+		glTexCoord2d(0.0f, 1.0f);
 		glVertex2f(-0.95f, 0.95f);
+
+		glTexCoord2d(1.0f, 1.0f);
 		glVertex2f(0.95f, 0.95f);
+
+		glTexCoord2d(1.0f, 0.0f);
 		glVertex2f(0.95f, -0.95f);
 	}
 	glEnd();
+
+	glDisable(GL_TEXTURE_2D);
 
 	SwapBuffers(paint.hdc);
 	EndPaint(hWnd, &paint);
@@ -130,6 +142,22 @@ void rctx::OpenGLRender::LoadTexture(std::filesystem::path imgPath)
 	bmp->LockBits(&rect, Gdiplus::ImageLockModeRead, bmp->GetPixelFormat(), bitmapData);
 
 	auto* pixels = static_cast<unsigned*>(bitmapData->Scan0);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, imgWidth, imgHeight, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pixels);
+
+	//GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb8, ImgWidth, ImgHeight, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgr, PixelType.UnsignedByte, bmpDatPtr);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	//GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
+	//GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+	//GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToBorder);
+	//GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToBorder);
 
 	bmp->UnlockBits(bitmapData);
 
