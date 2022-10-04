@@ -57,5 +57,7 @@ bool rctx::OpenGLTexture::CreateFromImage(const std::filesystem::path& imgPath)
 
 	glDisable(GL_TEXTURE_2D);
 
+	delete bmp;
+
 	return true;
 }
