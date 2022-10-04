@@ -29,9 +29,6 @@ namespace rctx
 		virtual void Close() override;
 		virtual void Update() override;
 
-	protected:
-		void LoadTexture(std::filesystem::path);
-
 	private:
 		HWND m_hWnd;
 		HDC  m_hDC;

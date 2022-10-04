@@ -74,7 +74,8 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 	{
 		share::HoloIniFileController holoIniFile;
 
-		LoadTexture(holoIniFile.GetImageFileName());
+		m_Texture.CreateFromImage(holoIniFile.GetImageFileName());
+
 		m_IsTextureLoad = true;
 	}
 
@@ -118,13 +119,4 @@ void rctx::OpenGLRender::Close()
 void rctx::OpenGLRender::Update()
 {
 	Draw(m_hWnd);
-}
-
-void rctx::OpenGLRender::LoadTexture(std::filesystem::path imgPath)
-{
-	std::cout << "Load file = " << imgPath << std::endl;
-
-	m_Texture.CreateFromImage(imgPath);
-
-	return;
 }
