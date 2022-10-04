@@ -21,7 +21,7 @@
     <ClCompile Include="src\gui\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\render\OpenGLRender.cpp">
+    <ClCompile Include="src\render\opengl\OpenGLRender.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\gui\Rect.cpp">
@@ -42,6 +42,9 @@
     <ClCompile Include="src\share\HoloIniFileController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\render\opengl\OpenGLTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gui\Window.h">
@@ -56,7 +59,7 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\render\OpenGLRender.h">
+    <ClInclude Include="src\render\opengl\OpenGLRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\render\IRender.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\share\HoloIniFileController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\opengl\OpenGLTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

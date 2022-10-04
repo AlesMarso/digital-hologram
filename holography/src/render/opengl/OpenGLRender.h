@@ -11,6 +11,7 @@
 #include <iostream>
 
 #include <share/HoloIniFileController.h>
+#include <render/opengl/OpenGLTexture.h>
 
 
 namespace rctx
@@ -35,9 +36,11 @@ namespace rctx
 		HWND m_hWnd;
 		HDC  m_hDC;
 		HGLRC m_hGLRC;
-		GLuint m_Texture;
 
 		bool m_IsTextureLoad;
+
+	private:
+		OpenGLTexture m_Texture;
 	};
 }
 

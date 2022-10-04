@@ -4,7 +4,7 @@
 #include <windows.h>
 #include <cstdint>
 #include <share/const.h>
-#include <render/OpenGLRender.h>
+#include <render/opengl/OpenGLRender.h>
 #include <gui/event/Functor.h>
 #include <gdiplus.h>
 #include <filesystem>

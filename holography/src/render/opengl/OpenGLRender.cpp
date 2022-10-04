@@ -4,8 +4,7 @@ rctx::OpenGLRender::OpenGLRender()
 	: m_hWnd(nullptr),
 	m_hDC(nullptr),
 	m_hGLRC(nullptr),
-	m_IsTextureLoad(false),
-	m_Texture(0)
+	m_IsTextureLoad(false)
 {
 }
 
@@ -13,8 +12,7 @@ rctx::OpenGLRender::OpenGLRender(HWND hwnd)
 	: m_hWnd(hwnd),
 	m_hDC(nullptr),
 	m_hGLRC(nullptr),
-	m_IsTextureLoad(false),
-	m_Texture(0)
+	m_IsTextureLoad(false)
 {
 }
 
@@ -81,7 +79,7 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 	}
 
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, m_Texture);
+	glBindTexture(GL_TEXTURE_2D, m_Texture.GetTextureID());
 
 	glBegin(GL_QUADS);
 	{
@@ -126,42 +124,7 @@ void rctx::OpenGLRender::LoadTexture(std::filesystem::path imgPath)
 {
 	std::cout << "Load file = " << imgPath << std::endl;
 
-	Gdiplus::Bitmap* bmp = new Gdiplus::Bitmap(imgPath.generic_wstring().c_str(), FALSE);
-
-	auto imgWidth = bmp->GetWidth();
-	auto imgHeight = bmp->GetHeight();
-
-	glEnable(GL_TEXTURE_2D);
-
-	glGenTextures(1, &m_Texture);
-	glBindTexture(GL_TEXTURE_2D, m_Texture);
-
-	auto bitmapData = new Gdiplus::BitmapData;
-	Gdiplus::Rect rect(0, 0, imgWidth, imgHeight);
-
-	bmp->LockBits(&rect, Gdiplus::ImageLockModeRead, bmp->GetPixelFormat(), bitmapData);
-
-	auto* pixels = static_cast<unsigned*>(bitmapData->Scan0);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, imgWidth, imgHeight, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pixels);
-
-	//GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb8, ImgWidth, ImgHeight, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgr, PixelType.UnsignedByte, bmpDatPtr);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	//GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
-	//GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-
-	//GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToBorder);
-	//GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToBorder);
-
-	bmp->UnlockBits(bitmapData);
-
-	glDisable(GL_TEXTURE_2D);
+	m_Texture.CreateFromImage(imgPath);
 
 	return;
 }

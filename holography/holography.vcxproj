@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\render\opengl\OpenGLTexture.cpp" />
     <ClCompile Include="src\share\HoloIniFileController.cpp" />
     <ClCompile Include="src\share\IniFileController.cpp" />
     <ClCompile Include="src\gui\Color.cpp" />
@@ -150,10 +151,11 @@
     <ClCompile Include="src\gui\Rect.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\gui\Window.cpp" />
-    <ClCompile Include="src\render\OpenGLRender.cpp" />
+    <ClCompile Include="src\render\opengl\OpenGLRender.cpp" />
     <ClCompile Include="src\render\VulkanRender.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\render\opengl\OpenGLTexture.h" />
     <ClInclude Include="src\share\HoloIniFileController.h" />
     <ClInclude Include="src\share\IniFileController.h" />
     <ClInclude Include="resource.h" />
@@ -162,7 +164,7 @@
     <ClInclude Include="src\gui\Rect.h" />
     <ClInclude Include="src\gui\Window.h" />
     <ClInclude Include="src\render\IRender.h" />
-    <ClInclude Include="src\render\OpenGLRender.h" />
+    <ClInclude Include="src\render\opengl\OpenGLRender.h" />
     <ClInclude Include="src\share\const.h" />
     <ClInclude Include="src\share\types.h" />
     <ClInclude Include="src\render\VulkanRender.h" />
