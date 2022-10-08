@@ -6,6 +6,17 @@ rctx::OpenGLRender::OpenGLRender()
 	m_hGLRC(nullptr),
 	m_IsTextureLoad(false)
 {
+	m_vertices[0] = -0.95f;
+	m_vertices[1] = -0.95f;
+
+	m_vertices[2] = -0.95f;
+	m_vertices[3] = 0.95f;
+
+	m_vertices[4] = 0.95f;
+	m_vertices[5] = 0.95f;
+
+	m_vertices[6] = 0.95f;
+	m_vertices[7] = -0.95f;
 }
 
 rctx::OpenGLRender::OpenGLRender(HWND hwnd)
@@ -14,6 +25,17 @@ rctx::OpenGLRender::OpenGLRender(HWND hwnd)
 	m_hGLRC(nullptr),
 	m_IsTextureLoad(false)
 {
+	m_vertices[0] = -0.95f;
+	m_vertices[1] = -0.95f;
+
+	m_vertices[2] = -0.95f;
+	m_vertices[3] = 0.95f;
+
+	m_vertices[4] = 0.95f;
+	m_vertices[5] = 0.95f;
+
+	m_vertices[6] = 0.95f;
+	m_vertices[7] = -0.95f;
 }
 
 rctx::OpenGLRender::~OpenGLRender()
@@ -74,29 +96,93 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 	{
 		share::HoloIniFileController holoIniFile;
 
-		m_Texture.CreateFromImage(holoIniFile.GetImageFileName());
+		m_PSIFirstTexture.CreateFromImage(holoIniFile.GetPSIFirstImage());
+		m_PSISecondTexture.CreateFromImage(holoIniFile.GetPSISecondImage());
+		m_PSIThirdTexture.CreateFromImage(holoIniFile.GetPSIThirdImage());
+		m_PSIFourthTexture.CreateFromImage(holoIniFile.GetPSIFourthImage());
 
 		m_IsTextureLoad = true;
 	}
 
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, m_Texture.GetTextureID());
+	glBindTexture(GL_TEXTURE_2D, m_PSIFirstTexture.GetTextureID());
 
+	GLuint vbo;
+
+	// First PSI Image
 	glBegin(GL_QUADS);
 	{
 		glTexCoord2d(0.0f, 0.0f);
 		glVertex2f(-0.95f, -0.95f);
 
-		glTexCoord2d(0.0f, 1.0f);
-		glVertex2f(-0.95f, 0.95f);
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex2f(-0.05f, -0.95f);
 
 		glTexCoord2d(1.0f, 1.0f);
+		glVertex2f(-0.05f, -0.05f);
+
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex2f(-0.95f, -0.05f);
+	}
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	// Second PSI Image
+	glBindTexture(GL_TEXTURE_2D, m_PSISecondTexture.GetTextureID());
+	glBegin(GL_QUADS);
+	{
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex2f(0.05f, -0.95f);
+
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex2f(0.95f, -0.95f);
+
+		glTexCoord2d(0.0f, 0.0f);
+		glVertex2f(0.95f, -0.05f);
+
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex2f(0.05f, -0.05f);
+	}
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	// Third PSI Image
+	glBindTexture(GL_TEXTURE_2D, m_PSIThirdTexture.GetTextureID());
+	glBegin(GL_QUADS);
+	{
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex2f(0.05f, 0.05f);
+
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex2f(0.95f, 0.05f);
+
+		glTexCoord2d(0.0f, 0.0f);
 		glVertex2f(0.95f, 0.95f);
 
 		glTexCoord2d(1.0f, 0.0f);
-		glVertex2f(0.95f, -0.95f);
+		glVertex2f(0.05f, 0.95f);
 	}
 	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	// Fourth PSI Image
+	glBindTexture(GL_TEXTURE_2D, m_PSIFourthTexture.GetTextureID());
+	glBegin(GL_QUADS);
+	{
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex2f(-0.95f, 0.05f);
+
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex2f(-0.05f, 0.05f);
+
+		glTexCoord2d(0.0f, 0.0f);
+		glVertex2f(-0.05f, 0.95f);
+
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex2f(-0.95f, 0.95f);
+	}
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glDisable(GL_TEXTURE_2D);
 
