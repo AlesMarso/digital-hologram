@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using OpenTK.Graphics.OpenGL;
-//using OpenTK.Graphics.ES30;
+using OpenTK.Platform.Windows;
+using OpenCL.Net;
+using OpenGL;
 
 namespace dholo
 {
@@ -51,6 +53,10 @@ namespace dholo
             InitializeComponent();
 
             Texture = new OpenGLTexture();
+
+            var t = OpenGL.Gl.GenBuffer();
+
+            var a = 1;
         }
 
         private void openImageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -90,15 +96,12 @@ namespace dholo
 
             TopGLRenderContextOrtho = OpenGLRenderContext.Height / 2;
             BottomGLRenderContextOrtho = -TopGLRenderContextOrtho;
+
+            
         }
 
         private void UseImgButton_Click(object sender, EventArgs e)
         {
-        }
-
-        private void GenTexture(ref Bitmap bitmap)
-        {
-            Texture.CreateTexture(ImgPath);
         }
 
         private void OnOpenGLRenderContextPaint(object sender, PaintEventArgs e)
@@ -108,8 +111,8 @@ namespace dholo
 
             if(!IsTextureCreated)
             {
-                GenTexture(ref ImgText);
-            
+                Texture.CreateTexture(ImgPath);
+
                 IsTextureCreated = true;
             }
 
@@ -124,11 +127,11 @@ namespace dholo
                     GL.TexCoord2(1.0f, 1.0f);
                     GL.Vertex2(1.0f, 1.0f);
                     GL.TexCoord2(0.0f, 1.0f);
-                    GL.Vertex2(-1.0f, 1.0f);
+                    GL.Vertex2(0.0f, 1.0f);
                     GL.TexCoord2(0.0f, 0.0f);
-                    GL.Vertex2(-1.0f, -1.0f);
+                    GL.Vertex2(0.0f, 0.0f);
                     GL.TexCoord2(1.0f, 0.0f);
-                    GL.Vertex2(1.0f, -1.0f);
+                    GL.Vertex2(1.0f, 0.0f);
                 }
                 GL.End();
                 GL.BindTexture(TextureTarget.Texture2D, 0);

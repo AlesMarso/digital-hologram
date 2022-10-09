@@ -8,12 +8,14 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>dholo</RootNamespace>
     <AssemblyName>DHolo</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,8 +30,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -101,11 +101,20 @@
     <Reference Include="Eto.WinForms, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Eto.Platform.Windows.2.4.1\lib\net45\Eto.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="OpenTK, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
-      <HintPath>packages\OpenTK.3.1.0\lib\net20\OpenTK.dll</HintPath>
+    <Reference Include="OpenCL.Net, Version=2.2.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\OpenCL.Net.2.2.9.0\lib\net40\OpenCL.Net.dll</HintPath>
     </Reference>
-    <Reference Include="OpenTK.GLControl, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
-      <HintPath>packages\OpenTK.GLControl.3.1.0\lib\net20\OpenTK.GLControl.dll</HintPath>
+    <Reference Include="OpenGL.Net, Version=0.8.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\OpenGL.Net.0.8.4\lib\net461\OpenGL.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=3.3.3.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>packages\OpenTK.3.3.3\lib\net20\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=3.3.3.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>packages\OpenTK.GLControl.3.3.3\lib\net20\OpenTK.GLControl.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpGL.WinForms">
+      <HintPath>..\..\..\..\source\repos\digital-hologram\external\Core\SharpGL.WinForms\SharpGL.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll</HintPath>
@@ -193,5 +202,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\Eto.Forms.2.4.1\build\Eto.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Eto.Forms.2.4.1\build\Eto.Forms.targets'))" />
+    <Error Condition="!Exists('packages\OpenCL.Net.2.2.9.0\build\net40\OpenCL.Net.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\OpenCL.Net.2.2.9.0\build\net40\OpenCL.Net.targets'))" />
   </Target>
+  <Import Project="packages\OpenCL.Net.2.2.9.0\build\net40\OpenCL.Net.targets" Condition="Exists('packages\OpenCL.Net.2.2.9.0\build\net40\OpenCL.Net.targets')" />
 </Project>

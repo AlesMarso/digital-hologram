@@ -73,6 +73,14 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 
 	wglMakeCurrent(dc, m_hGLRC);
 
+	int glewInitRes = glewInit();
+
+	if (glewInitRes != GLEW_OK)
+	{
+		std::cout << "GLEW Is not init" << std::endl;
+		return false;
+	}
+
 	gui::Color lightGray = 0xd3d3d3;
 	
 	glClearColor(lightGray.fRed(), lightGray.fGreen(), lightGray.fBlue(), 1.0f);
@@ -108,6 +116,9 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 	glBindTexture(GL_TEXTURE_2D, m_PSIFirstTexture.GetTextureID());
 
 	GLuint vbo;
+
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_VERTEX_ARRAY, vbo);
 
 	// First PSI Image
 	glBegin(GL_QUADS);
