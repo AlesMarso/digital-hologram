@@ -9,6 +9,8 @@ rctx::OpenGLTexture::OpenGLTexture()
 
 rctx::OpenGLTexture::~OpenGLTexture()
 {
+	if (m_TextureID)
+		glDeleteTextures(1, &m_TextureID);
 }
 
 GLuint rctx::OpenGLTexture::GetTextureID() const
