@@ -2,8 +2,11 @@
 
 #include <windows.h>
 #include <render/IRender.h>
-#include <gl/GLU.h>
-#include <gl/GL.h>
+
+#include <gl/glew.h>
+
+#include <CL/cl.h>
+
 #include <gui/Rect.h>
 #include <gui/Color.h>
 #include <filesystem>
@@ -38,6 +41,14 @@ namespace rctx
 
 	private:
 		OpenGLTexture m_Texture;
+
+		OpenGLTexture m_PSIFirstTexture;
+		OpenGLTexture m_PSISecondTexture;
+		OpenGLTexture m_PSIThirdTexture;
+		OpenGLTexture m_PSIFourthTexture;
+
+
+		float m_vertices[8];
 	};
 }
 
