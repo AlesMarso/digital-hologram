@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using OpenTK.Graphics.OpenGL;
+//using OpenTK.Graphics.ES30;
 
 namespace dholo
 {
@@ -19,10 +20,6 @@ namespace dholo
         private double LeftGLRenderContextOrtho;
         private double BottomGLRenderContextOrtho;
         private double TopGLRenderContextOrtho;
-        private double NearGLRenderContextOrtho;
-        private double FarGLRenderContextOrtho;
-
-        private uint[] Texture;
 
         private Color QuadColor;
         private Color BckgColor;
@@ -32,6 +29,8 @@ namespace dholo
         private string ImgPath;
         private Bitmap ImgText;
         private int VBO;
+
+        private OpenGLTexture Texture;
 
         private float[] vertices = new float[12]
         {
@@ -43,17 +42,15 @@ namespace dholo
 
         public MainWindow()
         {
-            Texture = new uint[1];
             IsTextureCreated = false;
             ImgPath = @"C:\Users\ales1\nstu-stuff\masterthesis\digital-hologram\digital-hologram\img\img.jpg";
-            ImgText = new Bitmap(ImgPath);
 
             QuadColor = Color.Black;
             BckgColor = Color.White;
 
             InitializeComponent();
 
-            VBO = CreateVBO();
+            Texture = new OpenGLTexture();
         }
 
         private void openImageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -93,9 +90,6 @@ namespace dholo
 
             TopGLRenderContextOrtho = OpenGLRenderContext.Height / 2;
             BottomGLRenderContextOrtho = -TopGLRenderContextOrtho;
-
-            NearGLRenderContextOrtho = -1.0f;
-            FarGLRenderContextOrtho = -2.0f;
         }
 
         private void UseImgButton_Click(object sender, EventArgs e)
@@ -104,62 +98,7 @@ namespace dholo
 
         private void GenTexture(ref Bitmap bitmap)
         {
-            BitmapData BiTMapData = null;
-
-            try
-            {
-                GL.GenTextures(1, Texture);
-                GL.BindTexture(TextureTarget.Texture2D, Texture[0]);
-
-                int ImgWidth = bitmap.Width;
-                int ImgHeight = bitmap.Height;
-
-                Rectangle ImgArea = new Rectangle(new Point(0, 0), new Size(ImgWidth, ImgHeight));
-                BiTMapData = bitmap.LockBits(
-                    ImgArea, 
-                    ImageLockMode.ReadOnly, 
-                    bitmap.PixelFormat);
-                
-                IntPtr bmpDatPtr = BiTMapData.Scan0;
-
-                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb8, ImgWidth, ImgHeight, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgr, PixelType.UnsignedByte, bmpDatPtr);
-
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
-
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToBorder);
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToBorder);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                if(BiTMapData != null)
-                    bitmap.UnlockBits(BiTMapData);
-            }
-        }
-
-        private int CreateVBO()
-        {
-            uint[] vbo = new uint[1];
-            int VBOId = 0;
-            try
-            {
-                //var sh = GL.CreateShader(ShaderType.ComputeShader);
-
-                //GL.GenBuffers(1, vbo);
-                //GL.BindBuffer(BufferTarget.ArrayBuffer, VBOId);
-                //GL.BufferData(BufferTarget.ArrayBuffer, sizeof(float) * 12, vertices, BufferUsageHint.StaticDraw);
-                //GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            return VBOId;
+            Texture.CreateTexture(ImgPath);
         }
 
         private void OnOpenGLRenderContextPaint(object sender, PaintEventArgs e)
@@ -177,13 +116,11 @@ namespace dholo
             if(IsTextureCreated)
             {
                 GL.Enable(EnableCap.Texture2D);
-                GL.BindTexture(TextureTarget.Texture2D, Texture[0]);
 
-#pragma warning disable CS0618 // Type or member is obsolete
+                GL.BindTexture(TextureTarget.Texture2D, Texture.TextureID);
                 GL.Begin(BeginMode.Quads);
-#pragma warning restore CS0618 // Type or member is obsolete
                 {
-                    GL.Color4(Color.White); //Must have, weirdness!
+                    GL.Color4(Color.White);
                     GL.TexCoord2(1.0f, 1.0f);
                     GL.Vertex2(1.0f, 1.0f);
                     GL.TexCoord2(0.0f, 1.0f);
@@ -194,6 +131,8 @@ namespace dholo
                     GL.Vertex2(1.0f, -1.0f);
                 }
                 GL.End();
+                GL.BindTexture(TextureTarget.Texture2D, 0);
+                
                 GL.Disable(EnableCap.Texture2D);
             }
 
