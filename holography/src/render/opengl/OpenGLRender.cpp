@@ -73,9 +73,7 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 
 	wglMakeCurrent(dc, m_hGLRC);
 
-	int glewInitRes = glewInit();
-
-	if (glewInitRes != GLEW_OK)
+	if (glewInit() != GLEW_OK)
 	{
 		std::cout << "GLEW Is not init" << std::endl;
 		return false;
@@ -126,13 +124,13 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 		glTexCoord2d(0.0f, 0.0f);
 		glVertex2f(-0.95f, -0.95f);
 
-		glTexCoord2d(1.0f, 0.0f);
+		glTexCoord2d(0.0f, 1.0f);
 		glVertex2f(-0.05f, -0.95f);
 
 		glTexCoord2d(1.0f, 1.0f);
 		glVertex2f(-0.05f, -0.05f);
 
-		glTexCoord2d(0.0f, 1.0f);
+		glTexCoord2d(1.0f, 0.0f);
 		glVertex2f(-0.95f, -0.05f);
 	}
 	glEnd();
