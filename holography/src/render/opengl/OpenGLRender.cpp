@@ -84,6 +84,11 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 	glClearColor(lightGray.fRed(), lightGray.fGreen(), lightGray.fBlue(), 1.0f);
 	glClearDepth(1.0f);
 
+	return true;
+}
+
+bool rctx::OpenGLRender::Load(HWND)
+{
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_STATIC_DRAW);
@@ -98,7 +103,7 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	return true;
+	return false;
 }
 
 void rctx::OpenGLRender::Draw(HWND hWnd)

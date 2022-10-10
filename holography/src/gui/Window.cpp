@@ -60,7 +60,7 @@ LRESULT gui::Window::OnCreate(const EventArgs& args)
 {
 	OnInit(args);
 
-	return m_RenderContext->Init(args.hWnd);
+	return m_RenderContext->Load(args.hWnd);
 }
 
 LRESULT gui::Window::OnPaint(const EventArgs& args)
@@ -101,7 +101,7 @@ LRESULT gui::Window::OnSizing(const EventArgs& args)
 
 LRESULT gui::Window::OnInit(const EventArgs& args)
 {
-		return LRESULT();
+	return m_RenderContext->Init(args.hWnd);
 }
 
 void gui::Window::SetEvent(uint32_t event_id, uint32_t action_id, Event func)

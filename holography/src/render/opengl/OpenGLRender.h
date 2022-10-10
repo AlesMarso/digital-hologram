@@ -27,6 +27,7 @@ namespace rctx
 		~OpenGLRender();
 
 		virtual bool Init(HWND) override;
+		virtual bool Load(HWND) override;
 		virtual void Draw(HWND) override;
 		virtual void Resize(HWND) override;
 		virtual void Close() override;
