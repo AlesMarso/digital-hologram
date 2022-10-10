@@ -46,7 +46,8 @@ namespace rctx
 		OpenGLTexture m_PSISecondTexture;
 		OpenGLTexture m_PSIThirdTexture;
 		OpenGLTexture m_PSIFourthTexture;
-
+		GLuint vbo;
+		GLuint vao;
 
 		float m_vertices[8];
 	};

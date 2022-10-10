@@ -84,6 +84,20 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 	glClearColor(lightGray.fRed(), lightGray.fGreen(), lightGray.fBlue(), 1.0f);
 	glClearDepth(1.0f);
 
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+
 	return true;
 }
 
@@ -113,84 +127,85 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, m_PSIFirstTexture.GetTextureID());
 
-	GLuint vbo;
-
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_VERTEX_ARRAY, vbo);
+	glBindVertexArray(vao);
+	glEnableVertexAttribArray(0);
+	glDrawArrays(GL_QUADS, 0, 4);
+	glDisableVertexAttribArray(0);
+	glBindVertexArray(0);
 
 	// First PSI Image
-	glBegin(GL_QUADS);
-	{
-		glTexCoord2d(0.0f, 0.0f);
-		glVertex2f(-0.95f, -0.95f);
-
-		glTexCoord2d(0.0f, 1.0f);
-		glVertex2f(-0.05f, -0.95f);
-
-		glTexCoord2d(1.0f, 1.0f);
-		glVertex2f(-0.05f, -0.05f);
-
-		glTexCoord2d(1.0f, 0.0f);
-		glVertex2f(-0.95f, -0.05f);
-	}
-	glEnd();
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	// Second PSI Image
-	glBindTexture(GL_TEXTURE_2D, m_PSISecondTexture.GetTextureID());
-	glBegin(GL_QUADS);
-	{
-		glTexCoord2d(1.0f, 1.0f);
-		glVertex2f(0.05f, -0.95f);
-
-		glTexCoord2d(0.0f, 1.0f);
-		glVertex2f(0.95f, -0.95f);
-
-		glTexCoord2d(0.0f, 0.0f);
-		glVertex2f(0.95f, -0.05f);
-
-		glTexCoord2d(1.0f, 0.0f);
-		glVertex2f(0.05f, -0.05f);
-	}
-	glEnd();
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	// Third PSI Image
-	glBindTexture(GL_TEXTURE_2D, m_PSIThirdTexture.GetTextureID());
-	glBegin(GL_QUADS);
-	{
-		glTexCoord2d(1.0f, 1.0f);
-		glVertex2f(0.05f, 0.05f);
-
-		glTexCoord2d(0.0f, 1.0f);
-		glVertex2f(0.95f, 0.05f);
-
-		glTexCoord2d(0.0f, 0.0f);
-		glVertex2f(0.95f, 0.95f);
-
-		glTexCoord2d(1.0f, 0.0f);
-		glVertex2f(0.05f, 0.95f);
-	}
-	glEnd();
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	// Fourth PSI Image
-	glBindTexture(GL_TEXTURE_2D, m_PSIFourthTexture.GetTextureID());
-	glBegin(GL_QUADS);
-	{
-		glTexCoord2d(1.0f, 1.0f);
-		glVertex2f(-0.95f, 0.05f);
-
-		glTexCoord2d(0.0f, 1.0f);
-		glVertex2f(-0.05f, 0.05f);
-
-		glTexCoord2d(0.0f, 0.0f);
-		glVertex2f(-0.05f, 0.95f);
-
-		glTexCoord2d(1.0f, 0.0f);
-		glVertex2f(-0.95f, 0.95f);
-	}
-	glEnd();
+	//glBegin(GL_QUADS);
+	//{
+	//	glTexCoord2d(0.0f, 0.0f);
+	//	glVertex2f(-0.95f, -0.95f);
+	//
+	//	glTexCoord2d(0.0f, 1.0f);
+	//	glVertex2f(-0.05f, -0.95f);
+	//
+	//	glTexCoord2d(1.0f, 1.0f);
+	//	glVertex2f(-0.05f, -0.05f);
+	//
+	//	glTexCoord2d(1.0f, 0.0f);
+	//	glVertex2f(-0.95f, -0.05f);
+	//}
+	//glEnd();
+	//glBindTexture(GL_TEXTURE_2D, 0);
+	//
+	//// Second PSI Image
+	//glBindTexture(GL_TEXTURE_2D, m_PSISecondTexture.GetTextureID());
+	//glBegin(GL_QUADS);
+	//{
+	//	glTexCoord2d(1.0f, 1.0f);
+	//	glVertex2f(0.05f, -0.95f);
+	//
+	//	glTexCoord2d(0.0f, 1.0f);
+	//	glVertex2f(0.95f, -0.95f);
+	//
+	//	glTexCoord2d(0.0f, 0.0f);
+	//	glVertex2f(0.95f, -0.05f);
+	//
+	//	glTexCoord2d(1.0f, 0.0f);
+	//	glVertex2f(0.05f, -0.05f);
+	//}
+	//glEnd();
+	//glBindTexture(GL_TEXTURE_2D, 0);
+	//
+	//// Third PSI Image
+	//glBindTexture(GL_TEXTURE_2D, m_PSIThirdTexture.GetTextureID());
+	//glBegin(GL_QUADS);
+	//{
+	//	glTexCoord2d(1.0f, 1.0f);
+	//	glVertex2f(0.05f, 0.05f);
+	//
+	//	glTexCoord2d(0.0f, 1.0f);
+	//	glVertex2f(0.95f, 0.05f);
+	//
+	//	glTexCoord2d(0.0f, 0.0f);
+	//	glVertex2f(0.95f, 0.95f);
+	//
+	//	glTexCoord2d(1.0f, 0.0f);
+	//	glVertex2f(0.05f, 0.95f);
+	//}
+	//glEnd();
+	//glBindTexture(GL_TEXTURE_2D, 0);
+	//
+	//// Fourth PSI Image
+	//glBindTexture(GL_TEXTURE_2D, m_PSIFourthTexture.GetTextureID());
+	//glBegin(GL_QUADS);
+	//{
+	//	glTexCoord2d(1.0f, 1.0f);
+	//	glVertex2f(-0.95f, 0.05f);
+	//
+	//	glTexCoord2d(0.0f, 1.0f);
+	//	glVertex2f(-0.05f, 0.05f);
+	//
+	//	glTexCoord2d(0.0f, 0.0f);
+	//	glVertex2f(-0.05f, 0.95f);
+	//
+	//	glTexCoord2d(1.0f, 0.0f);
+	//	glVertex2f(-0.95f, 0.95f);
+	//}
+	//glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glDisable(GL_TEXTURE_2D);
