@@ -103,7 +103,7 @@ bool rctx::OpenGLRender::Load(HWND)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	return false;
+	return true;
 }
 
 void rctx::OpenGLRender::Draw(HWND hWnd)
