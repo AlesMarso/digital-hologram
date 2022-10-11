@@ -2,21 +2,21 @@
 
 bool rctx::OpenGLTestSecene::Load()
 {
-    share::HoloIniFileController holoIniFile;
+	share::HoloIniFileController holoIniFile;
 
-    m_PSIFirstTexture.CreateFromImage(holoIniFile.GetPSIFirstImage());
-    m_PSISecondTexture.CreateFromImage(holoIniFile.GetPSISecondImage());
-    m_PSIThirdTexture.CreateFromImage(holoIniFile.GetPSIThirdImage());
-    m_PSIFourthTexture.CreateFromImage(holoIniFile.GetPSIFourthImage());
+	m_PSIFirstTexture.CreateFromImage(holoIniFile.GetPSIFirstImage());
+	m_PSISecondTexture.CreateFromImage(holoIniFile.GetPSISecondImage());
+	m_PSIThirdTexture.CreateFromImage(holoIniFile.GetPSIThirdImage());
+	m_PSIFourthTexture.CreateFromImage(holoIniFile.GetPSIFourthImage());
 
-    white = 0xffffff;
+	white = 0xffffff;
 
-    return true;
+	return true;
 }
 
 bool rctx::OpenGLTestSecene::Calculate()
 {
-    return true;
+	return true;
 }
 
 bool rctx::OpenGLTestSecene::Draw()
@@ -108,5 +108,5 @@ bool rctx::OpenGLTestSecene::Draw()
 
 bool rctx::OpenGLTestSecene::Close()
 {
-    return true;
+	return true;
 }
