@@ -50,3 +50,10 @@ float gui::Color::fBlue() const
 {
 	return (float)m_Blue / (float)m_bMaxColorVal;
 }
+
+void gui::Color::operator=(uint32_t color)
+{
+	m_Red = ((color & 0xff0000) >> 16);
+	m_Green = ((color & 0x00ff00) >> 8);
+	m_Blue = (color & 0x0000ff);
+}

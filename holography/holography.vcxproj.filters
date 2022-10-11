@@ -45,6 +45,9 @@
     <ClCompile Include="src\render\opengl\OpenGLTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\render\opengl\OpenGLTestSecene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gui\Window.h">
@@ -86,6 +89,12 @@
     <ClInclude Include="src\render\opengl\OpenGLTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\render\opengl\IOpenGLScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\opengl\OpenGLTestSecene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="holography.rc">
@@ -97,5 +106,10 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="x64\Debug\holo.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="toolbar1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

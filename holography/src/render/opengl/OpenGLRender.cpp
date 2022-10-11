@@ -103,40 +103,50 @@ bool rctx::OpenGLRender::Load(HWND)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	return true;
+	m_RenderScene = new rctx::OpenGLTestSecene();
+
+	return m_RenderScene->Load();
 }
 
-void rctx::OpenGLRender::Draw(HWND hWnd)
+void rctx::OpenGLRender::Render(HWND hWnd)
 {
 	PAINTSTRUCT paint;
 
 	BeginPaint(hWnd, &paint);
 
-	gui::Color white(0xffffff);
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glColor3f(white.fRed(), white.fGreen(), white.fBlue());
 
-	if (!m_IsTextureLoad)
-	{
-		share::HoloIniFileController holoIniFile;
+	if (!m_RenderScene->Calculate())
+		return;
 
-		m_PSIFirstTexture.CreateFromImage(holoIniFile.GetPSIFirstImage());
-		m_PSISecondTexture.CreateFromImage(holoIniFile.GetPSISecondImage());
-		m_PSIThirdTexture.CreateFromImage(holoIniFile.GetPSIThirdImage());
-		m_PSIFourthTexture.CreateFromImage(holoIniFile.GetPSIFourthImage());
+	if (!m_RenderScene->Draw())
+		return;
 
-		m_IsTextureLoad = true;
-	}
-
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, m_PSIFirstTexture.GetTextureID());
-
-	glBindVertexArray(vao);
-	glEnableVertexAttribArray(0);
-	glDrawArrays(GL_QUADS, 0, 4);
-	glDisableVertexAttribArray(0);
-	glBindVertexArray(0);
+	//gui::Color white(0xffffff);
+	//
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glColor3f(white.fRed(), white.fGreen(), white.fBlue());
+	//
+	//if (!m_IsTextureLoad)
+	//{
+	//	share::HoloIniFileController holoIniFile;
+	//
+	//	m_PSIFirstTexture.CreateFromImage(holoIniFile.GetPSIFirstImage());
+	//	m_PSISecondTexture.CreateFromImage(holoIniFile.GetPSISecondImage());
+	//	m_PSIThirdTexture.CreateFromImage(holoIniFile.GetPSIThirdImage());
+	//	m_PSIFourthTexture.CreateFromImage(holoIniFile.GetPSIFourthImage());
+	//
+	//	m_IsTextureLoad = true;
+	//}
+	//
+	//glEnable(GL_TEXTURE_2D);
+	//glBindTexture(GL_TEXTURE_2D, m_PSIFirstTexture.GetTextureID());
+	//
+	//glBindVertexArray(vao);
+	//glEnableVertexAttribArray(0);
+	//glDrawArrays(GL_QUADS, 0, 4);
+	//glDisableVertexAttribArray(0);
+	//glBindVertexArray(0);
 
 	// First PSI Image
 	//glBegin(GL_QUADS);
@@ -211,9 +221,9 @@ void rctx::OpenGLRender::Draw(HWND hWnd)
 	//	glVertex2f(-0.95f, 0.95f);
 	//}
 	//glEnd();
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	glDisable(GL_TEXTURE_2D);
+	//glBindTexture(GL_TEXTURE_2D, 0);
+	//
+	//glDisable(GL_TEXTURE_2D);
 
 	SwapBuffers(paint.hdc);
 	EndPaint(hWnd, &paint);
@@ -233,5 +243,5 @@ void rctx::OpenGLRender::Close()
 
 void rctx::OpenGLRender::Update()
 {
-	Draw(m_hWnd);
+	Render(m_hWnd);
 }

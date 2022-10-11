@@ -21,6 +21,8 @@ namespace gui
 		float fGreen() const;
 		float fBlue() const;
 
+		void operator=(uint32_t);
+
 	private:
 		uint8_t m_Red;
 		uint8_t m_Green;

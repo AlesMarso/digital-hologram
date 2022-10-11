@@ -5,6 +5,8 @@
 #define ID_ACTION_MAIN_MENU             0
 #define IDR_MAIN_MENU                   101
 #define IDD_PROPPAGE_SMALL              102
+#define IDR_TOOLBAR1                    106
+#define IDB_BITMAP1                     107
 #define IDC_BUTTON1                     1001
 #define ID_FILE                         40001
 #define ID_HOLOGRAM                     40002
@@ -17,7 +19,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        106
+#define _APS_NEXT_RESOURCE_VALUE        108
 #define _APS_NEXT_COMMAND_VALUE         40007
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

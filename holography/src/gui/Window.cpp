@@ -65,7 +65,7 @@ LRESULT gui::Window::OnCreate(const EventArgs& args)
 
 LRESULT gui::Window::OnPaint(const EventArgs& args)
 {
-	m_RenderContext->Draw(args.hWnd);
+	m_RenderContext->Render(args.hWnd);
 
 	return true;
 }

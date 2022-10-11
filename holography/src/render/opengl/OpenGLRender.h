@@ -15,7 +15,8 @@
 
 #include <share/HoloIniFileController.h>
 #include <render/opengl/OpenGLTexture.h>
-
+#include <render/opengl/IOpenGLScene.h>
+#include <render/opengl/OpenGLTestSecene.h>
 
 namespace rctx
 {
@@ -28,7 +29,7 @@ namespace rctx
 
 		virtual bool Init(HWND) override;
 		virtual bool Load(HWND) override;
-		virtual void Draw(HWND) override;
+		virtual void Render(HWND) override;
 		virtual void Resize(HWND) override;
 		virtual void Close() override;
 		virtual void Update() override;
@@ -51,6 +52,8 @@ namespace rctx
 		GLuint vao;
 
 		float m_vertices[8];
+
+		IOpenGLScene* m_RenderScene;
 	};
 }
 
