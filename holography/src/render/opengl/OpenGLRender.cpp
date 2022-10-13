@@ -4,38 +4,18 @@ rctx::OpenGLRender::OpenGLRender()
 	: m_hWnd(nullptr),
 	m_hDC(nullptr),
 	m_hGLRC(nullptr),
-	m_IsTextureLoad(false)
+	m_IsTextureLoad(false),
+	m_RenderScene(new rctx::OpenGLTestSecene())
 {
-	m_vertices[0] = -0.95f;
-	m_vertices[1] = -0.95f;
-
-	m_vertices[2] = -0.95f;
-	m_vertices[3] = 0.95f;
-
-	m_vertices[4] = 0.95f;
-	m_vertices[5] = 0.95f;
-
-	m_vertices[6] = 0.95f;
-	m_vertices[7] = -0.95f;
 }
 
 rctx::OpenGLRender::OpenGLRender(HWND hwnd)
 	: m_hWnd(hwnd),
 	m_hDC(nullptr),
 	m_hGLRC(nullptr),
-	m_IsTextureLoad(false)
+	m_IsTextureLoad(false),
+	m_RenderScene(new rctx::OpenGLTestSecene())
 {
-	m_vertices[0] = -0.95f;
-	m_vertices[1] = -0.95f;
-
-	m_vertices[2] = -0.95f;
-	m_vertices[3] = 0.95f;
-
-	m_vertices[4] = 0.95f;
-	m_vertices[5] = 0.95f;
-
-	m_vertices[6] = 0.95f;
-	m_vertices[7] = -0.95f;
 }
 
 rctx::OpenGLRender::~OpenGLRender()
@@ -79,6 +59,8 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 		return false;
 	}
 
+	std::cout << "GLEW is init" << std::endl;
+
 	gui::Color lightGray = 0xd3d3d3;
 	
 	glClearColor(lightGray.fRed(), lightGray.fGreen(), lightGray.fBlue(), 1.0f);
@@ -89,21 +71,7 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 
 bool rctx::OpenGLRender::Load(HWND)
 {
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_STATIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-
-	m_RenderScene = new rctx::OpenGLTestSecene();
+	m_RenderScene = new rctx::OpenGLPSIScene();
 
 	return m_RenderScene->Load();
 }

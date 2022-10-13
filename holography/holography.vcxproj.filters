@@ -48,6 +48,9 @@
     <ClCompile Include="src\render\opengl\OpenGLTestSecene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\render\opengl\OpenGLPSIScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gui\Window.h">
@@ -93,6 +96,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\render\opengl\OpenGLTestSecene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\opengl\OpenGLPSIScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

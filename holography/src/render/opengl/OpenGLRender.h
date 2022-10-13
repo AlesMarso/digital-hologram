@@ -17,6 +17,7 @@
 #include <render/opengl/OpenGLTexture.h>
 #include <render/opengl/IOpenGLScene.h>
 #include <render/opengl/OpenGLTestSecene.h>
+#include <render/opengl/OpenGLPSIScene.h>
 
 namespace rctx
 {
@@ -48,10 +49,6 @@ namespace rctx
 		OpenGLTexture m_PSISecondTexture;
 		OpenGLTexture m_PSIThirdTexture;
 		OpenGLTexture m_PSIFourthTexture;
-		GLuint vbo;
-		GLuint vao;
-
-		float m_vertices[8];
 
 		IOpenGLScene* m_RenderScene;
 	};
