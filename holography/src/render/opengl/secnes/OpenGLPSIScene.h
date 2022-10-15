@@ -2,7 +2,7 @@
 
 #include <GL/glew.h>
 #include <render/opengl/OpenGLTexture.h>
-#include <render/opengl/IOpenGLScene.h>
+#include <render/opengl/secnes/IOpenGLScene.h>
 #include <share/HoloIniFileController.h>
 #include <gui/Color.h>
 

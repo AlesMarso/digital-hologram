@@ -144,8 +144,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\render\opengl\OpenGLPSIScene.cpp" />
-    <ClCompile Include="src\render\opengl\OpenGLTestSecene.cpp" />
+    <ClCompile Include="src\render\opengl\secnes\OpenGLPSIScene.cpp" />
+    <ClCompile Include="src\render\opengl\secnes\OpenGLTestSecene.cpp" />
     <ClCompile Include="src\render\opengl\OpenGLTexture.cpp" />
     <ClCompile Include="src\share\HoloIniFileController.cpp" />
     <ClCompile Include="src\share\IniFileController.cpp" />
@@ -158,9 +158,9 @@
     <ClCompile Include="src\render\VulkanRender.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\render\opengl\OpenGLPSIScene.h" />
-    <ClInclude Include="src\render\opengl\OpenGLTestSecene.h" />
-    <ClInclude Include="src\render\opengl\IOpenGLScene.h" />
+    <ClInclude Include="src\render\opengl\secnes\OpenGLPSIScene.h" />
+    <ClInclude Include="src\render\opengl\secnes\OpenGLTestSecene.h" />
+    <ClInclude Include="src\render\opengl\secnes\IOpenGLScene.h" />
     <ClInclude Include="src\render\opengl\OpenGLTexture.h" />
     <ClInclude Include="src\share\HoloIniFileController.h" />
     <ClInclude Include="src\share\IniFileController.h" />

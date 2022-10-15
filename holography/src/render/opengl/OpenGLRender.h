@@ -15,9 +15,9 @@
 
 #include <share/HoloIniFileController.h>
 #include <render/opengl/OpenGLTexture.h>
-#include <render/opengl/IOpenGLScene.h>
-#include <render/opengl/OpenGLTestSecene.h>
-#include <render/opengl/OpenGLPSIScene.h>
+#include <render/opengl/secnes/IOpenGLScene.h>
+#include <render/opengl/secnes/OpenGLTestSecene.h>
+#include <render/opengl/secnes/OpenGLPSIScene.h>
 
 namespace rctx
 {
