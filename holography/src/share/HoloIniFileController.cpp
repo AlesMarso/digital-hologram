@@ -4,10 +4,13 @@ share::HoloIniFileController::HoloIniFileController()
 	: m_HoloIniFileName("holo.ini"),
 	m_TestImageSection("Testimage"),
 	m_ImageFileKey("ImageFile"),
+	m_FilePathKey("FilePath"),
 	m_PSIFirstImage_SectionName("PSI_Image_First"),
 	m_PSISecondImage_SectionName("PSI_Image_Second"),
 	m_PSIThirdImage_SectionName("PSI_Image_Third"),
-	m_PSIFourthImage_SectionName("PSI_Image_Fourth")
+	m_PSIFourthImage_SectionName("PSI_Image_Fourth"),
+	m_VertexShader_SectionName("Vertex_Shader"),
+	m_FragmentShader_SectionName("Fragment_Shader")
 {
 	IniFileController::getInstance()->SetIniFileName(m_HoloIniFileName);
 }
@@ -76,6 +79,34 @@ std::filesystem::path share::HoloIniFileController::GetPSIThirdImage() const
 std::filesystem::path share::HoloIniFileController::GetPSIFourthImage() const
 {
 	std::string m_ImgFileName = IniFileController::getInstance()->GetString(m_PSIFourthImage_SectionName, m_ImageFileKey);
+
+	string1024 executableFileName = { 0 };
+
+	GetModuleFileName(nullptr, executableFileName, 1024);
+
+	std::filesystem::path execDirPath = std::filesystem::path(executableFileName).remove_filename();
+	execDirPath.append(m_ImgFileName);
+
+	return execDirPath;
+}
+
+std::filesystem::path share::HoloIniFileController::GetVertexShaderFilePath() const
+{
+	std::string m_ImgFileName = IniFileController::getInstance()->GetString(m_VertexShader_SectionName, m_FilePathKey);
+
+	string1024 executableFileName = { 0 };
+
+	GetModuleFileName(nullptr, executableFileName, 1024);
+
+	std::filesystem::path execDirPath = std::filesystem::path(executableFileName).remove_filename();
+	execDirPath.append(m_ImgFileName);
+
+	return execDirPath;
+}
+
+std::filesystem::path share::HoloIniFileController::GetFragmentShaderFilePath() const
+{
+	std::string m_ImgFileName = IniFileController::getInstance()->GetString(m_FragmentShader_SectionName, m_FilePathKey);
 
 	string1024 executableFileName = { 0 };
 

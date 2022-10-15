@@ -1,7 +1,7 @@
 #include "OpenGLPSIScene.h"
 
 rctx::OpenGLPSIScene::OpenGLPSIScene()
-	: m_VBO(-1), m_VAO(-1)
+	: m_VBO(-1), m_VAO(-1), m_ProgramID(-1)
 {
 	m_Vertices[0] = -0.95f;
 	m_Vertices[1] = -0.95f;
@@ -36,6 +36,11 @@ bool rctx::OpenGLPSIScene::Load()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
+	share::HoloIniFileController holoIniFile;
+
+	m_VertexShader.LoadSource(holoIniFile.GetVertexShaderFilePath(), GL_VERTEX_SHADER, &m_ProgramID);
+	m_FragmentShader.LoadSource(holoIniFile.GetFragmentShaderFilePath(), GL_FRAGMENT_SHADER, &m_ProgramID);
+
 	return true;
 }
 
@@ -46,6 +51,9 @@ bool rctx::OpenGLPSIScene::Calculate()
 
 bool rctx::OpenGLPSIScene::Draw()
 {
+	if(m_ProgramID != -1)
+		glUseProgram(m_ProgramID);
+
 	glBindVertexArray(m_VAO);
 	glEnableVertexAttribArray(0);
 	glDrawArrays(GL_QUADS, 0, 4);

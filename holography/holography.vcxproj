@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\render\opengl\shaders\Shader.cpp" />
     <ClCompile Include="src\render\opengl\secnes\OpenGLPSIScene.cpp" />
     <ClCompile Include="src\render\opengl\secnes\OpenGLTestSecene.cpp" />
     <ClCompile Include="src\render\opengl\OpenGLTexture.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="src\render\VulkanRender.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\render\opengl\shaders\Shader.h" />
     <ClInclude Include="src\render\opengl\secnes\OpenGLPSIScene.h" />
     <ClInclude Include="src\render\opengl\secnes\OpenGLTestSecene.h" />
     <ClInclude Include="src\render\opengl\secnes\IOpenGLScene.h" />
@@ -180,6 +182,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ribbon1.mfcribbon-ms" />
+    <None Include="src\render\opengl\shaders\FragmentShader.frag">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="src\render\opengl\shaders\VertexShader.ver" />
     <None Include="x64\Debug\holo.ini" />
   </ItemGroup>
   <ItemGroup>

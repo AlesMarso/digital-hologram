@@ -39,17 +39,6 @@ namespace rctx
 		HWND m_hWnd;
 		HDC  m_hDC;
 		HGLRC m_hGLRC;
-
-		bool m_IsTextureLoad;
-
-	private:
-		OpenGLTexture m_Texture;
-
-		OpenGLTexture m_PSIFirstTexture;
-		OpenGLTexture m_PSISecondTexture;
-		OpenGLTexture m_PSIThirdTexture;
-		OpenGLTexture m_PSIFourthTexture;
-
 		IOpenGLScene* m_RenderScene;
 	};
 }

@@ -51,6 +51,9 @@
     <ClCompile Include="src\render\opengl\secnes\OpenGLPSIScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\render\opengl\shaders\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gui\Window.h">
@@ -101,6 +104,9 @@
     <ClInclude Include="src\render\opengl\secnes\OpenGLPSIScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\render\opengl\shaders\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="holography.rc">
@@ -112,6 +118,8 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="x64\Debug\holo.ini" />
+    <None Include="src\render\opengl\shaders\VertexShader.ver" />
+    <None Include="src\render\opengl\shaders\FragmentShader.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="toolbar1.bmp">

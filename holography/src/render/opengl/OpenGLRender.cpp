@@ -4,7 +4,6 @@ rctx::OpenGLRender::OpenGLRender()
 	: m_hWnd(nullptr),
 	m_hDC(nullptr),
 	m_hGLRC(nullptr),
-	m_IsTextureLoad(false),
 	m_RenderScene(new rctx::OpenGLTestSecene())
 {
 }
@@ -13,7 +12,6 @@ rctx::OpenGLRender::OpenGLRender(HWND hwnd)
 	: m_hWnd(hwnd),
 	m_hDC(nullptr),
 	m_hGLRC(nullptr),
-	m_IsTextureLoad(false),
 	m_RenderScene(new rctx::OpenGLTestSecene())
 {
 }
