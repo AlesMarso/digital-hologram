@@ -13,7 +13,7 @@ namespace rctx
 		Shader();
 		~Shader();
 
-		GLuint LoadSource(const std::filesystem::path&, GLenum, GLuint*);
+		GLuint LoadSource(const std::filesystem::path&, GLenum, GLint*);
 		GLuint GetShaderID() const;
 
 	private:

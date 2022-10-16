@@ -14,7 +14,7 @@ rctx::Shader::~Shader()
 	}
 }
 
-GLuint rctx::Shader::LoadSource(const std::filesystem::path& shadersrcpath, GLenum shadertype, GLuint* programid)
+GLuint rctx::Shader::LoadSource(const std::filesystem::path& shadersrcpath, GLenum shadertype, GLint* programid)
 {
 	if (!programid)
 		return -1;

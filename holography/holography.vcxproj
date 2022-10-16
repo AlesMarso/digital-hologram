@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\render\opengl\shaders\GPUProgram.cpp" />
     <ClCompile Include="src\render\opengl\shaders\Shader.cpp" />
     <ClCompile Include="src\render\opengl\secnes\OpenGLPSIScene.cpp" />
     <ClCompile Include="src\render\opengl\secnes\OpenGLTestSecene.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="src\render\VulkanRender.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\render\opengl\shaders\GPUProgram.h" />
     <ClInclude Include="src\render\opengl\shaders\Shader.h" />
     <ClInclude Include="src\render\opengl\secnes\OpenGLPSIScene.h" />
     <ClInclude Include="src\render\opengl\secnes\OpenGLTestSecene.h" />

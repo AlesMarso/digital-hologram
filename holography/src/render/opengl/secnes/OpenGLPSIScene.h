@@ -7,6 +7,7 @@
 #include <gui/Color.h>
 
 #include <render/opengl/shaders/Shader.h>
+#include <render/opengl/shaders/GPUProgram.h>
 
 namespace rctx
 {
@@ -25,8 +26,7 @@ namespace rctx
 		GLuint m_VBO;
 		GLuint m_VAO;
 		GLfloat m_Vertices[8];
-		Shader m_VertexShader;
-		Shader m_FragmentShader;
-		GLuint m_ProgramID;
+
+		GPUProgram m_Program;
 	};
 }
