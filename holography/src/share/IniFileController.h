@@ -14,7 +14,8 @@ namespace share
 		~IniFileController();
 
 		void SetIniFileName(std::string);
-		std::string GetString(std::string, std::string);
+		std::string GetString(const std::string&, const std::string&);
+		std::filesystem::path GetFullFilePath(const std::string&, const std::string&);
 
 	private:
 		std::filesystem::path m_IniFilePath;
