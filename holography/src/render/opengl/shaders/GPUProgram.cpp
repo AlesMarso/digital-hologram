@@ -29,3 +29,8 @@ void rctx::GPUProgram::UseProgram()
     if (m_ProgramID != -1)
         glUseProgram(m_ProgramID);
 }
+
+void rctx::GPUProgram::SetUniform1i(const std::string& variablename, int value)
+{
+    glUniform1i(glGetUniformLocation(m_ProgramID, variablename.c_str()), value);
+}

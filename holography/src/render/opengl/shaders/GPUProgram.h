@@ -18,6 +18,8 @@ namespace rctx
 		GLint GetProgramID() const;
 		void UseProgram();
 
+		void SetUniform1i(const std::string&, int);
+
 	private:
 		Shader m_VertexShader;
 		Shader m_FragmentShader;

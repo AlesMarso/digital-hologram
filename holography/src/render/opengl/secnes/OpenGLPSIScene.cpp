@@ -75,7 +75,7 @@ bool rctx::OpenGLPSIScene::Draw()
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_PSIFirstTexture.GetTextureID());
-	glUniform1i(glGetUniformLocation(m_Program.GetProgramID(), "u_Texture"), 0);
+	m_Program.SetUniform1i("u_Texture", 0);
 
 	glEnableVertexAttribArray(0);
 	glDrawArrays(GL_QUADS, 0, 4);
