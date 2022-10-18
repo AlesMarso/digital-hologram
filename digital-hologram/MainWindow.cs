@@ -12,7 +12,6 @@ using System.Windows.Forms;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Platform.Windows;
 using OpenCL.Net;
-using OpenGL;
 
 namespace dholo
 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using OpenTK.Graphics.OpenGL;
+//using OpenTK.Graphics.OpenGL;
+using OpenTK.Graphics.OpenGL4;
 using System.Drawing;
 using System.Drawing.Imaging;
 
@@ -27,6 +28,10 @@ namespace dholo
             TextureID = Texture[0];
             GL.BindTexture(TextureTarget.Texture2D, TextureID);
 
+            int res = 0;
+            GL.GenBuffers(1, out res);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, res);
+
             int ImgWidth = bitmap.Width;
             int ImgHeight = bitmap.Height;
 
@@ -35,7 +40,7 @@ namespace dholo
 
             IntPtr bmpDatPtr = BiTMapData.Scan0;
 
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb8, ImgWidth, ImgHeight, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgr, PixelType.UnsignedByte, bmpDatPtr);
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb8, ImgWidth, ImgHeight, 0, OpenTK.Graphics.OpenGL4.PixelFormat.Bgr, PixelType.UnsignedByte, bmpDatPtr);
 
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);

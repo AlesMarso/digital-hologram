@@ -25,7 +25,8 @@ namespace rctx
 	private:
 		GLuint m_VBO;
 		GLuint m_VAO;
-		GLfloat m_Vertices[8];
+		GLfloat m_Vertices[16];
+		OpenGLTexture m_PSIFirstTexture;
 
 		GPUProgram m_Program;
 	};

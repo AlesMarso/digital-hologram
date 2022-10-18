@@ -218,17 +218,6 @@ namespace dholo
             this.OpenGLRenderContext.Paint += new System.Windows.Forms.PaintEventHandler(this.OnOpenGLRenderContextPaint);
             this.OpenGLRenderContext.Resize += new System.EventHandler(this.OpenGLRenderContext_Resize);
             // 
-            // openGLControl1
-            // 
-            this.openGLControl1.DrawFPS = false;
-            this.openGLControl1.Location = new System.Drawing.Point(699, 308);
-            this.openGLControl1.Name = "openGLControl1";
-            this.openGLControl1.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
-            this.openGLControl1.RenderContextType = SharpGL.RenderContextType.DIBSection;
-            this.openGLControl1.RenderTrigger = SharpGL.RenderTrigger.TimerBased;
-            this.openGLControl1.Size = new System.Drawing.Size(231, 221);
-            this.openGLControl1.TabIndex = 14;
-            // 
             // MainWindow
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
