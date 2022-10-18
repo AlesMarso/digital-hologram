@@ -51,10 +51,8 @@ namespace dholo
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.PSIGroupBox = new System.Windows.Forms.GroupBox();
             this.OpenGLRenderContext = new OpenTK.GLControl();
-            this.openGLControl1 = new SharpGL.OpenGLControl();
             this.hologramContextMenu.SuspendLayout();
             this.menuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.openGLControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // hologramContextMenu
@@ -222,7 +220,6 @@ namespace dholo
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(984, 611);
-            this.Controls.Add(this.openGLControl1);
             this.Controls.Add(this.OpenGLRenderContext);
             this.Controls.Add(this.PSIGroupBox);
             this.Controls.Add(this.statusStrip);
@@ -235,7 +232,6 @@ namespace dholo
             this.hologramContextMenu.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.openGLControl1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -263,6 +259,5 @@ namespace dholo
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.GroupBox PSIGroupBox;
         private OpenTK.GLControl OpenGLRenderContext;
-        private SharpGL.OpenGLControl openGLControl1;
     }
 }

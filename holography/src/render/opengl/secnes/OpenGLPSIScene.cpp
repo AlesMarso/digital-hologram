@@ -57,6 +57,7 @@ bool rctx::OpenGLPSIScene::Load()
 	m_Program.LinkVertexShader(holoIniFile.GetVertexShaderFilePath());
 	m_Program.LinkFragmentShader(holoIniFile.GetFragmentShaderFilePath());
 	m_PSIFirstTexture.CreateFromImage(holoIniFile.GetPSIFirstImage());
+	m_ImgTexture.CreateFromImage(holoIniFile.GetImageFileName());
 
 	return true;
 }
@@ -75,7 +76,11 @@ bool rctx::OpenGLPSIScene::Draw()
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_PSIFirstTexture.GetTextureID());
-	m_Program.SetUniform1i("u_Texture", 0);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, m_ImgTexture.GetTextureID());
+
+	m_Program.SetUniform1i("u_Texture1", 1);
 
 	glEnableVertexAttribArray(0);
 	glDrawArrays(GL_QUADS, 0, 4);

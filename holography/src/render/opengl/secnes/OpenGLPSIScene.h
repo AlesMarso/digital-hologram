@@ -27,6 +27,7 @@ namespace rctx
 		GLuint m_VAO;
 		GLfloat m_Vertices[16];
 		OpenGLTexture m_PSIFirstTexture;
+		OpenGLTexture m_ImgTexture;
 
 		GPUProgram m_Program;
 	};
