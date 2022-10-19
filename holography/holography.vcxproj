@@ -158,6 +158,7 @@
     <ClCompile Include="src\gui\Window.cpp" />
     <ClCompile Include="src\render\opengl\OpenGLRender.cpp" />
     <ClCompile Include="src\render\VulkanRender.cpp" />
+    <ClCompile Include="src\render\opengl\buffers\VertexBufferObjectClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\render\opengl\shaders\GPUProgram.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="src\share\const.h" />
     <ClInclude Include="src\share\types.h" />
     <ClInclude Include="src\render\VulkanRender.h" />
+    <ClInclude Include="src\render\opengl\buffers\VertexBufferObjectClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="holography.rc" />

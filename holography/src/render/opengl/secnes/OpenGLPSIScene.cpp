@@ -1,7 +1,7 @@
 #include "OpenGLPSIScene.h"
 
 rctx::OpenGLPSIScene::OpenGLPSIScene()
-	: m_VBO(-1), m_VAO(-1)
+	: m_VAO(-1)
 {
 	m_Vertices[0] = -0.95f;
 	m_Vertices[1] = -0.95f;
@@ -32,16 +32,18 @@ rctx::OpenGLPSIScene::~OpenGLPSIScene()
 {
 }
 
+template< typename T> void sizeOfT(std::vector<T> in) { std::cout << in.size() * sizeof(T) << std::endl; };
+
 bool rctx::OpenGLPSIScene::Load()
 {
-	glGenBuffers(1, &m_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(m_Vertices), m_Vertices, GL_STATIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	std::vector<float> input;
+	input.insert(input.end(), &m_Vertices[0], &m_Vertices[16]);
+
+	m_VBO.SetData(input);
 
 	glGenVertexArrays(1, &m_VAO);
 	glBindVertexArray(m_VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+	m_VBO.Bind();
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
@@ -49,7 +51,7 @@ bool rctx::OpenGLPSIScene::Load()
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	m_VBO.UnBind();
 	glBindVertexArray(0);
 
 	share::HoloIniFileController holoIniFile;

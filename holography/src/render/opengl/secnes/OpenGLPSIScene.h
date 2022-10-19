@@ -8,6 +8,10 @@
 
 #include <render/opengl/shaders/Shader.h>
 #include <render/opengl/shaders/GPUProgram.h>
+#include <render/opengl/buffers/VertexBufferObjectClass.h>
+
+#include <iostream>
+#include <vector>
 
 namespace rctx
 {
@@ -23,11 +27,13 @@ namespace rctx
 		virtual bool Close() override;
 
 	private:
-		GLuint m_VBO;
+		//GLuint m_VBO;
 		GLuint m_VAO;
 		GLfloat m_Vertices[16];
 		OpenGLTexture m_PSIFirstTexture;
 		OpenGLTexture m_ImgTexture;
+
+		VertexBufferObjectClass<float, GL_STATIC_DRAW> m_VBO;
 
 		GPUProgram m_Program;
 	};
