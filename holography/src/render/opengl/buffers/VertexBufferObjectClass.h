@@ -1,76 +1,59 @@
 #pragma once
 
-#include <GL/glew.h>
+#include <render/opengl/buffers/VertexObject.h>
 #include <vector>
 
 namespace rctx
 {
-	template<typename T, GLenum U>
-	class VertexBufferObjectClass
+	template<typename T>
+	class VertexBufferObjectClass : public VertexObject
 	{
 	public:
 		VertexBufferObjectClass();
 		~VertexBufferObjectClass();
 
-		GLuint GetBufferID() const;
+		void SetData(const std::vector<T>&, GLenum);
 
-		void SetData(const std::vector<T>&);
-
-		void Bind();
-		void UnBind();
-		bool IsBind() const;
+		void Bind() override;
+		void UnBind() override;
 
 	private:
-		GLuint m_idVBO;
-		bool m_IsBind;
 		GLsizeiptr m_Size;
 	};
 
-	template<typename T, GLenum U>
-	inline VertexBufferObjectClass<T, U>::VertexBufferObjectClass()
+	template<typename T>
+	inline VertexBufferObjectClass<T>::VertexBufferObjectClass()
 	{
-		glGenBuffers(1, &m_idVBO);
+		glGenBuffers(1, &m_ID);
 	}
 
-	template<typename T, GLenum U>
-	inline VertexBufferObjectClass<T, U>::~VertexBufferObjectClass()
+	template<typename T>
+	inline VertexBufferObjectClass<T>::~VertexBufferObjectClass()
 	{
-		glDeleteBuffers(1, &m_idVBO);
+		glDeleteBuffers(1, &m_ID);
 	}
 
-	template<typename T, GLenum U>
-	inline GLuint VertexBufferObjectClass<T, U>::GetBufferID() const
-	{
-		return m_idVBO;
-	}
-
-	template<typename T, GLenum U>
-	inline void VertexBufferObjectClass<T, U>::SetData(const std::vector<T>& input)
+	template<typename T>
+	inline void VertexBufferObjectClass<T>::SetData(const std::vector<T>& input, GLenum usage)
 	{
 		m_Size = input.size() * sizeof(T);
 
 		Bind();
-		glBufferData(GL_ARRAY_BUFFER, m_Size, &input[0], U);
+		glBufferData(GL_ARRAY_BUFFER, m_Size, &input[0], usage);
 		UnBind();
 	}
 
-	template<typename T, GLenum U>
-	inline void VertexBufferObjectClass<T, U>::Bind()
+	template<typename T>
+	inline void VertexBufferObjectClass<T>::Bind()
 	{
 		m_IsBind = true;
-		glBindBuffer(GL_ARRAY_BUFFER, m_idVBO);
+		glBindBuffer(GL_ARRAY_BUFFER, m_ID);
 	}
 
-	template<typename T, GLenum U>
-	inline void VertexBufferObjectClass<T, U>::UnBind()
+	template<typename T>
+	inline void VertexBufferObjectClass<T>::UnBind()
 	{
 		m_IsBind = false;
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
-	}
-
-	template<typename T, GLenum U>
-	inline bool VertexBufferObjectClass<T, U>::IsBind() const
-	{
-		return m_IsBind;
 	}
 }

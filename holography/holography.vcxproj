@@ -158,9 +158,10 @@
     <ClCompile Include="src\gui\Window.cpp" />
     <ClCompile Include="src\render\opengl\OpenGLRender.cpp" />
     <ClCompile Include="src\render\VulkanRender.cpp" />
-    <ClCompile Include="src\render\opengl\buffers\VertexBufferObjectClass.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\render\opengl\buffers\VertexArrayObject.h" />
+    <ClInclude Include="src\render\opengl\buffers\VertexObject.h" />
     <ClInclude Include="src\render\opengl\shaders\GPUProgram.h" />
     <ClInclude Include="src\render\opengl\shaders\Shader.h" />
     <ClInclude Include="src\render\opengl\secnes\OpenGLPSIScene.h" />

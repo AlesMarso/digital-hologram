@@ -28,12 +28,12 @@ namespace rctx
 
 	private:
 		//GLuint m_VBO;
-		GLuint m_VAO;
+		GLuint m_VAO[2];
 		GLfloat m_Vertices[16];
-		OpenGLTexture m_PSIFirstTexture;
+		OpenGLTexture m_PSIFirstTexture[2];
 		OpenGLTexture m_ImgTexture;
 
-		VertexBufferObjectClass<float, GL_STATIC_DRAW> m_VBO;
+		VertexBufferObjectClass<float> m_VBO[2];
 
 		GPUProgram m_Program;
 	};
