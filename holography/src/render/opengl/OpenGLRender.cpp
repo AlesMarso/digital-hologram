@@ -6,6 +6,9 @@ rctx::OpenGLRender::OpenGLRender()
 	m_hGLRC(nullptr),
 	m_RenderScene(new rctx::OpenGLTestSecene())
 {
+	m_InfoItems.push_back(OpenGLInfoItem(GL_VERSION, String));
+	m_InfoItems.push_back(OpenGLInfoItem(GL_VENDOR, String));
+	m_InfoItems.push_back(OpenGLInfoItem(GL_RENDERER, String));
 }
 
 rctx::OpenGLRender::OpenGLRender(HWND hwnd)
@@ -70,6 +73,25 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 bool rctx::OpenGLRender::Load(HWND)
 {
 	m_RenderScene = new rctx::OpenGLPSIScene();
+
+	std::for_each(m_InfoItems.begin(), m_InfoItems.end(), [](OpenGLInfoItem& item)
+		{
+			switch (item.m_Type)
+			{
+			case Int:
+			{
+				GLint info = -1;
+				glGetIntegerv(item.m_Param, &info);
+
+				std::cout << info << std::endl;
+				break;
+			}
+
+			case String:
+				std::cout << glGetString(item.m_Param) << std::endl;
+				break;
+			}
+		});
 
 	return m_RenderScene->Load();
 }

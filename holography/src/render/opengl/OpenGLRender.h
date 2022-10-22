@@ -12,6 +12,7 @@
 #include <filesystem>
 #include <gdiplus.h>
 #include <iostream>
+#include <vector>
 
 #include <share/HoloIniFileController.h>
 #include <render/opengl/OpenGLTexture.h>
@@ -21,6 +22,24 @@
 
 namespace rctx
 {
+	enum TypeInfoItem
+	{
+		Int,
+		String,
+		EnumInt,
+		EnumString
+	};
+
+	struct OpenGLInfoItem
+	{
+		GLenum m_Param;
+		TypeInfoItem m_Type;
+
+		OpenGLInfoItem(GLenum param, TypeInfoItem type)
+			: m_Param(param), m_Type(type)
+		{}
+	};
+
 	class OpenGLRender : public IRender
 	{
 	public:
@@ -40,6 +59,6 @@ namespace rctx
 		HDC  m_hDC;
 		HGLRC m_hGLRC;
 		IOpenGLScene* m_RenderScene;
+		std::vector<OpenGLInfoItem> m_InfoItems;
 	};
 }
-

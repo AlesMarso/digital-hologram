@@ -62,13 +62,25 @@ bool rctx::OpenGLPSIScene::Load()
 	m_Program.LinkFragmentShader(holoIniFile.GetFragmentShaderFilePath());
 
 	m_PSIFirstTexture[0].CreateFromImage(holoIniFile.GetPSIFirstImage());
-	m_PSIFirstTexture[1].CreateFromImage(holoIniFile.GetImageFileName());
+	m_PSIFirstTexture[1].CreateFromImage(holoIniFile.GetPSISecondImage());
+	m_PSIFirstTexture[2].CreateFromImage(holoIniFile.GetPSIThirdImage());
+	m_PSIFirstTexture[3].CreateFromImage(holoIniFile.GetPSIFourthImage());
 
 	return true;
 }
 
 bool rctx::OpenGLPSIScene::Calculate()
 {
+	//glEnable(GL_TEXTURE_2D);
+	//
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	glActiveTexture(GL_TEXTURE0 + i);
+	//	glBindTexture(GL_TEXTURE_2D, m_PSIFirstTexture[i].GetTextureID());
+	//}
+	//
+	//glDisable(GL_TEXTURE_2D);
+
 	return true;
 }
 
@@ -78,13 +90,13 @@ bool rctx::OpenGLPSIScene::Draw()
 
 	m_Program.UseProgram();
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		glBindVertexArray(m_VAO[i]);
-
+		
 		glActiveTexture(GL_TEXTURE0 + i);
 		glBindTexture(GL_TEXTURE_2D, m_PSIFirstTexture[i].GetTextureID());
-
+		
 		m_Program.SetUniform1i("u_Texture", i);
 
 		glEnableVertexAttribArray(0);

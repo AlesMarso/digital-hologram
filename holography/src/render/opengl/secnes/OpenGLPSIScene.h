@@ -27,11 +27,9 @@ namespace rctx
 		virtual bool Close() override;
 
 	private:
-		//GLuint m_VBO;
 		GLuint m_VAO[2];
 		GLfloat m_Vertices[16];
-		OpenGLTexture m_PSIFirstTexture[2];
-		OpenGLTexture m_ImgTexture;
+		OpenGLTexture m_PSIFirstTexture[4];
 
 		VertexBufferObjectClass<float> m_VBO[2];
 
