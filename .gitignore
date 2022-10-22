@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /digital-hologram/digital-hologram.sln
+/.vscode/tasks.json
+/.vscode/launch.json
