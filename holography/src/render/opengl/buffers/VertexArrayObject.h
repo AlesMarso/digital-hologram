@@ -23,7 +23,7 @@ namespace rctx
 	template<typename T>
 	inline VertexArrayObject<T>::VertexArrayObject()
 	{
-		glGenVertexArrays(1, &m_ID)
+		glGenVertexArrays(1, &m_ID);
 	}
 
 	template<typename T>

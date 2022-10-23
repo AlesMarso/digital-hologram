@@ -14,6 +14,7 @@ namespace rctx
 
 		void LinkVertexShader(const std::filesystem::path&);
 		void LinkFragmentShader(const std::filesystem::path&);
+		void LinkComputeShader(const std::filesystem::path&);
 
 		GLint GetProgramID() const;
 		void UseProgram();
@@ -23,6 +24,7 @@ namespace rctx
 	private:
 		Shader m_VertexShader;
 		Shader m_FragmentShader;
+		Shader m_ComputeShader;
 		GLint m_ProgramID;
 	};
 }

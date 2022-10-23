@@ -9,6 +9,7 @@
 #include <render/opengl/shaders/Shader.h>
 #include <render/opengl/shaders/GPUProgram.h>
 #include <render/opengl/buffers/VertexBufferObjectClass.h>
+#include <render/opengl/buffers/VertexArrayObject.h>
 
 #include <iostream>
 #include <vector>
@@ -29,9 +30,10 @@ namespace rctx
 	private:
 		GLuint m_VAO[2];
 		GLfloat m_Vertices[16];
-		OpenGLTexture m_PSIFirstTexture[4];
+		OpenGLTexture m_PSITextures[4];
 
 		VertexBufferObjectClass<float> m_VBO[2];
+		VertexArrayObject<float> m_VAOs[2];
 
 		GPUProgram m_Program;
 	};

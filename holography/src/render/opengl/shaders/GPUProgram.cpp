@@ -19,6 +19,11 @@ void rctx::GPUProgram::LinkFragmentShader(const std::filesystem::path& fragments
     m_FragmentShader.LoadSource(fragmentshader, GL_FRAGMENT_SHADER, &m_ProgramID);
 }
 
+void rctx::GPUProgram::LinkComputeShader(const std::filesystem::path& computeshader)
+{
+    m_ComputeShader.LoadSource(computeshader, GL_COMPUTE_SHADER, &m_ProgramID);
+}
+
 GLint rctx::GPUProgram::GetProgramID() const
 {
     return m_ProgramID;
