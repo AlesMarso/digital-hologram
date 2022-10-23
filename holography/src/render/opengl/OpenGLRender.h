@@ -19,6 +19,7 @@
 #include <render/opengl/secnes/IOpenGLScene.h>
 #include <render/opengl/secnes/OpenGLTestSecene.h>
 #include <render/opengl/secnes/OpenGLPSIScene.h>
+#include <render/opengl/secnes/OpenGLFuorierScene.h>
 
 namespace rctx
 {

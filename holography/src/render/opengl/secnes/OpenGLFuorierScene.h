@@ -2,10 +2,14 @@
 
 #include <GL/glew.h>
 
+#include <share/HoloIniFileController.h>
+
 #include <render/opengl/secnes/IOpenGLScene.h>
 #include <render/opengl/OpenGLTexture.h>
 #include <render/opengl/shaders/Shader.h>
 #include <render/opengl/shaders/GPUProgram.h>
+#include <render/opengl/buffers/VertexArrayObject.h>
+#include <render/opengl/buffers/VertexBufferObjectClass.h>
 
 namespace rctx
 {
@@ -13,7 +17,7 @@ namespace rctx
 	{
 	public:
 
-		OpenGLFuorierScene() = default;
+		OpenGLFuorierScene();
 		~OpenGLFuorierScene() = default;
 
 		bool Load() override;
@@ -22,9 +26,14 @@ namespace rctx
 		bool Close() override;
 
 	private:
-		OpenGLTexture m_TestTexture;
+		OpenGLTexture m_Texture;
 
 		GPUProgram m_ComputeProgram;
 		GPUProgram m_RenderProgram;
+
+		VertexBufferObjectClass<float> m_VBO;
+		VertexArrayObject<float> m_VAO;
+
+		GLfloat m_Vertices[16];
 	};
 }

@@ -9,6 +9,7 @@ rctx::OpenGLRender::OpenGLRender()
 	m_InfoItems.push_back(OpenGLInfoItem(GL_VERSION, String));
 	m_InfoItems.push_back(OpenGLInfoItem(GL_VENDOR, String));
 	m_InfoItems.push_back(OpenGLInfoItem(GL_RENDERER, String));
+	m_InfoItems.push_back(OpenGLInfoItem(GL_SHADING_LANGUAGE_VERSION, String));
 }
 
 rctx::OpenGLRender::OpenGLRender(HWND hwnd)
@@ -72,7 +73,7 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 
 bool rctx::OpenGLRender::Load(HWND)
 {
-	m_RenderScene = new rctx::OpenGLPSIScene();
+	m_RenderScene = new rctx::OpenGLFuorierScene();
 
 	std::for_each(m_InfoItems.begin(), m_InfoItems.end(), [](OpenGLInfoItem& item)
 		{
