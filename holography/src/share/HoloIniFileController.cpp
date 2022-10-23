@@ -10,7 +10,8 @@ share::HoloIniFileController::HoloIniFileController()
 	m_PSIThirdImage_SectionName("PSI_Image_Third"),
 	m_PSIFourthImage_SectionName("PSI_Image_Fourth"),
 	m_VertexShader_SectionName("Vertex_Shader"),
-	m_FragmentShader_SectionName("Fragment_Shader")
+	m_FragmentShader_SectionName("Fragment_Shader"),
+	m_ComputeShader_SectionName("Compute_Shader")
 {
 	IniFileController::getInstance()->SetIniFileName(m_HoloIniFileName);
 }
@@ -53,4 +54,9 @@ std::filesystem::path share::HoloIniFileController::GetVertexShaderFilePath() co
 std::filesystem::path share::HoloIniFileController::GetFragmentShaderFilePath() const
 {
 	return IniFileController::getInstance()->GetFullFilePath(m_FragmentShader_SectionName, m_FilePathKey);
+}
+
+std::filesystem::path share::HoloIniFileController::GetComputeShaderFilePath() const
+{
+	return IniFileController::getInstance()->GetFullFilePath(m_ComputeShader_SectionName, m_FilePathKey);
 }

@@ -19,6 +19,7 @@ namespace share
 		std::filesystem::path GetPSIFourthImage() const;
 		std::filesystem::path GetVertexShaderFilePath() const;
 		std::filesystem::path GetFragmentShaderFilePath() const;
+		std::filesystem::path GetComputeShaderFilePath() const;
 
 	private:
 		std::string m_HoloIniFileName;
@@ -30,6 +31,7 @@ namespace share
 		std::string m_PSIFourthImage_SectionName;
 		std::string m_VertexShader_SectionName;
 		std::string m_FragmentShader_SectionName;
+		std::string m_ComputeShader_SectionName;
 
 		std::string m_ImageFileKey;
 		std::string m_FilePathKey;
