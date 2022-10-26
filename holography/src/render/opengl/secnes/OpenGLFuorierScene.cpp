@@ -32,11 +32,48 @@ bool rctx::OpenGLFuorierScene::Load()
     m_RenderProgram.LinkVertexShader(holoIniFile.GetVertexShaderFilePath());
     m_RenderProgram.LinkFragmentShader(holoIniFile.GetFragmentShaderFilePath());
 
+    m_ComputeProgram.LinkComputeShader(holoIniFile.GetComputeShaderFilePath());
+
+    int maxX, maxY, maxZ, maxItemsPerGroup;
+
+    glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 0, &maxX);
+    glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 1, &maxY);
+    glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 2, &maxZ);
+    glGetIntegerv(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &maxItemsPerGroup);
+
+    std::cout << "Max work group size X: " << maxX << std::endl;
+    std::cout << "Max work group size Y: " << maxY << std::endl;
+    std::cout << "Max work group size Z: " << maxZ << std::endl;
+    std::cout << "Max work group items: " << maxItemsPerGroup << std::endl;
+
+    glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, 0, &maxGroupX);
+    glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, 1, &maxGroupY);
+    glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, 2, &maxGroupZ);
+
+    std::cout << "Max work group count X: " << maxGroupX << std::endl;
+    std::cout << "Max work group count Y: " << maxGroupY << std::endl;
+    std::cout << "Max work group count Z: " << maxGroupZ << std::endl;
+
     return true;
 }
 
 bool rctx::OpenGLFuorierScene::Calculate()
 {
+    m_ComputeProgram.UseProgram();
+
+    glEnable(GL_TEXTURE_2D);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, m_Texture.GetTextureID());
+    glBindImageTexture(0, m_Texture.GetTextureID(), 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+    glDispatchCompute(1, 4, 1);
+    glMemoryBarrier(GL_ALL_BARRIER_BITS);
+    glBindImageTexture(0, 0, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    glDisable(GL_TEXTURE_2D);
+
     return true;
 }
 
@@ -55,6 +92,8 @@ bool rctx::OpenGLFuorierScene::Draw()
     glDrawArrays(GL_QUADS, 0, 4);
     m_VAO.DisableArray(0);
     m_VAO.UnBind();
+
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     glDisable(GL_TEXTURE_2D);
 

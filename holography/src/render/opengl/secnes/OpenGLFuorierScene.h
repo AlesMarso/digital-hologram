@@ -35,5 +35,6 @@ namespace rctx
 		VertexArrayObject<float> m_VAO;
 
 		GLfloat m_Vertices[16];
+		int maxGroupX, maxGroupY, maxGroupZ;
 	};
 }
