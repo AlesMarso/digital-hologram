@@ -39,3 +39,8 @@ void rctx::GPUProgram::SetUniform1i(const std::string& variablename, int value)
 {
     glUniform1i(glGetUniformLocation(m_ProgramID, variablename.c_str()), value);
 }
+
+void rctx::GPUProgram::SetUniform1ui(const std::string& variablename, unsigned int value)
+{
+    glUniform1ui(glGetUniformLocation(m_ProgramID, variablename.c_str()), value);
+}

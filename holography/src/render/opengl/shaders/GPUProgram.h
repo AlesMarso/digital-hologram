@@ -20,6 +20,7 @@ namespace rctx
 		void UseProgram();
 
 		void SetUniform1i(const std::string&, int);
+		void SetUniform1ui(const std::string&, unsigned int);
 
 	private:
 		Shader m_VertexShader;

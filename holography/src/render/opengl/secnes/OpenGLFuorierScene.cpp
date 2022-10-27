@@ -60,6 +60,7 @@ bool rctx::OpenGLFuorierScene::Load()
 bool rctx::OpenGLFuorierScene::Calculate()
 {
     m_ComputeProgram.UseProgram();
+    m_ComputeProgram.SetUniform1ui("PixelsX", static_cast<unsigned int>(m_Texture.GetWidth()));
 
     glEnable(GL_TEXTURE_2D);
 
