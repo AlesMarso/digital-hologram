@@ -1,9 +1,16 @@
 #include <iostream>
 #include <gui/Window.h>
 #include <gdiplus.h>
+#include "math/FFT.h"
 
 int main()
 {
+	std::vector<math::Complex> input;
+	for (int i = 0; i < 16; i++)
+		input.push_back(math::Complex{static_cast<float>(i), static_cast<float>(i)});
+
+	input = math::fft(input);
+
 	try
 	{
 		gui::Window window;
