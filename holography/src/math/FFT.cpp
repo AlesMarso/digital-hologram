@@ -14,6 +14,11 @@ namespace math
 		return j >> (16 - logm);
 	}
 
+	Complex Butterfuy(const Complex& rigth, const Complex& left)
+	{
+		return Complex();
+	}
+
 	std::vector<Complex> fft(const std::vector<Complex>& input)
 	{
 		if (!input.size())
@@ -26,11 +31,27 @@ namespace math
 
 		for (int i = 0; i < sz; i++)
 		{
-			int reverse_i = BitReverseOfCenter(i, 4);
+			int reverse_i = BitReverseOfCenter(i, 3);
 			output[i] = input[reverse_i];
 		}
 
+		uint32_t log = static_cast<uint32_t>(std::log2(static_cast<double>(sz)));
+		uint32_t num_blocks = sz / 2;
+		uint32_t vals = 2;
 
+		for (uint32_t level = 0; level < log; level++)
+		{
+			for (uint32_t block = 0; block < num_blocks; block++)
+			{
+				for (uint32_t id_val = 0; id_val < vals; id_val++)
+				{
+
+				}
+			}
+
+			vals >>= 1; // vals *= 2
+			num_blocks <<= 1; // num_blocks / 2
+		}
 
 		return output;
 	}

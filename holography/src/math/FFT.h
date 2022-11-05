@@ -4,6 +4,7 @@
 #include <exception>
 #include <cstdint>
 #include <algorithm>
+#include <cmath>
 
 namespace math
 {
@@ -31,6 +32,8 @@ namespace math
 	constexpr uint32_t MASK_0000 = 0x0000FFFF;
 
 	uint32_t BitReverseOfCenter(uint32_t, uint32_t);
+
+	Complex Butterfuy(const Complex&, const Complex&);
 
 	std::vector<Complex> fft(const std::vector<Complex>&);
 }
