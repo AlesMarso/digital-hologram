@@ -6,10 +6,12 @@
 int main()
 {
 	std::vector<math::Complex> input;
-	for (int i = 0; i < 8; i++)
+	std::vector<math::Complex> output;
+
+	for (int i = 0; i < 16; i++)
 		input.push_back(math::Complex{static_cast<float>(i), static_cast<float>(i)});
 
-	input = math::fft(input);
+	math::fft(input, output);
 
 	try
 	{
