@@ -1,22 +1,39 @@
 #pragma once
 
+#define _USE_MATH_DEFINES
+
 #include <vector>
 #include <exception>
 #include <cstdint>
 #include <algorithm>
+#include <cmath>
 
 namespace math
 {
-	struct Complex
+	class Complex
 	{
+	public:
+		Complex() = default;
+		Complex(float, float);
+		Complex(const Complex&);
+		~Complex() = default;
+
+		void SetA(float);
+		void SetB(float);
+
+		float GetA() const;
+		float GetB() const;
+
+		void operator=(const Complex&);
+		void operator*=(int);
+
+		friend Complex operator+(const Complex&, const Complex&);
+		friend Complex operator-(const Complex&, const Complex&);
+		friend Complex operator*(const Complex&, const Complex&);
+
+	private:
 		float m_A;
 		float m_B;
-
-		void operator=(const Complex& left)
-		{
-			this->m_A = left.m_A;
-			this->m_B = left.m_B;
-		}
 	};
 
 	constexpr uint32_t MASK_AAAA = 0x0000AAAA;
@@ -31,6 +48,7 @@ namespace math
 	constexpr uint32_t MASK_0000 = 0x0000FFFF;
 
 	uint32_t BitReverseOfCenter(uint32_t, uint32_t);
+	Complex Butterfly(const Complex&, const Complex&);
 
-	std::vector<Complex> fft(const std::vector<Complex>&);
+	void fft(const std::vector<Complex>&, std::vector<Complex>&);
 }
