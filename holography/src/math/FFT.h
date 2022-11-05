@@ -50,5 +50,5 @@ namespace math
 	uint32_t BitReverseOfCenter(uint32_t, uint32_t);
 	Complex Butterfly(const Complex&, const Complex&);
 
-	std::vector<Complex> fft(const std::vector<Complex>&);
+	void fft(const std::vector<Complex>&, std::vector<Complex>&);
 }

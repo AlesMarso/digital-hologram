@@ -99,14 +99,14 @@ namespace math
 		output.resize(input.size());
 
 		uint32_t sz = output.size();
+		uint32_t numLog2Levels = static_cast<uint32_t>(std::log2(static_cast<double>(sz)));
 
 		for (int i = 0; i < sz; i++)
 		{
-			int reverse_i = BitReverseOfCenter(i, 3);
+			int reverse_i = BitReverseOfCenter(i, numLog2Levels);
 			output[i] = input[reverse_i];
 		}
 
-		uint32_t numLog2Levels = static_cast<uint32_t>(std::log2(static_cast<double>(sz)));
 		uint32_t numBlocks = sz / 2;
 		uint32_t numButterflyOperations = 1;
 		uint32_t offset = 2;
@@ -119,7 +119,8 @@ namespace math
 			{
 				for (uint32_t operation = 0; operation < numButterflyOperations; operation++)
 				{
-					double phi = M_2PI * ((operation) / _2_k);
+					double y = static_cast<double>(operation) / static_cast<double>(_2_k);
+					double phi = M_2PI * y;
 
 					Complex W;
 					W.SetA(std::cosf(phi));
