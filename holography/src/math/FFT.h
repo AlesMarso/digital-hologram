@@ -13,7 +13,7 @@ namespace math
 	class Complex
 	{
 	public:
-		Complex() = default;
+		Complex();
 		Complex(float, float);
 		Complex(const Complex&);
 		~Complex() = default;
@@ -26,6 +26,7 @@ namespace math
 
 		void operator=(const Complex&);
 		void operator*=(int);
+		void operator+=(const Complex&);
 
 		friend Complex operator+(const Complex&, const Complex&);
 		friend Complex operator-(const Complex&, const Complex&);
@@ -47,8 +48,11 @@ namespace math
 	constexpr uint32_t MASK_FFFF = 0xFFFF0000;
 	constexpr uint32_t MASK_0000 = 0x0000FFFF;
 
+	constexpr auto M_2PI = 2 * 3.14159265358979323846;
+
 	uint32_t BitReverseOfCenter(uint32_t, uint32_t);
 	Complex Butterfly(const Complex&, const Complex&);
 
 	void fft(const std::vector<Complex>&, std::vector<Complex>&);
+	void fft_even_count_points(const std::vector<Complex>&, std::vector<Complex>&);
 }

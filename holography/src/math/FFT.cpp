@@ -35,6 +35,12 @@ namespace math
 		return Complex(a, b);
 	}
 
+	Complex::Complex()
+	{
+		m_A = 0.0f;
+		m_B = 0.0f;
+	}
+
 	Complex::Complex(float a, float b)
 	{
 		m_A = a;
@@ -71,6 +77,11 @@ namespace math
 	{
 		this->m_A *= val;
 		this->m_B *= val;
+	}
+
+	void Complex::operator+=(const Complex& left)
+	{
+		*this = *this + left;
 	}
 
 	void Complex::operator=(const Complex& left)
@@ -111,7 +122,6 @@ namespace math
 		uint32_t numButterflyOperations = 1;
 		uint32_t offset = 2;
 		uint32_t offsetId = 1;
-		constexpr auto M_2PI = 2 * M_PI;
 
 		for (uint32_t logLevel = 0, _2_k = 2; logLevel < numLog2Levels; logLevel++, _2_k *= 2)
 		{
@@ -142,6 +152,61 @@ namespace math
 
 			offset *= 2; // offset = offset * 2
 			offsetId *= 2; // offsetId = offsetId * 2
+		}
+	}
+
+	void fft_even_count_points(const std::vector<Complex>& in, std::vector<Complex>& out)
+	{
+		if (in.empty())
+			throw std::exception("Input array must have a some points");
+
+		auto N = in.size();
+		uint32_t M = N, L = 1;
+
+		for (; M % 2 == 0; L *= 2, M /= 2);
+
+		std::vector<Complex> fftInput;
+		std::vector<Complex> fftOutput;
+		std::vector<Complex> temp;
+
+		out.resize(N);
+		temp.resize(N);
+
+		fftInput.resize(L);
+		fftOutput.resize(L);
+
+		for (int h = 0; h < M; h++)
+		{
+			for (int g = 0; g < L; g++)
+				fftInput[g] = in[h + g * M];
+
+			fft(fftInput, fftOutput);
+
+			for (int g = 0; g < L; g++)
+				temp[h + g * M] = fftOutput[g];
+		}
+
+		for (int r = 0; r < L; r++)
+		{
+			for (int s = 0; s < M; s++)
+			{
+				auto outId = r + s * L;
+
+				Complex res;
+
+				for (int m = 0; m < M; m++)
+				{
+					double phi = M_2PI * (static_cast<double>(m * (r + s * L)) / static_cast<double>(N));
+
+					Complex W;
+					W.SetA(std::cosf(phi));
+					W.SetB(std::sinf(phi));
+
+					res += temp[m + r * M] * W;
+				}
+
+				out[outId] = res;
+			}
 		}
 	}
 }
