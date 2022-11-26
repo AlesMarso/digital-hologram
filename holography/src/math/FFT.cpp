@@ -161,7 +161,7 @@ namespace math
 			throw std::exception("Input array must have a some points");
 
 		auto N = in.size();
-		uint32_t M = N, L = 1;
+		uint64_t M = N, L = 1;
 
 		for (; M % 2 == 0; L *= 2, M /= 2);
 
@@ -175,28 +175,28 @@ namespace math
 		fftInput.resize(L);
 		fftOutput.resize(L);
 
-		for (int h = 0; h < M; h++)
+		for (uint64_t h = 0; h < M; h++)
 		{
-			for (int g = 0; g < L; g++)
+			for (uint64_t g = 0; g < L; g++)
 				fftInput[g] = in[h + g * M];
 
 			fft(fftInput, fftOutput);
 
-			for (int g = 0; g < L; g++)
+			for (uint64_t g = 0; g < L; g++)
 				temp[h + g * M] = fftOutput[g];
 		}
 
-		for (int r = 0; r < L; r++)
+		for (uint64_t r = 0; r < L; r++)
 		{
-			for (int s = 0; s < M; s++)
+			for (uint64_t s = 0; s < M; s++)
 			{
-				auto outId = r + s * L;
+				uint64_t outId = r + s * L;
 
 				Complex res;
 
-				for (int m = 0; m < M; m++)
+				for (uint64_t m = 0; m < M; m++)
 				{
-					double phi = M_2PI * (static_cast<double>(m * (r + s * L)) / static_cast<double>(N));
+					double phi = M_2PI * (static_cast<double>(m * outId) / static_cast<double>(N));
 
 					Complex W;
 					W.SetA(std::cosf(phi));
