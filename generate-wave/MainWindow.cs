@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using dholo.wave;
 
-namespace dholo
+namespace generate_wave
 {
-    public partial class GenerateWaveDlg : Form
+    public partial class MainWindow : Form
     {
         public const int StepWidth = 20;
         public const int StepHeight = 20;
@@ -14,7 +19,7 @@ namespace dholo
 
         private Bitmap image;
 
-        public GenerateWaveDlg()
+        public MainWindow()
         {
             InitializeComponent();
 
@@ -23,7 +28,7 @@ namespace dholo
             waveType.SelectedIndex = 0;
         }
 
-        private void OnChartPaint(object sender, PaintEventArgs e)
+        private void OnPaint(object sender, PaintEventArgs e)
         {
             DrawGrid(e.Graphics);
             DrawChart(e.Graphics);
@@ -84,6 +89,53 @@ namespace dholo
             }
         }
 
+        private void OnSaveImageClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (saveImageDlg.ShowDialog() == DialogResult.OK)
+                {
+                    image.Save(saveImageDlg.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void OnCreateImageClick(object sender, EventArgs e)
+        {
+            try
+            {
+                var BmpWidth = Convert.ToInt32(pointsCnt.Text);
+                var BmpHeight = Convert.ToInt32(pointsCnt.Text);
+
+                image = new Bitmap(BmpWidth, BmpHeight, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
+
+                for (int iy = 0; iy < BmpHeight; iy++)
+                {
+                    for (int ix = 0; ix < BmpWidth; ix++)
+                    {
+                        var PixelColor = Convert.ToByte(wave.Points[ix].Y * 255);
+
+                        image.SetPixel(ix, iy, Color.FromArgb(PixelColor, PixelColor, PixelColor));
+                    }
+                }
+
+                ResultImageWave.Image = image;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void OnEraseImageClick(object sender, EventArgs e)
+        {
+            ResultImageWave.Image = null;
+        }
+
         private void OnWaveTypeSelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -111,48 +163,6 @@ namespace dholo
 
                 Chart.Refresh();
 
-            } 
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void OnSaveImageClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if(saveImageDlg.ShowDialog() == DialogResult.OK)
-                {
-                    image.Save(saveImageDlg.FileName);
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void OnCreateImageClick(object sender, EventArgs e)
-        {
-            try
-            {
-                var BmpWidth = Convert.ToInt32(pointsCnt.Text);
-                var BmpHeight = Convert.ToInt32(pointsCnt.Text);
-
-                image = new Bitmap(BmpWidth, BmpHeight, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
-
-                for(int iy = 0; iy < BmpHeight; iy++)
-                {
-                    for(int ix = 0; ix < BmpWidth; ix++)
-                    {
-                       var PixelColor = Convert.ToByte(wave.Points[ix].Y * 255);
-
-                       image.SetPixel(ix, iy, Color.FromArgb(PixelColor, PixelColor, PixelColor));
-                    }
-                }
-
-                ResultImageWave.Image = image;
             }
             catch (Exception ex)
             {
@@ -160,37 +170,7 @@ namespace dholo
             }
         }
 
-        private void OnEraseImageClick(object sender, EventArgs e)
-        {
-            ResultImageWave.Image = null;
-        }
-
         private void Chart_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ResultImageWave_Click(object sender, EventArgs e)
         {
 
         }

@@ -57,6 +57,7 @@ namespace dholo
             this.Chart.Size = new System.Drawing.Size(558, 323);
             this.Chart.TabIndex = 0;
             this.Chart.TabStop = false;
+            this.Chart.Click += new System.EventHandler(this.Chart_Click);
             this.Chart.Paint += new System.Windows.Forms.PaintEventHandler(this.OnChartPaint);
             // 
             // waveType
@@ -81,6 +82,7 @@ namespace dholo
             this.label1.Size = new System.Drawing.Size(77, 19);
             this.label1.TabIndex = 2;
             this.label1.Text = "Вид волны";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // phase
             // 
@@ -102,6 +104,7 @@ namespace dholo
             this.label3.Size = new System.Drawing.Size(39, 19);
             this.label3.TabIndex = 5;
             this.label3.Text = "Фаза";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // wavesCnt
             // 
@@ -123,6 +126,7 @@ namespace dholo
             this.label4.Size = new System.Drawing.Size(87, 19);
             this.label4.TabIndex = 7;
             this.label4.Text = "Кол-во волн";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // ResultImageWave
             // 
@@ -134,6 +138,7 @@ namespace dholo
             this.ResultImageWave.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ResultImageWave.TabIndex = 9;
             this.ResultImageWave.TabStop = false;
+            this.ResultImageWave.Click += new System.EventHandler(this.ResultImageWave_Click);
             // 
             // saveImage
             // 
@@ -188,6 +193,7 @@ namespace dholo
             this.label2.Size = new System.Drawing.Size(93, 19);
             this.label2.TabIndex = 17;
             this.label2.Text = "Кол-во точек";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // GenerateWaveDlg
             // 
