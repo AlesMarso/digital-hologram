@@ -88,7 +88,7 @@ namespace generate_wave
             // createImage
             // 
             this.createImage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.createImage.Location = new System.Drawing.Point(659, 158);
+            this.createImage.Location = new System.Drawing.Point(655, 158);
             this.createImage.Name = "createImage";
             this.createImage.Size = new System.Drawing.Size(33, 32);
             this.createImage.TabIndex = 28;
