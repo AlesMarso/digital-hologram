@@ -44,6 +44,7 @@ namespace generate_wave
             this.Chart = new System.Windows.Forms.PictureBox();
             this.saveImageDlg = new System.Windows.Forms.SaveFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.oneDimensionFFT = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ResultImageWave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Chart)).BeginInit();
             this.SuspendLayout();
@@ -72,7 +73,7 @@ namespace generate_wave
             // eraseImage
             // 
             this.eraseImage.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.eraseImage.Location = new System.Drawing.Point(814, 336);
+            this.eraseImage.Location = new System.Drawing.Point(814, 402);
             this.eraseImage.Name = "eraseImage";
             this.eraseImage.Size = new System.Drawing.Size(85, 26);
             this.eraseImage.TabIndex = 29;
@@ -83,7 +84,7 @@ namespace generate_wave
             // createImage
             // 
             this.createImage.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.createImage.Location = new System.Drawing.Point(698, 336);
+            this.createImage.Location = new System.Drawing.Point(814, 370);
             this.createImage.Name = "createImage";
             this.createImage.Size = new System.Drawing.Size(85, 26);
             this.createImage.TabIndex = 28;
@@ -94,7 +95,7 @@ namespace generate_wave
             // saveImage
             // 
             this.saveImage.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.saveImage.Location = new System.Drawing.Point(576, 336);
+            this.saveImage.Location = new System.Drawing.Point(814, 338);
             this.saveImage.Name = "saveImage";
             this.saveImage.Size = new System.Drawing.Size(85, 26);
             this.saveImage.TabIndex = 27;
@@ -191,11 +192,23 @@ namespace generate_wave
             this.Chart.Click += new System.EventHandler(this.Chart_Click);
             this.Chart.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
             // 
+            // oneDimensionFFT
+            // 
+            this.oneDimensionFFT.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.oneDimensionFFT.Location = new System.Drawing.Point(576, 336);
+            this.oneDimensionFFT.Name = "oneDimensionFFT";
+            this.oneDimensionFFT.Size = new System.Drawing.Size(134, 26);
+            this.oneDimensionFFT.TabIndex = 32;
+            this.oneDimensionFFT.Text = "1-мерное БПФ";
+            this.oneDimensionFFT.UseVisualStyleBackColor = true;
+            this.oneDimensionFFT.Click += new System.EventHandler(this.oneDimensionFFT_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(909, 370);
+            this.ClientSize = new System.Drawing.Size(909, 437);
+            this.Controls.Add(this.oneDimensionFFT);
             this.Controls.Add(this.pointsCnt);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.eraseImage);
@@ -235,6 +248,7 @@ namespace generate_wave
         private System.Windows.Forms.PictureBox Chart;
         private System.Windows.Forms.SaveFileDialog saveImageDlg;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button oneDimensionFFT;
     }
 }
 

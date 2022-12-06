@@ -45,7 +45,7 @@
     <ClCompile Include="src\render\opengl\OpenGLTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\render\opengl\secnes\OpenGLTestSecene.cpp">
+    <ClCompile Include="src\render\opengl\secnes\OpenGLTestScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\render\opengl\secnes\OpenGLPSIScene.cpp">
@@ -107,7 +107,7 @@
     <ClInclude Include="src\render\opengl\secnes\IOpenGLScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\render\opengl\secnes\OpenGLTestSecene.h">
+    <ClInclude Include="src\render\opengl\secnes\OpenGLTestScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\render\opengl\secnes\OpenGLPSIScene.h">

@@ -149,7 +149,7 @@
     <ClCompile Include="src\render\opengl\shaders\GPUProgram.cpp" />
     <ClCompile Include="src\render\opengl\shaders\Shader.cpp" />
     <ClCompile Include="src\render\opengl\secnes\OpenGLPSIScene.cpp" />
-    <ClCompile Include="src\render\opengl\secnes\OpenGLTestSecene.cpp" />
+    <ClCompile Include="src\render\opengl\secnes\OpenGLTestScene.cpp" />
     <ClCompile Include="src\render\opengl\OpenGLTexture.cpp" />
     <ClCompile Include="src\share\HoloIniFileController.cpp" />
     <ClCompile Include="src\share\IniFileController.cpp" />
@@ -169,7 +169,7 @@
     <ClInclude Include="src\render\opengl\shaders\GPUProgram.h" />
     <ClInclude Include="src\render\opengl\shaders\Shader.h" />
     <ClInclude Include="src\render\opengl\secnes\OpenGLPSIScene.h" />
-    <ClInclude Include="src\render\opengl\secnes\OpenGLTestSecene.h" />
+    <ClInclude Include="src\render\opengl\secnes\OpenGLTestScene.h" />
     <ClInclude Include="src\render\opengl\secnes\IOpenGLScene.h" />
     <ClInclude Include="src\render\opengl\OpenGLTexture.h" />
     <ClInclude Include="src\share\HoloIniFileController.h" />

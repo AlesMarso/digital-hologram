@@ -4,7 +4,7 @@ rctx::OpenGLRender::OpenGLRender()
 	: m_hWnd(nullptr),
 	m_hDC(nullptr),
 	m_hGLRC(nullptr),
-	m_RenderScene(new rctx::OpenGLTestSecene())
+	m_RenderScene(new rctx::OpenGLTestScene())
 {
 	m_InfoItems.push_back(OpenGLInfoItem(GL_VERSION, String));
 	m_InfoItems.push_back(OpenGLInfoItem(GL_VENDOR, String));
@@ -16,7 +16,7 @@ rctx::OpenGLRender::OpenGLRender(HWND hwnd)
 	: m_hWnd(hwnd),
 	m_hDC(nullptr),
 	m_hGLRC(nullptr),
-	m_RenderScene(new rctx::OpenGLTestSecene())
+	m_RenderScene(new rctx::OpenGLTestScene())
 {
 }
 

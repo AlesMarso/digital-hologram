@@ -14,6 +14,7 @@ namespace generate_wave
     {
         public const int StepWidth = 20;
         public const int StepHeight = 20;
+        private static double M_2PI = 2 * 3.14159265358979323846;
 
         public Wave wave;
 
@@ -173,6 +174,83 @@ namespace generate_wave
         private void Chart_Click(object sender, EventArgs e)
         {
 
+        }
+
+        int BitReverseOfCenter(int index, int logm = 16)
+        {
+            int j = index;
+
+            j = (j & 0x00005555) << 1 | (j & 0x0000AAAA) >> 1;
+            j = (j & 0x00003333) << 2 | (j & 0x0000CCCC) >> 2;
+            j = (j & 0x00000F0F) << 4 | (j & 0x0000F0F0) >> 4;
+            j = (j & 0x000000FF) << 8 | (j & 0x0000FF00) >> 8;
+
+            return j >> (16 - logm);
+        }
+
+        void D1_FFT(ref Complex[] input, ref Complex[] output )
+        {
+            if (input.Length == 0)
+                throw new OverflowException();
+
+            int sz = output.Length;
+            int numLog2Levels = (int)Math.Log((double)sz);
+
+            for (int i = 0; i < sz; i++)
+            {
+                int reverse_i = BitReverseOfCenter(i, numLog2Levels);
+                output[i] = input[reverse_i];
+            }
+
+            int numBlocks = sz / 2;
+            int numButterflyOperations = 1;
+            int offset = 2;
+            int offsetId = 1;
+
+            for (int logLevel = 0, _2_k = 2; logLevel < numLog2Levels; logLevel++, _2_k *= 2)
+            {
+                for (int block = 0, idFirstElemInBlock = 0; block < numBlocks; block++, idFirstElemInBlock += offset)
+                {
+                    for (int operation = 0; operation < numButterflyOperations; operation++)
+                    {
+                        double y = (double)(operation) / (double)(_2_k);
+                        double phi = M_2PI * y;
+
+                        Complex W = new Complex(Math.Cos(phi), Math.Sin(phi));
+
+                        int rightId = idFirstElemInBlock + operation;
+                        int leftId = rightId + offsetId;
+
+                        Complex right = output[rightId];
+                        Complex left = output[leftId] * W;
+
+                        output[rightId] = right + left;
+                        output[leftId] = right - left;
+                    }
+                }
+
+                numBlocks /= 2; // numBlocks = numBlocks / 2
+                numButterflyOperations *= 2; // numButterflyOperations = numButterflyOperations * 2
+
+                offset *= 2; // offset = offset * 2
+                offsetId *= 2; // offsetId = offsetId * 2
+            }
+        }
+
+        private void oneDimensionFFT_Click(object sender, EventArgs e)
+        {
+            Complex[] output = new Complex[wave.CntPoints];
+            Complex[] input = new Complex[wave.CntPoints];
+
+            for(int i = 0; i < wave.CntPoints; i++)
+            {
+                input[i] = new Complex((double)wave.Points[i].Y, 0.0);
+
+            }
+
+            D1_FFT(ref input, ref output);
+
+            int a = 1;
         }
     }
 }
