@@ -45,6 +45,7 @@ namespace generate_wave
             this.saveImageDlg = new System.Windows.Forms.SaveFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.oneDimensionFFT = new System.Windows.Forms.Button();
+            this.twoDimensionFFT = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ResultImageWave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Chart)).BeginInit();
             this.SuspendLayout();
@@ -195,7 +196,7 @@ namespace generate_wave
             // oneDimensionFFT
             // 
             this.oneDimensionFFT.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.oneDimensionFFT.Location = new System.Drawing.Point(576, 336);
+            this.oneDimensionFFT.Location = new System.Drawing.Point(17, 370);
             this.oneDimensionFFT.Name = "oneDimensionFFT";
             this.oneDimensionFFT.Size = new System.Drawing.Size(134, 26);
             this.oneDimensionFFT.TabIndex = 32;
@@ -203,11 +204,23 @@ namespace generate_wave
             this.oneDimensionFFT.UseVisualStyleBackColor = true;
             this.oneDimensionFFT.Click += new System.EventHandler(this.oneDimensionFFT_Click);
             // 
+            // twoDimensionFFT
+            // 
+            this.twoDimensionFFT.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.twoDimensionFFT.Location = new System.Drawing.Point(17, 402);
+            this.twoDimensionFFT.Name = "twoDimensionFFT";
+            this.twoDimensionFFT.Size = new System.Drawing.Size(134, 26);
+            this.twoDimensionFFT.TabIndex = 33;
+            this.twoDimensionFFT.Text = "2-мерное БПФ";
+            this.twoDimensionFFT.UseVisualStyleBackColor = true;
+            this.twoDimensionFFT.Click += new System.EventHandler(this.twoDimensionFFT_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(909, 437);
+            this.Controls.Add(this.twoDimensionFFT);
             this.Controls.Add(this.oneDimensionFFT);
             this.Controls.Add(this.pointsCnt);
             this.Controls.Add(this.label2);
@@ -222,6 +235,7 @@ namespace generate_wave
             this.Controls.Add(this.label1);
             this.Controls.Add(this.waveType);
             this.Controls.Add(this.Chart);
+            this.MaximumSize = new System.Drawing.Size(925, 476);
             this.Name = "MainWindow";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.ResultImageWave)).EndInit();
@@ -249,6 +263,7 @@ namespace generate_wave
         private System.Windows.Forms.SaveFileDialog saveImageDlg;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button oneDimensionFFT;
+        private System.Windows.Forms.Button twoDimensionFFT;
     }
 }
 

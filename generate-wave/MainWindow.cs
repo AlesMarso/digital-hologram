@@ -27,6 +27,12 @@ namespace generate_wave
             wave = new SinWave();
 
             waveType.SelectedIndex = 0;
+
+            wave.CntT = 1;
+            wave.Phase = 0;
+            wave.CntPoints = 1024;
+
+            wave.Make();
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
@@ -68,8 +74,6 @@ namespace generate_wave
 
         private void DrawChart(Graphics render)
         {
-            wave.Make();
-
             var len = wave.Points.Length - 1;
 
             PointF p1 = wave.Points[0];
@@ -162,6 +166,8 @@ namespace generate_wave
                 wave.Phase = phase.Text.Length == 0 ? 0 : Convert.ToSingle(phase.Text);
                 wave.CntPoints = pointsCnt.Text.Length == 0 ? 1024 : Convert.ToInt32(pointsCnt.Text);
 
+                wave.Make();
+
                 Chart.Refresh();
 
             }
@@ -250,7 +256,84 @@ namespace generate_wave
 
             D1_FFT(ref input, ref output);
 
-            int a = 1;
+            for(int i = 0; i < wave.CntPoints; i++)
+            {
+                wave.Points[i].Y = (float)Math.Sqrt(output[i].A * output[i].A + output[i].B * output[i].B);
+            }
+
+            wave.FindMax();
+
+            for(int i = 0; i < wave.CntPoints; i++)
+            {
+                wave.Points[i].Y /= (float)wave.MAX;
+            }
+
+            Chart.Refresh();
+        }
+
+        private void twoDimensionFFT_Click(object sender, EventArgs e)
+        {
+            Complex[] output = new Complex[wave.CntPoints];
+            Complex[] input = new Complex[wave.CntPoints];
+
+            for (int i = 0; i < wave.CntPoints; i++)
+            {
+                input[i] = new Complex((double)wave.Points[i].Y, 0.0);
+
+            }
+
+            D1_FFT(ref input, ref output);
+
+            Complex[] temp = new Complex[output.Length];
+
+            float[,] result = new float[output.Length, output.Length];
+
+            float MAX = -1000000000;
+
+            for(int i = 0; i < wave.CntPoints; i++)
+            {
+                for(int j = 0; j < wave.CntPoints; j++)
+                {
+                    input[j] = output[i];
+                }
+
+                D1_FFT(ref input, ref temp);
+
+                for(int j = 0; j < wave.CntPoints; j++)
+                {
+                    float ampl = (float)Math.Sqrt(temp[j].A * temp[j].A + temp[j].B * temp[j].B);
+                    result[i, j] = ampl;
+                    if (ampl > MAX) MAX = ampl;
+                }
+            }
+
+            try
+            {
+                var BmpWidth = Convert.ToInt32(temp.Length);
+                var BmpHeight = Convert.ToInt32(temp.Length);
+
+                image = new Bitmap(BmpWidth, BmpHeight, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+                for (int iy = 0; iy < BmpHeight; iy++)
+                {
+                    for (int ix = 0; ix < BmpWidth; ix++)
+                    {
+                        float pixelVal = 0;
+                        if(result[ix, iy] != 0)
+                            pixelVal = 1 - 1 / result[ix, iy];
+
+                        var PixelColor = Convert.ToByte(pixelVal * 255);
+
+                        image.SetPixel(ix, iy, Color.FromArgb(PixelColor, PixelColor, PixelColor));
+                    }
+                }
+
+                ResultImageWave.Image = image;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
