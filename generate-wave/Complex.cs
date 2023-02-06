@@ -8,8 +8,8 @@ namespace generate_wave
 {
     class Complex
     {
-        private double A { get; set; }
-        private double B { get; set; }
+        public double A { get; set; }
+        public double B { get; set; }
 
         public Complex()
         {
