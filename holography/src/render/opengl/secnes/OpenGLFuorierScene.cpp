@@ -55,6 +55,12 @@ bool rctx::OpenGLFuorierScene::Load()
     std::cout << "Max work group count Y: " << maxGroupY << std::endl;
     std::cout << "Max work group count Z: " << maxGroupZ << std::endl;
 
+    int maxSharedMemorySize = 0;
+
+    glGetIntegerv(GL_MAX_COMPUTE_SHARED_MEMORY_SIZE, &maxSharedMemorySize);
+
+    std::cout << "Max shared memory size = " << maxSharedMemorySize << std::endl;
+
     return true;
 }
 
@@ -62,26 +68,26 @@ bool rctx::OpenGLFuorierScene::Calculate()
 {
     glEnable(GL_TEXTURE_2D);
 
-    glActiveTexture(GL_TEXTURE0);
+    //glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_Texture.GetTextureID());
     glBindImageTexture(0, m_Texture.GetTextureID(), 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
 
     m_ComputeProgram.UseProgram();
     m_ComputeProgram.SetUniform1ui("PixelsX", static_cast<unsigned int>(m_Texture.GetWidth()));
-    uint32_t numLog2Levels = 1;
+    uint32_t numLog2Levels = static_cast<uint32_t>(std::log(m_Texture.GetWidth()));
     m_ComputeProgram.SetUniform1ui("Log2Levels", static_cast<unsigned int>(numLog2Levels));
 
-    glDispatchCompute(1, 4, 1);
+    glDispatchCompute(1, 1, 1);
     glMemoryBarrier(GL_ALL_BARRIER_BITS);
 
-    m_ComputeProgram2.UseProgram();
-    m_ComputeProgram2.SetUniform1ui("PixelsX", static_cast<unsigned int>(m_Texture.GetWidth()));
-    numLog2Levels = 2;
-    m_ComputeProgram2.SetUniform1ui("Log2Levels", static_cast<unsigned int>(numLog2Levels));
+    //m_ComputeProgram2.UseProgram();
+    //m_ComputeProgram2.SetUniform1ui("PixelsX", static_cast<unsigned int>(m_Texture.GetWidth()));
+    //numLog2Levels = 2;
+    //m_ComputeProgram2.SetUniform1ui("Log2Levels", static_cast<unsigned int>(numLog2Levels));
 
-    glDispatchCompute(1, 4, 1);
-    glMemoryBarrier(GL_ALL_BARRIER_BITS);
- 
+    //glDispatchCompute(1, 4, 1);
+    //glMemoryBarrier(GL_ALL_BARRIER_BITS);
+
     glBindImageTexture(0, 0, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
     glBindTexture(GL_TEXTURE_2D, 0);
 

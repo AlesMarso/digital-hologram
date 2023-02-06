@@ -251,21 +251,21 @@ namespace generate_wave
             for(int i = 0; i < wave.CntPoints; i++)
             {
                 input[i] = new Complex((double)wave.Points[i].Y, 0.0);
-
             }
 
             D1_FFT(ref input, ref output);
 
             for(int i = 0; i < wave.CntPoints; i++)
             {
-                wave.Points[i].Y = (float)Math.Sqrt(output[i].A * output[i].A + output[i].B * output[i].B);
+                float ampl = (float)Math.Sqrt(output[i].A * output[i].A + output[i].B * output[i].B);
+                wave.Points[i].Y = ampl;
             }
 
             wave.FindMax();
 
             for(int i = 0; i < wave.CntPoints; i++)
             {
-                wave.Points[i].Y /= (float)wave.MAX;
+                wave.Points[i].Y = wave.Points[i].Y / (float)wave.MAX;
             }
 
             Chart.Refresh();
