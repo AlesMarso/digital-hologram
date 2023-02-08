@@ -29,6 +29,7 @@ namespace rctx
 		OpenGLTexture m_Texture;
 
 		GPUProgram m_ComputeProgram;
+		GPUProgram m_ComputeProgram2;
 		GPUProgram m_RenderProgram;
 
 		VertexBufferObjectClass<float> m_VBO;
