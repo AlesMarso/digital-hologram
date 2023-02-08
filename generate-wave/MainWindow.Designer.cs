@@ -48,8 +48,8 @@ namespace generate_wave
             this.twoDimensionFFT = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ResultImageWave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Chart)).BeginInit();
-            this.waveCharacteristics.SuspendLayout();
-            this.waveTransport.SuspendLayout();
+            //this.waveCharacteristics.SuspendLayout();
+            //this.waveTransport.SuspendLayout();
             this.SuspendLayout();
             // 
             // pointsCnt
@@ -236,9 +236,9 @@ namespace generate_wave
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.ResultImageWave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Chart)).EndInit();
-            this.waveCharacteristics.ResumeLayout(false);
-            this.waveCharacteristics.PerformLayout();
-            this.waveTransport.ResumeLayout(false);
+            //this.waveCharacteristics.ResumeLayout(false);
+            //this.waveCharacteristics.PerformLayout();
+            //this.waveTransport.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
