@@ -195,6 +195,7 @@ namespace generate_wave
             this.Chart.Click += new System.EventHandler(this.Chart_Click);
             this.Chart.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
             // 
+
             // oneDimensionFFT
             // 
             this.oneDimensionFFT.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -217,13 +218,19 @@ namespace generate_wave
             this.twoDimensionFFT.UseVisualStyleBackColor = true;
             this.twoDimensionFFT.Click += new System.EventHandler(this.twoDimensionFFT_Click);
             // 
+
+
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+
             this.ClientSize = new System.Drawing.Size(909, 437);
             this.Controls.Add(this.twoDimensionFFT);
             this.Controls.Add(this.oneDimensionFFT);
+
+            this.ClientSize = new System.Drawing.Size(909, 370);
+
             this.Controls.Add(this.pointsCnt);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.eraseImage);
@@ -260,8 +267,10 @@ namespace generate_wave
         private System.Windows.Forms.PictureBox Chart;
         private System.Windows.Forms.SaveFileDialog saveImageDlg;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+
         private System.Windows.Forms.Button oneDimensionFFT;
         private System.Windows.Forms.Button twoDimensionFFT;
+
     }
 }
 
