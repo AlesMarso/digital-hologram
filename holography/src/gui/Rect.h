@@ -24,7 +24,7 @@ namespace gui
 		uint32_t GetClientX() const;
 		uint32_t GetClientY() const;
 
-	private:
+	protected:
 		RECT m_Rect;
 		RECT m_ClientRect;
 	};

@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\gui\MonitorRect.cpp" />
     <ClCompile Include="src\math\FFT.cpp" />
     <ClCompile Include="src\render\opengl\secnes\OpenGLFuorierScene.cpp" />
     <ClCompile Include="src\render\opengl\shaders\GPUProgram.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="src\render\VulkanRender.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\gui\MonitorRect.h" />
     <ClInclude Include="src\math\FFT.h" />
     <ClInclude Include="src\render\opengl\secnes\OpenGLFuorierScene.h" />
     <ClInclude Include="src\render\opengl\buffers\VertexArrayObject.h" />

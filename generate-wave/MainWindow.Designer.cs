@@ -224,7 +224,6 @@ namespace generate_wave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-
             this.ClientSize = new System.Drawing.Size(909, 437);
             this.Controls.Add(this.twoDimensionFFT);
             this.Controls.Add(this.oneDimensionFFT);
@@ -238,7 +237,7 @@ namespace generate_wave
             this.Controls.Add(this.saveImage);
             this.Controls.Add(this.ResultImageWave);
             this.Controls.Add(this.Chart);
-            this.MaximumSize = new System.Drawing.Size(925, 476);
+            this.MaximumSize = new System.Drawing.Size(5000, 5000);
             this.Name = "MainWindow";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.ResultImageWave)).EndInit();
