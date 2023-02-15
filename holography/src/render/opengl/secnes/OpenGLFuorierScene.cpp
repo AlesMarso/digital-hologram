@@ -15,14 +15,17 @@ bool rctx::OpenGLFuorierScene::Load()
     input.insert(input.end(), &m_Vertices[0], &m_Vertices[16]);
 
     m_VBO.SetData(input, GL_STATIC_DRAW);
-
+    //m_VBO1.SetData(input, GL_STATIC_DRAW);
+    
     m_VAO.Bind();
     m_VBO.Bind();
+//m_VBO1.Bind();
 
     m_VAO.SetArray(0, 2, GL_FLOAT, GL_FALSE, 4, 0);
     m_VAO.SetArray(1, 2, GL_FLOAT, GL_FALSE, 4, 2);
 
     m_VBO.UnBind();
+    //m_VBO1.UnBind();
     m_VAO.UnBind();
 
     share::HoloIniFileController holoIniFile;
@@ -71,6 +74,7 @@ bool rctx::OpenGLFuorierScene::Calculate()
     //glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_Texture.GetTextureID());
     glBindImageTexture(0, m_Texture.GetTextureID(), 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+   // m_VBO1.Bind();
 
     m_ComputeProgram.UseProgram();
     m_ComputeProgram.SetUniform1ui("PixelsX", static_cast<unsigned int>(m_Texture.GetWidth()));
@@ -92,6 +96,7 @@ bool rctx::OpenGLFuorierScene::Calculate()
     glBindTexture(GL_TEXTURE_2D, 0);
 
     glDisable(GL_TEXTURE_2D);
+    //m_VBO1.UnBind();
 
     return true;
 }

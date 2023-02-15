@@ -34,6 +34,7 @@ namespace rctx
 
 		VertexBufferObjectClass<float> m_VBO;
 		VertexArrayObject<float> m_VAO;
+		VertexBufferObjectClass<float> m_VBO1;
 
 		GLfloat m_Vertices[16];
 		int maxGroupX, maxGroupY, maxGroupZ;
