@@ -202,10 +202,23 @@ namespace generate_wave
             int sz = output.Length;
             int numLog2Levels = (int)Math.Log((double)sz);
 
-            for (int i = 0; i < sz; i++)
+            const int MAX_THEOR_THREADS_NUM = 1024;
+            const int MAX_POINTS_COUNT = 4;
+
+            for(int thread_id = 0; thread_id < MAX_THEOR_THREADS_NUM; thread_id++)
             {
-                int reverse_i = BitReverseOfCenter(i, numLog2Levels);
-                output[i] = input[reverse_i];
+                int id = thread_id * MAX_POINTS_COUNT;
+
+                for (int j = 0; j < MAX_POINTS_COUNT; j++)
+                {
+                    int i = id + j;
+
+                    if (i >= sz)
+                        continue;
+
+                    int reverse_i = BitReverseOfCenter(i, numLog2Levels);
+                    output[i] = input[reverse_i];
+                }
             }
 
             int numBlocks = sz / 2;
