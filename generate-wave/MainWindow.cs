@@ -348,5 +348,79 @@ namespace generate_wave
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void FFTSort(ref Complex[] input, ref Complex[] output)
+        {
+            if (input.Length == 0)
+                throw new OverflowException();
+
+            int sz = output.Length;
+            int numLog2Levels = (int)Math.Log((double)sz, 2.0);
+
+            const int MAX_THEOR_THREADS_NUM = 1024;
+            const int MAX_POINTS_COUNT = 4;
+
+            for (int thread_id = 0; thread_id < MAX_THEOR_THREADS_NUM; thread_id++)
+            {
+                int id = thread_id * MAX_POINTS_COUNT;
+
+                for (int j = 0; j < MAX_POINTS_COUNT; j++)
+                {
+                    int i = id + j;
+
+                    if (i >= sz)
+                        continue;
+
+                    int reverse_i = BitReverseOfCenter(i, numLog2Levels);
+                    output[i] = input[reverse_i];
+                }
+            }
+
+            return;
+        }
+
+        private void FFTSort_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Complex[] output = new Complex[wave.CntPoints];
+                Complex[] input = new Complex[wave.CntPoints];
+
+                for (int i = 0; i < wave.CntPoints; i++)
+                {
+                    input[i] = new Complex((double)wave.Points[i].Y, 0.0);
+                }
+
+                FFTSort(ref input, ref output);
+
+                for(int i = 0; i < wave.CntPoints; i++)
+                {
+                    wave.Points[i].Y = (float)output[i].A;
+                }
+
+                Chart.Refresh();
+
+                var BmpWidth = Convert.ToInt32(pointsCnt.Text);
+                var BmpHeight = Convert.ToInt32(pointsCnt.Text);
+
+                image = new Bitmap(BmpWidth, BmpHeight, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
+
+                for (int iy = 0; iy < BmpHeight; iy++)
+                {
+                    for (int ix = 0; ix < BmpWidth; ix++)
+                    {
+                        var PixelColor = Convert.ToByte(wave.Points[ix].Y * 255);
+
+                        image.SetPixel(ix, iy, Color.FromArgb(PixelColor, PixelColor, PixelColor));
+                    }
+                }
+
+                ResultImageWave.Image = image;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

@@ -48,6 +48,7 @@ namespace generate_wave
             this.twoDimensionFFT = new System.Windows.Forms.Button();
             this.GraphicsSettings = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.fftSortButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ResultImageWave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Chart)).BeginInit();
             this.GraphicsSettings.SuspendLayout();
@@ -238,6 +239,7 @@ namespace generate_wave
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.fftSortButton);
             this.groupBox1.Controls.Add(this.oneDimensionFFT);
             this.groupBox1.Controls.Add(this.twoDimensionFFT);
             this.groupBox1.Location = new System.Drawing.Point(11, 410);
@@ -246,6 +248,17 @@ namespace generate_wave
             this.groupBox1.TabIndex = 35;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Преобразования";
+            // 
+            // fftSortButton
+            // 
+            this.fftSortButton.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.fftSortButton.Location = new System.Drawing.Point(9, 94);
+            this.fftSortButton.Name = "fftSortButton";
+            this.fftSortButton.Size = new System.Drawing.Size(134, 26);
+            this.fftSortButton.TabIndex = 34;
+            this.fftSortButton.Text = "БПФ сортировка";
+            this.fftSortButton.UseVisualStyleBackColor = true;
+            this.fftSortButton.Click += new System.EventHandler(this.FFTSort_Click);
             // 
             // MainWindow
             // 
@@ -293,6 +306,7 @@ namespace generate_wave
         private System.Windows.Forms.Button twoDimensionFFT;
         private System.Windows.Forms.GroupBox GraphicsSettings;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button fftSortButton;
     }
 }
 
