@@ -73,7 +73,7 @@ bool rctx::OpenGLRender::Init(HWND hWnd)
 
 bool rctx::OpenGLRender::Load(HWND)
 {
-	m_RenderScene = new rctx::OpenGLFuorierScene();
+	m_RenderScene = new rctx::OpenGLDoubleFFT128x128points();
 
 	std::for_each(m_InfoItems.begin(), m_InfoItems.end(), [](OpenGLInfoItem& item)
 		{

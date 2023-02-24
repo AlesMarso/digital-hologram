@@ -20,6 +20,7 @@
 #include <render/opengl/secnes/OpenGLTestScene.h>
 #include <render/opengl/secnes/OpenGLPSIScene.h>
 #include <render/opengl/secnes/OpenGLFuorierScene.h>
+#include <render/opengl/secnes/OpenGLDoubleFFT128x128points.h>
 
 namespace rctx
 {
