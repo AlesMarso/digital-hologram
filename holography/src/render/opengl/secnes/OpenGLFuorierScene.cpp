@@ -78,7 +78,7 @@ bool rctx::OpenGLFuorierScene::Calculate()
 
     m_ComputeProgram.UseProgram();
     m_ComputeProgram.SetUniform1ui("PixelsX", static_cast<unsigned int>(m_Texture.GetWidth()));
-    uint32_t numLog2Levels = static_cast<uint32_t>(std::log(m_Texture.GetWidth()));
+    uint32_t numLog2Levels = static_cast<uint32_t>(std::log2(m_Texture.GetWidth()));
     m_ComputeProgram.SetUniform1ui("Log2Levels", static_cast<unsigned int>(numLog2Levels));
 
     glDispatchCompute(1, 1, 1);
