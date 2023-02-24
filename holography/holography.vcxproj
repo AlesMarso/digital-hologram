@@ -200,6 +200,7 @@
     </None>
     <None Include="src\render\opengl\shaders\VertexShader.ver" />
     <None Include="x64\Debug\holo.ini" />
+    <None Include="x64\Debug\shaders\DoubleFFT128x128.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="toolbar1.bmp" />

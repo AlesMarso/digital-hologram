@@ -200,7 +200,7 @@ namespace generate_wave
                 throw new OverflowException();
 
             int sz = output.Length;
-            int numLog2Levels = (int)Math.Log((double)sz);
+            int numLog2Levels = (int)Math.Log((double)sz, 2.0);
 
             const int MAX_THEOR_THREADS_NUM = 1024;
             const int MAX_POINTS_COUNT = 4;
@@ -333,7 +333,7 @@ namespace generate_wave
                     {
                         float pixelVal = 0;
                         if(result[ix, iy] != 0)
-                            pixelVal = 1 - 1 / result[ix, iy];
+                            pixelVal = result[ix, iy] / MAX;
 
                         var PixelColor = Convert.ToByte(pixelVal * 255);
 

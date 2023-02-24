@@ -159,6 +159,7 @@
     <None Include="x64\Debug\holo.ini" />
     <None Include="src\render\opengl\shaders\VertexShader.ver" />
     <None Include="src\render\opengl\shaders\FragmentShader.frag" />
+    <None Include="x64\Debug\shaders\DoubleFFT128x128.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="toolbar1.bmp">

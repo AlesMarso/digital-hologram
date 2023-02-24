@@ -27,12 +27,12 @@ bool rctx::OpenGLDoubleFFT128x128points::Load()
 
     share::HoloIniFileController holoIniFile;
 
-    m_Texture.CreateFromImage(holoIniFile.GetPSIFirstImage());
+    m_Texture.CreateFromImage(holoIniFile.GetDoubleFFT128x128ImageFile());
 
     m_RenderProgram.LinkVertexShader(holoIniFile.GetVertexShaderFilePath());
     m_RenderProgram.LinkFragmentShader(holoIniFile.GetFragmentShaderFilePath());
 
-    m_ComputeProgram.LinkComputeShader(holoIniFile.GetComputeShaderFilePath());
+    m_ComputeProgram.LinkComputeShader(holoIniFile.GetDoubleFFT128x128ComputeShaderFilePath());
 
     return true;
 }
@@ -45,8 +45,11 @@ bool rctx::OpenGLDoubleFFT128x128points::Calculate()
     glBindImageTexture(0, m_Texture.GetTextureID(), 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
 
     m_ComputeProgram.UseProgram();
-    m_ComputeProgram.SetUniform1ui("PixelsX", static_cast<unsigned int>(m_Texture.GetWidth()));
-    uint32_t numLog2Levels = static_cast<uint32_t>(std::log2(m_Texture.GetWidth()));
+
+    auto width = m_Texture.GetWidth();
+
+    m_ComputeProgram.SetUniform1ui("PixelsX", static_cast<unsigned int>(width));
+    uint32_t numLog2Levels = static_cast<uint32_t>(std::log2(width));
     m_ComputeProgram.SetUniform1ui("Log2Levels", static_cast<unsigned int>(numLog2Levels));
 
     glDispatchCompute(1, 1, 1);
