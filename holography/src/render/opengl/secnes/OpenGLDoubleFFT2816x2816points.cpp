@@ -49,8 +49,6 @@ bool rctx::OpenGLDoubleFFT2816x2816points::Calculate()
     auto width = m_Texture.GetWidth();
 
     m_ComputeProgram.SetUniform1ui("PixelsX", static_cast<unsigned int>(width));
-    uint32_t numLog2Levels = static_cast<uint32_t>(std::log2(width));
-    m_ComputeProgram.SetUniform1ui("Log2Levels", static_cast<unsigned int>(numLog2Levels));
 
     glDispatchCompute(1, 1, 1);
     glMemoryBarrier(GL_ALL_BARRIER_BITS);
