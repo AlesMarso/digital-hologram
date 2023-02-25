@@ -69,6 +69,9 @@
     <ClCompile Include="src\render\opengl\secnes\OpenGLDoubleFFT128x128points.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\render\opengl\secnes\OpenGLDoubleFFT2816x2816points.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gui\Window.h">
@@ -144,6 +147,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\render\opengl\secnes\OpenGLDoubleFFT128x128points.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\opengl\secnes\OpenGLDoubleFFT2816x2816points.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
