@@ -22,6 +22,8 @@ namespace share
 		std::filesystem::path GetComputeShaderFilePath() const;
 		std::filesystem::path GetDoubleFFT128x128ImageFile() const;
 		std::filesystem::path GetDoubleFFT128x128ComputeShaderFilePath() const;
+		std::filesystem::path GetDoubleFFT2816x2816ImageFile() const;
+		std::filesystem::path GetDoubleFFT2816x2816ComputeShaderFilePath() const;
 
 	private:
 		std::string m_HoloIniFileName;
@@ -35,6 +37,7 @@ namespace share
 		std::string m_FragmentShader_SectionName;
 		std::string m_ComputeShader_SectionName;
 		std::string m_DoubleFFT128x128_SectionName;
+		std::string m_DoubleFFT2816x2816_SectionName;
 
 		std::string m_ImageFileKey;
 		std::string m_FilePathKey;

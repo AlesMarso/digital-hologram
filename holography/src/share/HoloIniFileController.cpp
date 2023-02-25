@@ -12,7 +12,8 @@ share::HoloIniFileController::HoloIniFileController()
 	m_VertexShader_SectionName("Vertex_Shader"),
 	m_FragmentShader_SectionName("Fragment_Shader"),
 	m_ComputeShader_SectionName("Compute_Shader"),
-	m_DoubleFFT128x128_SectionName("DoubleFFT128x128")
+	m_DoubleFFT128x128_SectionName("DoubleFFT128x128"),
+	m_DoubleFFT2816x2816_SectionName("DoubleFFT2816x2816")
 {
 	IniFileController::getInstance()->SetIniFileName(m_HoloIniFileName);
 }
@@ -70,4 +71,14 @@ std::filesystem::path share::HoloIniFileController::GetDoubleFFT128x128ImageFile
 std::filesystem::path share::HoloIniFileController::GetDoubleFFT128x128ComputeShaderFilePath() const
 {
 	return IniFileController::getInstance()->GetFullFilePath(m_DoubleFFT128x128_SectionName, m_FilePathKey);
+}
+
+std::filesystem::path share::HoloIniFileController::GetDoubleFFT2816x2816ImageFile() const
+{
+	return IniFileController::getInstance()->GetFullFilePath(m_DoubleFFT2816x2816_SectionName, m_ImageFileKey);
+}
+
+std::filesystem::path share::HoloIniFileController::GetDoubleFFT2816x2816ComputeShaderFilePath() const
+{
+	return IniFileController::getInstance()->GetFullFilePath(m_DoubleFFT2816x2816_SectionName, m_FilePathKey);
 }
