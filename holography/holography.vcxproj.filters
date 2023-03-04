@@ -78,6 +78,9 @@
     <ClCompile Include="src\render\opengl\transform\OpenGLPSITransform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\render\opengl\transform\OpenGLExpTransform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gui\Window.h">
@@ -165,6 +168,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\render\opengl\transform\OpenGLPSITransform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\opengl\transform\OpenGLExpTransform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

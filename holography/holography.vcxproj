@@ -154,6 +154,7 @@
     <ClCompile Include="src\render\opengl\secnes\OpenGLPSIScene.cpp" />
     <ClCompile Include="src\render\opengl\secnes\OpenGLTestScene.cpp" />
     <ClCompile Include="src\render\opengl\OpenGLTexture.cpp" />
+    <ClCompile Include="src\render\opengl\transform\OpenGLExpTransform.cpp" />
     <ClCompile Include="src\render\opengl\transform\OpenGLFFTTransform.cpp" />
     <ClCompile Include="src\render\opengl\transform\OpenGLPSITransform.cpp" />
     <ClCompile Include="src\share\HoloIniFileController.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="src\render\opengl\secnes\IOpenGLScene.h" />
     <ClInclude Include="src\render\opengl\OpenGLTexture.h" />
     <ClInclude Include="src\render\opengl\transform\IOpenGLTransform.h" />
+    <ClInclude Include="src\render\opengl\transform\OpenGLExpTransform.h" />
     <ClInclude Include="src\render\opengl\transform\OpenGLFFTTransform.h" />
     <ClInclude Include="src\render\opengl\transform\OpenGLPSITransform.h" />
     <ClInclude Include="src\share\HoloIniFileController.h" />
