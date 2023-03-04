@@ -9,7 +9,7 @@ namespace rctx
 		IOpenGLTransform() = default;
 		~IOpenGLTransform() = default;
 
-		virtual void Init() = 0;
+		virtual void Init(const std::filesystem::path&) = 0;
 		virtual void Execute() = 0;
 	};
 }

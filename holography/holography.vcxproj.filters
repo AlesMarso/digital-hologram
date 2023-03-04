@@ -72,6 +72,9 @@
     <ClCompile Include="src\render\opengl\secnes\OpenGLDoubleFFT2816x2816points.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\render\opengl\transform\OpenGLFFTTransform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gui\Window.h">
@@ -153,6 +156,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\render\opengl\transform\IOpenGLTransform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\render\opengl\transform\OpenGLFFTTransform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
