@@ -178,6 +178,7 @@
     <ClInclude Include="src\render\opengl\secnes\OpenGLTestScene.h" />
     <ClInclude Include="src\render\opengl\secnes\IOpenGLScene.h" />
     <ClInclude Include="src\render\opengl\OpenGLTexture.h" />
+    <ClInclude Include="src\render\opengl\transform\IOpenGLTransform.h" />
     <ClInclude Include="src\share\HoloIniFileController.h" />
     <ClInclude Include="src\share\IniFileController.h" />
     <ClInclude Include="resource.h" />
