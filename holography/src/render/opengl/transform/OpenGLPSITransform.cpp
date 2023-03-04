@@ -1,0 +1,66 @@
+#include "OpenGLPSITransform.h"
+
+rctx::OpenGLPSITransform::OpenGLPSITransform(const std::filesystem::path& src)
+	: m_SrcPath(src)
+{
+	Init(m_SrcPath);
+}
+
+void rctx::OpenGLPSITransform::SetFirstPSIImage(GLuint id)
+{
+	m_FirstPSIImage = id;
+}
+
+void rctx::OpenGLPSITransform::SetSecondPSIImage(GLuint id)
+{
+	m_SecondPSIImage = id;
+}
+
+void rctx::OpenGLPSITransform::SetThirdPSIImage(GLuint id)
+{
+	m_ThirdPSIImage = id;
+}
+
+void rctx::OpenGLPSITransform::SetFourthPSIImage(GLuint id)
+{
+	m_FourthPSIImage = id;
+}
+
+void rctx::OpenGLPSITransform::SetAmplitudeImage(GLuint id)
+{
+	m_AmpltudeImage = id;
+}
+
+void rctx::OpenGLPSITransform::SetPhaseImage(GLuint id)
+{
+	m_PahseImage = id;
+}
+
+void rctx::OpenGLPSITransform::SetPhaseOne(float val)
+{
+	m_PhaseOne = val;
+}
+
+void rctx::OpenGLPSITransform::SetPhaseTwo(float val)
+{
+	m_PhaseTwo = val;
+}
+
+void rctx::OpenGLPSITransform::SetPhaseThree(float val)
+{
+	m_PhaseThree = val;
+}
+
+void rctx::OpenGLPSITransform::SetPhaseFour(float val)
+{
+	m_PhaseThree = val;
+}
+
+void rctx::OpenGLPSITransform::Init(const std::filesystem::path& src)
+{
+	m_PSIProgram.LinkComputeShader(src);
+}
+
+void rctx::OpenGLPSITransform::Execute()
+{
+}
