@@ -167,6 +167,7 @@
     <None Include="src\render\opengl\shaders\FragmentShader.frag" />
     <None Include="x64\Debug\shaders\DoubleFFT128x128.glsl" />
     <None Include="x64\Debug\shaders\DoubleFFT2816x2816.glsl" />
+    <None Include="x64\Debug\shaders\DoubleFFT128x128_second.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="toolbar1.bmp">

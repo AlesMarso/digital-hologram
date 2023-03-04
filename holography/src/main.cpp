@@ -5,14 +5,14 @@
 
 int main()
 {
-	std::vector<math::Complex> input;
-	std::vector<math::Complex> output;
+	//std::vector<math::Complex> input;
+	//std::vector<math::Complex> output;
 
-	for (int i = 0; i < 12; i++)
-		input.push_back(math::Complex{static_cast<float>(i), 0.0});
+	//for (int i = 0; i < 12; i++)
+		//input.push_back(math::Complex{static_cast<float>(i), 0.0});
 
 	//math::fft(input, output);
-	math::fft_even_count_points(input, output);
+	//math::fft_even_count_points(input, output);
 
 	try
 	{

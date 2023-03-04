@@ -203,6 +203,7 @@
     <None Include="src\render\opengl\shaders\VertexShader.ver" />
     <None Include="x64\Debug\holo.ini" />
     <None Include="x64\Debug\shaders\DoubleFFT128x128.glsl" />
+    <None Include="x64\Debug\shaders\DoubleFFT128x128_second.glsl" />
     <None Include="x64\Debug\shaders\DoubleFFT2816x2816.glsl" />
   </ItemGroup>
   <ItemGroup>

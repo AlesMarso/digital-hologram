@@ -25,14 +25,22 @@ namespace rctx
 		bool Close() override;
 
 	private:
-		OpenGLTexture m_Texture;
+		OpenGLTexture m_TextureAmplitude;
+		OpenGLTexture m_TexturePhase;
+
 
 		GPUProgram m_ComputeProgram;
 		GPUProgram m_RenderProgram;
 
-		VertexBufferObjectClass<float> m_VBO;
-		VertexArrayObject<float> m_VAO;
+		VertexBufferObjectClass<float> m_VBOAmplitude;
+		VertexBufferObjectClass<float> m_VBOPhase;
 
-		GLfloat m_Vertices[16];
+		VertexArrayObject<float> m_VAOAmplitude;
+		VertexArrayObject<float> m_VAOPhase;
+
+
+		GLfloat m_VerticesAmplitude[16];
+		GLfloat m_VerticesPhase[16];
+
 	};
 }
