@@ -97,11 +97,8 @@ bool rctx::OpenGLFresnelScene::Draw()
         glBindTexture(GL_TEXTURE_2D, 0);
     };
 
-    glBindTexture(GL_TEXTURE_2D, 0);
-
     draw(GL_TEXTURE0, m_AmplitudeTexture.GetTextureID(), 0, m_VAOAmplitude);
     draw(GL_TEXTURE1, m_PhaseTexture.GetTextureID(), 1, m_VAOPhase);
-
 
     glDisable(GL_TEXTURE_2D);
 
