@@ -57,7 +57,7 @@
     <ClCompile Include="src\render\opengl\shaders\GPUProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\render\opengl\secnes\OpenGLFuorierScene.cpp">
+    <ClCompile Include="src\render\opengl\secnes\OpenGLFresnelScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\math\FFT.cpp">
@@ -146,7 +146,7 @@
     <ClInclude Include="src\render\opengl\buffers\VertexObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\render\opengl\secnes\OpenGLFuorierScene.h">
+    <ClInclude Include="src\render\opengl\secnes\OpenGLFresnelScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\math\FFT.h">

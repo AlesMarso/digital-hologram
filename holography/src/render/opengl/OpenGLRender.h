@@ -19,7 +19,7 @@
 #include <render/opengl/secnes/IOpenGLScene.h>
 #include <render/opengl/secnes/OpenGLTestScene.h>
 #include <render/opengl/secnes/OpenGLPSIScene.h>
-#include <render/opengl/secnes/OpenGLFuorierScene.h>
+#include <render/opengl/secnes/OpenGLFresnelScene.h>
 #include <render/opengl/secnes/OpenGLDoubleFFT128x128points.h>
 #include <render/opengl/secnes/OpenGLDoubleFFT2816x2816points.h>
 
