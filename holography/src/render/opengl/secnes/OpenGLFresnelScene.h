@@ -6,11 +6,8 @@
 
 #include <render/opengl/secnes/IOpenGLScene.h>
 #include <render/opengl/OpenGLTexture.h>
-#include <render/opengl/shaders/Shader.h>
-#include <render/opengl/shaders/GPUProgram.h>
 #include <render/opengl/buffers/VertexArrayObject.h>
 #include <render/opengl/buffers/VertexBufferObjectClass.h>
-
 #include <render/opengl/transform/OpenGLPSITransform.h>
 
 namespace rctx
