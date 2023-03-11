@@ -25,6 +25,7 @@ namespace share
 		std::filesystem::path GetDoubleFFT2816x2816ImageFile() const;
 		std::filesystem::path GetDoubleFFT2816x2816ComputeShaderFilePath() const;
 		std::filesystem::path GetPSITransformComputeShaderFilePath() const;
+		std::filesystem::path GetExpTransformComputeShaderFilePath() const;
 
 	private:
 		std::string m_HoloIniFileName;
@@ -40,6 +41,7 @@ namespace share
 		std::string m_DoubleFFT128x128_SectionName;
 		std::string m_DoubleFFT2816x2816_SectionName;
 		std::string m_PSITransform_SectionName;
+		std::string m_ExpTransform_SectionName;
 
 		std::string m_ImageFileKey;
 		std::string m_FilePathKey;

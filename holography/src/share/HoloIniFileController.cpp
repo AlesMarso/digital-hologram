@@ -14,7 +14,8 @@ share::HoloIniFileController::HoloIniFileController()
 	m_ComputeShader_SectionName("Compute_Shader"),
 	m_DoubleFFT128x128_SectionName("DoubleFFT128x128"),
 	m_DoubleFFT2816x2816_SectionName("DoubleFFT2816x2816"),
-	m_PSITransform_SectionName("PSITransform")
+	m_PSITransform_SectionName("PSITransform"),
+	m_ExpTransform_SectionName("ExpTransform")
 {
 	IniFileController::getInstance()->SetIniFileName(m_HoloIniFileName);
 }
@@ -87,4 +88,9 @@ std::filesystem::path share::HoloIniFileController::GetDoubleFFT2816x2816Compute
 std::filesystem::path share::HoloIniFileController::GetPSITransformComputeShaderFilePath() const
 {
 	return IniFileController::getInstance()->GetFullFilePath(m_PSITransform_SectionName, m_FilePathKey);
+}
+
+std::filesystem::path share::HoloIniFileController::GetExpTransformComputeShaderFilePath() const
+{
+	return IniFileController::getInstance()->GetFullFilePath(m_ExpTransform_SectionName, m_FilePathKey);
 }
