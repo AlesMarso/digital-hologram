@@ -207,6 +207,7 @@
     <None Include="src\render\opengl\shaders\FragmentShader.frag">
       <FileType>Document</FileType>
     </None>
+    <None Include="src\render\opengl\shaders\PSI128x128.glsl" />
     <None Include="src\render\opengl\shaders\VertexShader.ver" />
     <None Include="x64\Debug\holo.ini" />
     <None Include="x64\Debug\shaders\DoubleFFT128x128.glsl" />

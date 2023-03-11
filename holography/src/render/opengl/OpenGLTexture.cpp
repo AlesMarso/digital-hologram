@@ -63,3 +63,23 @@ bool rctx::OpenGLTexture::CreateFromImage(const std::filesystem::path& imgPath)
 
 	return true;
 }
+
+bool rctx::OpenGLTexture::Create(int width, int height)
+{
+	glEnable(GL_TEXTURE_2D);
+
+	glGenTextures(1, &m_TextureID);
+	glBindTexture(GL_TEXTURE_2D, m_TextureID);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_BGRA_EXT, GL_UNSIGNED_BYTE, NULL);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+	glDisable(GL_TEXTURE_2D);
+
+	return true;
+}

@@ -33,7 +33,7 @@ void rctx::OpenGLPSITransform::SetAmplitudeImage(GLuint id)
 
 void rctx::OpenGLPSITransform::SetPhaseImage(GLuint id)
 {
-	m_PahseImage = id;
+	m_PhaseImage = id;
 }
 
 void rctx::OpenGLPSITransform::SetPhaseOne(float val)
@@ -63,4 +63,33 @@ void rctx::OpenGLPSITransform::Init(const std::filesystem::path& src)
 
 void rctx::OpenGLPSITransform::Execute()
 {
+	glEnable(GL_TEXTURE_2D);
+
+	glBindTexture(GL_TEXTURE_2D, m_FirstPSIImage);
+	glBindImageTexture(0, m_FirstPSIImage, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+
+	glBindTexture(GL_TEXTURE_2D, m_SecondPSIImage);
+	glBindImageTexture(1, m_SecondPSIImage, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+
+	glBindTexture(GL_TEXTURE_2D, m_ThirdPSIImage);
+	glBindImageTexture(2, m_ThirdPSIImage, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+
+	glBindTexture(GL_TEXTURE_2D, m_FourthPSIImage);
+	glBindImageTexture(3, m_FourthPSIImage, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+
+	glBindTexture(GL_TEXTURE_2D, m_AmpltudeImage);
+	glBindImageTexture(4, m_AmpltudeImage, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+
+	glBindTexture(GL_TEXTURE_2D, m_PhaseImage);
+	glBindImageTexture(5, m_PhaseImage, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+
+	m_PSIProgram.UseProgram();
+
+	glDispatchCompute(1, 1, 1);
+	glMemoryBarrier(GL_ALL_BARRIER_BITS);
+
+	glBindImageTexture(0, 0, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	glDisable(GL_TEXTURE_2D);
 }

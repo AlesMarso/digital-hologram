@@ -43,7 +43,7 @@ namespace rctx
 		GLuint m_ThirdPSIImage;
 		GLuint m_FourthPSIImage;
 		GLuint m_AmpltudeImage;
-		GLuint m_PahseImage;
+		GLuint m_PhaseImage;
 		
 		float m_PhaseOne;
 		float m_PhaseTwo;

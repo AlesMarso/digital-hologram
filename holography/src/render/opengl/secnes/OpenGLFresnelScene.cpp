@@ -52,14 +52,27 @@ bool rctx::OpenGLFresnelScene::Load()
     m_PSIThirdTexture.CreateFromImage(holoIniFile.GetPSIThirdImage());
     m_PSIFourthTexture.CreateFromImage(holoIniFile.GetPSIFourthImage());
 
+    m_AmplitudeTexture.Create(128, 128);
+    m_PhaseTexture.Create(128, 128);
+
     m_RenderProgram.LinkVertexShader(holoIniFile.GetVertexShaderFilePath());
     m_RenderProgram.LinkFragmentShader(holoIniFile.GetFragmentShaderFilePath());
+
+    m_PSITransform.Init(holoIniFile.GetPSITransformComputeShaderFilePath());
+
+    m_PSITransform.SetFirstPSIImage(m_PSIFirstTexture.GetTextureID());
+    m_PSITransform.SetSecondPSIImage(m_PSISecondTexture.GetTextureID());
+    m_PSITransform.SetThirdPSIImage(m_PSIThirdTexture.GetTextureID());
+    m_PSITransform.SetFourthPSIImage(m_PSIFourthTexture.GetTextureID());
+    m_PSITransform.SetAmplitudeImage(m_AmplitudeTexture.GetTextureID());
+    m_PSITransform.SetPhaseImage(m_PhaseTexture.GetTextureID());
 
     return true;
 }
 
 bool rctx::OpenGLFresnelScene::Calculate()
 {
+    m_PSITransform.Execute();
     return true;
 }
 
@@ -70,7 +83,7 @@ bool rctx::OpenGLFresnelScene::Draw()
     m_RenderProgram.UseProgram();
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, m_PSIFirstTexture.GetTextureID());
+    glBindTexture(GL_TEXTURE_2D, m_AmplitudeTexture.GetTextureID());
     m_RenderProgram.SetUniform1i("u_Texture", 0);
 
     m_VAOAmplitude.Bind();
@@ -82,7 +95,7 @@ bool rctx::OpenGLFresnelScene::Draw()
     glBindTexture(GL_TEXTURE_2D, 0);
 
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, m_PSISecondTexture.GetTextureID());
+    glBindTexture(GL_TEXTURE_2D, m_PhaseTexture.GetTextureID());
     m_RenderProgram.SetUniform1i("u_Texture", 1);
     m_VAOPhase.Bind();
     m_VAOPhase.EnableArray(0);

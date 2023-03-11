@@ -19,6 +19,7 @@ namespace rctx
 		int GetHeight() const;
 
 		bool CreateFromImage(const std::filesystem::path&);
+		bool Create(int width, int height);
 
 	private:
 		GLuint m_TextureID;
