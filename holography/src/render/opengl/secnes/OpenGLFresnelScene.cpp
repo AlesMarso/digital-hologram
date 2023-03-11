@@ -82,28 +82,26 @@ bool rctx::OpenGLFresnelScene::Draw()
 
     m_RenderProgram.UseProgram();
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, m_AmplitudeTexture.GetTextureID());
-    m_RenderProgram.SetUniform1i("u_Texture", 0);
+    auto draw = [=](GLenum textureNum, GLuint textureID, int uniform, VertexArrayObject<float>& vao)
+    {
+        glActiveTexture(textureNum);
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        m_RenderProgram.SetUniform1i("u_Texture", uniform);
 
-    m_VAOAmplitude.Bind();
-    m_VAOAmplitude.EnableArray(0);
-    glDrawArrays(GL_QUADS, 0, 4);
-    m_VAOAmplitude.DisableArray(0);
-    m_VAOAmplitude.UnBind();
+        vao.Bind();
+        vao.EnableArray(0);
+        glDrawArrays(GL_QUADS, 0, 4);
+        vao.DisableArray(0);
+        vao.UnBind();
 
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, m_PhaseTexture.GetTextureID());
-    m_RenderProgram.SetUniform1i("u_Texture", 1);
-    m_VAOPhase.Bind();
-    m_VAOPhase.EnableArray(0);
-    glDrawArrays(GL_QUADS, 0, 4);
-    m_VAOPhase.DisableArray(0);
-    m_VAOPhase.UnBind();
+        glBindTexture(GL_TEXTURE_2D, 0);
+    };
 
     glBindTexture(GL_TEXTURE_2D, 0);
+
+    draw(GL_TEXTURE0, m_AmplitudeTexture.GetTextureID(), 0, m_VAOAmplitude);
+    draw(GL_TEXTURE1, m_PhaseTexture.GetTextureID(), 1, m_VAOPhase);
+
 
     glDisable(GL_TEXTURE_2D);
 
