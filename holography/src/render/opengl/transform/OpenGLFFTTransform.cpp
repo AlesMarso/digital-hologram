@@ -13,13 +13,26 @@ void rctx::OpenGLFFTTransform::SetVariables(GLuint ampl, GLuint phase)
 	m_PhaseTextureID = phase;
 }
 
-void rctx::OpenGLFFTTransform::Init(const std::filesystem::path&)
+void rctx::OpenGLFFTTransform::SetAmplitudeTextureID(GLuint id)
 {
-	m_GPUFFTProgram.LinkComputeShader(m_SrcPath);
+	m_AmplitudeTextureID = id;
+}
+
+void rctx::OpenGLFFTTransform::SetPhaseTextureID(GLuint id)
+{
+	m_PhaseTextureID = id;
+}
+
+void rctx::OpenGLFFTTransform::Init(const std::filesystem::path& path)
+{
+	m_GPUFFTProgram.LinkComputeShader(path);
 }
 
 void rctx::OpenGLFFTTransform::Execute()
 {
+	GLuint query = 0;
+	glGenQueries(1, &query);
+
 	glEnable(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D,m_AmplitudeTextureID);
@@ -27,8 +40,16 @@ void rctx::OpenGLFFTTransform::Execute()
 
 	m_GPUFFTProgram.UseProgram();
 
-	glDispatchCompute(1, 1, 1);
 	glMemoryBarrier(GL_ALL_BARRIER_BITS);
+
+	glBeginQuery(GL_ANY_SAMPLES_PASSED, query);
+	glDispatchCompute(1, 1, 1);
+	glEndQuery(GL_ANY_SAMPLES_PASSED);
+
+	GLint res = 0;
+	glGetQueryiv(query, GL_QUERY_RESULT, &res);
+
+	std::cout << res << std::endl;
 
 	glBindImageTexture(0, 0, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
 	glBindTexture(GL_TEXTURE_2D, 0);

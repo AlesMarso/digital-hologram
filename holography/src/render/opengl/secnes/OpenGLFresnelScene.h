@@ -9,6 +9,7 @@
 #include <render/opengl/buffers/VertexArrayObject.h>
 #include <render/opengl/buffers/VertexBufferObjectClass.h>
 #include <render/opengl/transform/OpenGLPSITransform.h>
+#include <render/opengl/transform/OpenGLFFTTransform.h>
 
 namespace rctx
 {
@@ -47,5 +48,6 @@ namespace rctx
 
 	private:
 		OpenGLPSITransform m_PSITransform;
+		OpenGLFFTTransform m_FFTTransform;
 	};
 }

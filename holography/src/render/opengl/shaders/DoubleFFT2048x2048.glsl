@@ -121,20 +121,19 @@ void fft_array()
 	}
 }
 
-void load_from_texture_to_array()
+void load_from_texture_to_array(uint index)
 {
-	uint texPosX = gl_GlobalInvocationID.x;
+	uint texPosX = (gl_GlobalInvocationID.x * MAX_POINTS_COUNT_PER_THREAD) + index;
 
 	for(uint i = 0; i < PixelsX; i++)
 	{
-		uint reverse_i = BitReverse(i, Log2Levels);
-		array[i] = imageLoad(out_tex, ivec2(reverse_i, texPosX)).rg;
+		array[i] = imageLoad(out_tex, ivec2(i, texPosX)).rg;
 	}
 }
 
-void load_from_array_to_texture()
+void load_from_array_to_texture(uint index)
 {
-	uint texPosX = gl_GlobalInvocationID.x;
+	uint texPosX = (gl_GlobalInvocationID.x * MAX_POINTS_COUNT_PER_THREAD) + index;
 
 	float ampl = 0;
 	float phi = 0;
@@ -168,20 +167,19 @@ void load_from_array_to_texture()
 	}
 }
 
-void load_from_texture_to_array_2()
+void load_from_texture_to_array_2(uint index)
 {
-	uint texPosX = gl_GlobalInvocationID.x;
+	uint texPosX = (gl_GlobalInvocationID.x * MAX_POINTS_COUNT_PER_THREAD) + index;
 
 	for(uint i = 0; i < PixelsX; i++)
 	{
-		uint reverse_i = BitReverse(i, Log2Levels);
-		array[i] = imageLoad(out_tex, ivec2(texPosX, reverse_i)).rg;
+		array[i] = imageLoad(out_tex, ivec2(texPosX, i)).rg;
 	}
 }
 
-void load_from_array_to_texture_2()
+void load_from_array_to_texture_2(uint index)
 {
-	uint texPosX = gl_GlobalInvocationID.x;
+	uint texPosX = (gl_GlobalInvocationID.x * MAX_POINTS_COUNT_PER_THREAD) + index;
 
 	float ampl = 0;
 	float phi = 0;

@@ -190,6 +190,7 @@
     <None Include="x64\Debug\shaders\DoubleFFT2816x2816.glsl" />
     <None Include="x64\Debug\shaders\DoubleFFT128x128_second.glsl" />
     <None Include="src\render\opengl\shaders\PSI128x128.glsl" />
+    <None Include="x64\Debug\shaders\DoubleFFT2048x2048.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="toolbar1.bmp">

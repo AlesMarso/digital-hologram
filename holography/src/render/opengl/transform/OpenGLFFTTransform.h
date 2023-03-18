@@ -19,6 +19,8 @@ namespace rctx
 		virtual ~OpenGLFFTTransform() = default;
 
 		void SetVariables(GLuint, GLuint);
+		void SetAmplitudeTextureID(GLuint id);
+		void SetPhaseTextureID(GLuint id);
 
 		virtual void Init(const std::filesystem::path&) override;
 		virtual void Execute() override;
