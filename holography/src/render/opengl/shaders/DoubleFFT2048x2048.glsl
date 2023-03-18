@@ -1,7 +1,8 @@
 #version 460 core
 
 layout(local_size_x = 1024) in;
-layout(binding = 0, rgba8) uniform image2D out_tex;
+layout(binding = 0, rgba8) uniform image2D AmplitudeTextureID;
+layout(binding = 1, rgba8) uniform image2D PhaseTextureID;
 
 const uint PixelsX= 2048;
 const uint Log2Levels = 11;
@@ -9,7 +10,7 @@ const uint Log2Levels = 11;
 const float M_PI = 3.14159265358979323846;
 const float M_2PI = 2 * M_PI;
 
-const uint MAX_POINTS_COUNT_PER_THREAD = 4;
+const uint MAX_POINTS_COUNT_PER_THREAD = 2;
 const uint MAX_SUB_ARRAY_COUNT = 2;
 const uint MAX_SUB_ARRAY_SIZE = 2048;
 
@@ -127,7 +128,8 @@ void load_from_texture_to_array(uint index)
 
 	for(uint i = 0; i < PixelsX; i++)
 	{
-		array[i] = imageLoad(out_tex, ivec2(i, texPosX)).rg;
+		uint reverse_i = BitReverse(i, Log2Levels);
+		array[i] = imageLoad(AmplitudeTextureID, ivec2(reverse_i, texPosX)).rg;
 	}
 }
 
@@ -163,7 +165,7 @@ void load_from_array_to_texture(uint index)
 
 		pixelVal = vec4(val_ampl, val_ampl, val_ampl, 0.0);
 
-		imageStore(out_tex, ivec2(i, texPosX), pixelVal);
+		imageStore(AmplitudeTextureID, ivec2(i, texPosX), pixelVal);
 	}
 }
 
@@ -173,7 +175,8 @@ void load_from_texture_to_array_2(uint index)
 
 	for(uint i = 0; i < PixelsX; i++)
 	{
-		array[i] = imageLoad(out_tex, ivec2(texPosX, i)).rg;
+		uint reverse_i = BitReverse(i, Log2Levels);
+		array[i] = imageLoad(AmplitudeTextureID, ivec2(texPosX, reverse_i)).rg;
 	}
 }
 
@@ -204,12 +207,16 @@ void load_from_array_to_texture_2(uint index)
 
 	for(uint i = 0; i < PixelsX; i++)
 	{
-		val_ampl = array[i].r / max;
+		if(array[i].r < 500)
+			val_ampl = array[i].r;
+		else
+			val_ampl = 0.0;
+
 		val_phi = array[i].g;
 
 		pixelVal = vec4(val_ampl, val_ampl, val_ampl, 0.0);
 
-		imageStore(out_tex, ivec2(texPosX, i), pixelVal);
+		imageStore(AmplitudeTextureID, ivec2(texPosX, i), pixelVal);
 	}
 }
 
@@ -225,7 +232,7 @@ void main()
 	}
 
 	barrier();
-
+	
 	for(uint id = 0; id < MAX_POINTS_COUNT_PER_THREAD; id++)
 	{
 		load_from_texture_to_array_2(id);
