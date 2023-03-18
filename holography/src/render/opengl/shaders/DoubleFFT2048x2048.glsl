@@ -9,6 +9,10 @@ const uint Log2Levels = 11;
 const float M_PI = 3.14159265358979323846;
 const float M_2PI = 2 * M_PI;
 
+const uint MAX_POINTS_COUNT_PER_THREAD = 4;
+const uint MAX_SUB_ARRAY_COUNT = 2;
+const uint MAX_SUB_ARRAY_SIZE = 2048;
+
 // right = a + bi, left = c + di
 // right + left = (a + bi) + (c + di) = 
 // = (a + c) + i(b + d)
@@ -75,7 +79,7 @@ float calc_phi(float a, float b)
 	return atan_val;
 }
 
-vec2 array[128];
+vec2 array[2048];
 
 void fft_array()
 {
@@ -213,19 +217,25 @@ void load_from_array_to_texture_2()
 
 void main()
 {
-	load_from_texture_to_array();
+	for(uint id = 0; id < MAX_POINTS_COUNT_PER_THREAD; id++)
+	{
+		load_from_texture_to_array(id);
 
-	fft_array();
+		fft_array();
 
-	load_from_array_to_texture();
+		load_from_array_to_texture(id);
+	}
 
 	barrier();
 
-	load_from_texture_to_array_2();
+	for(uint id = 0; id < MAX_POINTS_COUNT_PER_THREAD; id++)
+	{
+		load_from_texture_to_array_2(id);
 	
-	fft_array();
+		fft_array();
 	
-	load_from_array_to_texture_2();
+		load_from_array_to_texture_2(id);
+	}
 	
 	barrier();
 }
