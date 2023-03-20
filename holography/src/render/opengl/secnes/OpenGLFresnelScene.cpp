@@ -78,6 +78,13 @@ bool rctx::OpenGLFresnelScene::Load()
 bool rctx::OpenGLFresnelScene::Calculate()
 {
     m_FFTTransform.Execute();
+
+    auto executiontime = m_FFTTransform.GetElapsedTime();
+
+    double res = static_cast<double>(executiontime) / static_cast<double>(M_10E9);
+
+    std::cout << "Execution time = " << res << " in seconds" << std::endl;
+
     return true;
 }
 

@@ -26,13 +26,13 @@ void rctx::OpenGLFFTTransform::SetPhaseTextureID(GLuint id)
 void rctx::OpenGLFFTTransform::Init(const std::filesystem::path& path)
 {
 	m_GPUFFTProgram.LinkComputeShader(path);
+
+	glGenQueries(1, &m_StartQuery);
+	glGenQueries(1, &m_EndQuery);
 }
 
 void rctx::OpenGLFFTTransform::Execute()
 {
-	GLuint query = 0;
-	glGenQueries(1, &query);
-
 	glEnable(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D,m_AmplitudeTextureID);
@@ -45,14 +45,14 @@ void rctx::OpenGLFFTTransform::Execute()
 
 	glMemoryBarrier(GL_ALL_BARRIER_BITS);
 
-	glBeginQuery(GL_ANY_SAMPLES_PASSED, query);
+	glQueryCounter(m_StartQuery, GL_TIMESTAMP);
 	glDispatchCompute(1, 1, 1);
-	glEndQuery(GL_ANY_SAMPLES_PASSED);
+	glQueryCounter(m_EndQuery, GL_TIMESTAMP);
 
-	GLint res = 0;
-	glGetQueryiv(query, GL_QUERY_RESULT, &res);
+	glGetQueryObjectui64v(m_StartQuery, GL_QUERY_RESULT, &m_StartTime);
+	glGetQueryObjectui64v(m_EndQuery, GL_QUERY_RESULT, &m_EndTime);
 
-	std::cout << res << std::endl;
+	m_ElapsedTime = m_EndTime - m_StartTime;
 
 	glBindImageTexture(0, 0, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
 	glBindTexture(GL_TEXTURE_2D, 0);
