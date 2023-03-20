@@ -14,9 +14,9 @@ namespace rctx
 	class OpenGLFFTTransform : public IOpenGLTransform
 	{
 	public:
-		OpenGLFFTTransform() = default;
+		OpenGLFFTTransform();
 		OpenGLFFTTransform(const std::filesystem::path&, GLuint, GLuint);
-		virtual ~OpenGLFFTTransform() = default;
+		virtual ~OpenGLFFTTransform();
 
 		void SetVariables(GLuint, GLuint);
 		void SetAmplitudeTextureID(GLuint id);

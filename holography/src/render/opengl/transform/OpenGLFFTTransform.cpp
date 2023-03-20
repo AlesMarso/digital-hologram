@@ -1,10 +1,23 @@
 #include "OpenGLFFTTransform.h"
 
+rctx::OpenGLFFTTransform::OpenGLFFTTransform()
+	: m_AmplitudeTextureID(0), m_PhaseTextureID(0)
+{
+	glGenQueries(1, &m_StartQuery);
+	glGenQueries(1, &m_EndQuery);
+}
+
 rctx::OpenGLFFTTransform::OpenGLFFTTransform(const std::filesystem::path& src, GLuint ampl, GLuint phase)
 	: m_SrcPath(src)
 {
 	Init(m_SrcPath);
 	SetVariables(ampl, phase);
+}
+
+rctx::OpenGLFFTTransform::~OpenGLFFTTransform()
+{
+	glDeleteQueries(1, &m_StartQuery);
+	glDeleteQueries(1, &m_EndQuery);
 }
 
 void rctx::OpenGLFFTTransform::SetVariables(GLuint ampl, GLuint phase)
@@ -27,8 +40,6 @@ void rctx::OpenGLFFTTransform::Init(const std::filesystem::path& path)
 {
 	m_GPUFFTProgram.LinkComputeShader(path);
 
-	glGenQueries(1, &m_StartQuery);
-	glGenQueries(1, &m_EndQuery);
 }
 
 void rctx::OpenGLFFTTransform::Execute()
