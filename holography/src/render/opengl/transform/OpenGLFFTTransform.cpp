@@ -38,6 +38,9 @@ void rctx::OpenGLFFTTransform::Execute()
 	glBindTexture(GL_TEXTURE_2D,m_AmplitudeTextureID);
 	glBindImageTexture(0, m_AmplitudeTextureID, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
 
+	glBindTexture(GL_TEXTURE_2D, m_PhaseTextureID);
+	glBindImageTexture(1, m_PhaseTextureID, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+
 	m_GPUFFTProgram.UseProgram();
 
 	glMemoryBarrier(GL_ALL_BARRIER_BITS);

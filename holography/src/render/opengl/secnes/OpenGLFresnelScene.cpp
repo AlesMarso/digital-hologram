@@ -69,6 +69,8 @@ bool rctx::OpenGLFresnelScene::Load()
 
     m_FFTTransform.Init(holoIniFile.GetDoubleFFT128x128ComputeShaderFilePath());
     m_FFTTransform.SetAmplitudeTextureID(m_AmplitudeTexture.GetTextureID());
+    m_FFTTransform.SetPhaseTextureID(m_PhaseTexture.GetTextureID());
+
 
     return true;
 }
