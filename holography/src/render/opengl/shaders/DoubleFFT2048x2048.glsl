@@ -129,7 +129,19 @@ void load_from_texture_to_array(uint index)
 	for(uint i = 0; i < PixelsX; i++)
 	{
 		uint reverse_i = BitReverse(i, Log2Levels);
-		array[i] = imageLoad(AmplitudeTextureID, ivec2(reverse_i, texPosX)).rg;
+		array[i].r = imageLoad(AmplitudeTextureID, ivec2(reverse_i, texPosX)).r;
+		array[i].g = 0;
+	}
+}
+
+void load_from_texture_to_array1(uint index)
+{
+	uint texPosX = (gl_GlobalInvocationID.x * MAX_POINTS_COUNT_PER_THREAD) + index;
+
+	for(uint i = 0; i < PixelsX; i++)
+	{
+		array[i].r = imageLoad(AmplitudeTextureID, ivec2(i, texPosX)).r;
+		array[i].g = imageLoad(PhaseTextureID, ivec2(i, texPosX)).r;
 	}
 }
 
@@ -157,15 +169,40 @@ void load_from_array_to_texture(uint index)
 
 	float val_ampl = 0;
 	float val_phi = 0;
+	float k = 1 / max;
 
 	for(uint i = 0; i < PixelsX; i++)
 	{
-		val_ampl = array[i].r / max;
+		val_ampl = array[i].r * k;
+		val_phi = array[i].g;
+
+		pixelVal = vec4(val_ampl, val_phi, k, 0.0);
+
+		imageStore(AmplitudeTextureID, ivec2(i, texPosX), pixelVal);
+	}
+}
+
+void load_from_array_to_texture1(uint index)
+{
+	uint texPosX = (gl_GlobalInvocationID.x * MAX_POINTS_COUNT_PER_THREAD) + index;
+
+	vec4 pixelVal;
+
+	float val_ampl = 0;
+	float val_phi = 0;
+
+	for(uint i = 0; i < PixelsX; i++)
+	{
+		val_ampl = array[i].r;
 		val_phi = array[i].g;
 
 		pixelVal = vec4(val_ampl, val_ampl, val_ampl, 0.0);
 
 		imageStore(AmplitudeTextureID, ivec2(i, texPosX), pixelVal);
+
+		pixelVal = vec4(val_phi, val_phi, val_phi, 0.0);
+
+		imageStore(PhaseTextureID, ivec2(i, texPosX), pixelVal);
 	}
 }
 
@@ -176,7 +213,22 @@ void load_from_texture_to_array_2(uint index)
 	for(uint i = 0; i < PixelsX; i++)
 	{
 		uint reverse_i = BitReverse(i, Log2Levels);
-		array[i] = imageLoad(AmplitudeTextureID, ivec2(texPosX, reverse_i)).rg;
+		vec3 val = imageLoad(AmplitudeTextureID, ivec2(texPosX, reverse_i)).rgb;
+		float k = val.b;
+
+		array[i].r = (val.r) * cos(val.g);
+		array[i].g = (val.r) * sin(val.g);
+	}
+}
+
+void load_from_texture_to_array_3(uint index)
+{
+	uint texPosX = (gl_GlobalInvocationID.x * MAX_POINTS_COUNT_PER_THREAD) + index;
+
+	for(uint i = 0; i < PixelsX; i++)
+	{
+		array[i].r = imageLoad(AmplitudeTextureID, ivec2(texPosX, i)).r;
+		array[i].g = imageLoad(PhaseTextureID, ivec2(texPosX, i)).r;
 	}
 }
 
@@ -207,16 +259,54 @@ void load_from_array_to_texture_2(uint index)
 
 	for(uint i = 0; i < PixelsX; i++)
 	{
-		if(array[i].r < 500)
+		if(array[i].r < 255)
 			val_ampl = array[i].r;
 		else
-			val_ampl = 0.0;
+			val_ampl = 0;
 
 		val_phi = array[i].g;
 
 		pixelVal = vec4(val_ampl, val_ampl, val_ampl, 0.0);
 
 		imageStore(AmplitudeTextureID, ivec2(texPosX, i), pixelVal);
+
+		pixelVal = vec4(val_phi, val_phi, val_phi, 0.0);
+
+		imageStore(PhaseTextureID, ivec2(texPosX, i), pixelVal);
+	}
+}
+
+void load_from_array_to_texture_3(uint index)
+{
+	uint texPosX = (gl_GlobalInvocationID.x * MAX_POINTS_COUNT_PER_THREAD) + index;
+
+	vec4 pixelVal;
+
+	float val_ampl = 0;
+	float val_phi = 0;
+
+	for(uint i = 0; i < PixelsX; i++)
+	{
+		val_ampl = array[i].r;
+		val_phi = array[i].g;
+
+		pixelVal = vec4(val_ampl, val_ampl, val_ampl, 0.0);
+
+		imageStore(AmplitudeTextureID, ivec2(texPosX, i), pixelVal);
+
+		pixelVal = vec4(val_phi, val_phi, val_phi, 0.0);
+
+		imageStore(PhaseTextureID, ivec2(texPosX, i), pixelVal);
+	}
+}
+
+void sort()
+{
+	for(int i = 0; i < 1024; i++)
+	{
+		vec2 temp = array[i];
+		array[i] = array[i+ 1024];
+		array[i+1024] = temp;
 	}
 }
 
@@ -243,4 +333,24 @@ void main()
 	}
 	
 	barrier();
+
+	for(uint id = 0; id < MAX_POINTS_COUNT_PER_THREAD; id++)
+	{
+		load_from_texture_to_array1(id);
+
+		sort();
+
+		load_from_array_to_texture1(id);
+	}
+
+	barrier();
+
+	for(uint id = 0; id < MAX_POINTS_COUNT_PER_THREAD; id++)
+	{
+		load_from_texture_to_array_3(id);
+	
+		sort();
+	
+		load_from_array_to_texture_3(id);
+	}
 }
