@@ -216,8 +216,8 @@ void load_from_texture_to_array_2(uint index)
 		vec3 val = imageLoad(AmplitudeTextureID, ivec2(texPosX, reverse_i)).rgb;
 		float k = val.b;
 
-		array[i].r = (val.r) * cos(val.g);
-		array[i].g = (val.r) * sin(val.g);
+		array[i].r = (val.r) * cos(val.g * M_2PI);
+		array[i].g = (val.r) * sin(val.g * M_2PI);
 	}
 }
 
@@ -259,11 +259,7 @@ void load_from_array_to_texture_2(uint index)
 
 	for(uint i = 0; i < PixelsX; i++)
 	{
-		if(array[i].r < 255)
-			val_ampl = array[i].r;
-		else
-			val_ampl = 0;
-
+		val_ampl = array[i].r;
 		val_phi = array[i].g;
 
 		pixelVal = vec4(val_ampl, val_ampl, val_ampl, 0.0);
@@ -353,4 +349,6 @@ void main()
 	
 		load_from_array_to_texture_3(id);
 	}
+
+	barrier();
 }
