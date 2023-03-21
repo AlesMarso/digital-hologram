@@ -48,7 +48,7 @@ float calc_ampl(float i1, float i2, float i3, float i4)
 
 	float ap = bxy / 2;
 
-	return bxy * K;
+	return ap * K;
 }
 
 float calc_phi(float i1, float i2, float i3, float i4)
