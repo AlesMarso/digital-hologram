@@ -14,9 +14,9 @@ namespace rctx
 	class OpenGLPSITransform : public IOpenGLTransform
 	{
 	public:
-		OpenGLPSITransform() = default;
+		OpenGLPSITransform();
 		OpenGLPSITransform(const std::filesystem::path&);
-		~OpenGLPSITransform() = default;
+		virtual ~OpenGLPSITransform();
 
 		void SetFirstPSIImage(GLuint);
 		void SetSecondPSIImage(GLuint);

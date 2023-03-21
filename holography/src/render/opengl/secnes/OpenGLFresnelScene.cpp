@@ -52,8 +52,8 @@ bool rctx::OpenGLFresnelScene::Load()
     m_PSIThirdTexture.CreateFromImage(holoIniFile.GetPSIThirdImage());
     m_PSIFourthTexture.CreateFromImage(holoIniFile.GetPSIFourthImage());
 
-    m_AmplitudeTexture.CreateFromImage(holoIniFile.GetDoubleFFT128x128ImageFile());
-    m_PhaseTexture.Create(2048, 2048);
+    m_AmplitudeTexture.Create(128, 128); //CreateFromImage(holoIniFile.GetDoubleFFT128x128ImageFile());
+    m_PhaseTexture.Create(128, 128);
 
     m_RenderProgram.LinkVertexShader(holoIniFile.GetVertexShaderFilePath());
     m_RenderProgram.LinkFragmentShader(holoIniFile.GetFragmentShaderFilePath());
@@ -77,9 +77,9 @@ bool rctx::OpenGLFresnelScene::Load()
 
 bool rctx::OpenGLFresnelScene::Calculate()
 {
-    m_FFTTransform.Execute();
+    m_PSITransform.Execute();
 
-    auto executiontime = m_FFTTransform.GetElapsedTime();
+    auto executiontime = m_PSITransform.GetElapsedTime();
 
     double res = static_cast<double>(executiontime) / static_cast<double>(M_10E9);
 

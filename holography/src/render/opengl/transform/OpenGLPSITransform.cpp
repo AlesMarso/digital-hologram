@@ -1,9 +1,21 @@
 #include "OpenGLPSITransform.h"
 
+rctx::OpenGLPSITransform::OpenGLPSITransform()
+{
+	glGenQueries(1, &m_StartQuery);
+	glGenQueries(1, &m_EndQuery);
+}
+
 rctx::OpenGLPSITransform::OpenGLPSITransform(const std::filesystem::path& src)
 	: m_SrcPath(src)
 {
 	Init(m_SrcPath);
+}
+
+rctx::OpenGLPSITransform::~OpenGLPSITransform()
+{
+	glDeleteQueries(1, &m_StartQuery);
+	glDeleteQueries(1, &m_EndQuery);
 }
 
 void rctx::OpenGLPSITransform::SetFirstPSIImage(GLuint id)
@@ -84,9 +96,17 @@ void rctx::OpenGLPSITransform::Execute()
 	glBindImageTexture(5, m_PhaseImage, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
 
 	m_PSIProgram.UseProgram();
-
-	glDispatchCompute(1, 1, 1);
+	
 	glMemoryBarrier(GL_ALL_BARRIER_BITS);
+
+	glQueryCounter(m_StartQuery, GL_TIMESTAMP);
+	glDispatchCompute(1, 1, 1);
+	glQueryCounter(m_EndQuery, GL_TIMESTAMP);
+
+	glGetQueryObjectui64v(m_StartQuery, GL_QUERY_RESULT, &m_StartTime);
+	glGetQueryObjectui64v(m_EndQuery, GL_QUERY_RESULT, &m_EndTime);
+
+	m_ElapsedTime = m_EndTime - m_StartTime;
 
 	glBindImageTexture(0, 0, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
 	glBindTexture(GL_TEXTURE_2D, 0);
