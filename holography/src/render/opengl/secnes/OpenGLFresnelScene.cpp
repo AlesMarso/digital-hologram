@@ -2,11 +2,11 @@
 
 rctx::OpenGLFresnelScene::OpenGLFresnelScene()
 {
-    m_VerticesAmplitude[0] = -0.95f; m_VerticesAmplitude[4] = -0.95f; m_VerticesAmplitude[8] = -0.05f; m_VerticesAmplitude[12] = -0.05f;
-    m_VerticesAmplitude[1] = -0.95f; m_VerticesAmplitude[5] = 0.95f; m_VerticesAmplitude[9] = 0.95f; m_VerticesAmplitude[13] = -0.95f;
+    m_VerticesAmplitude[0] = -1.0f; m_VerticesAmplitude[4] = -1.0f; m_VerticesAmplitude[8] = 0.0f; m_VerticesAmplitude[12] = 0.0f;
+    m_VerticesAmplitude[1] = -1.0f; m_VerticesAmplitude[5] = 1.0f; m_VerticesAmplitude[9] = 1.0f; m_VerticesAmplitude[13] = -1.0f;
 
-    m_VerticesPhase[0] = 0.05f; m_VerticesPhase[4] = 0.05f; m_VerticesPhase[8] = 0.95f; m_VerticesPhase[12] = 0.95f;
-    m_VerticesPhase[1] = -0.95f; m_VerticesPhase[5] = 0.95f; m_VerticesPhase[9] = 0.95f; m_VerticesPhase[13] = -0.95f;
+    m_VerticesPhase[0] = 0.0f; m_VerticesPhase[4] = 0.0f; m_VerticesPhase[8] = 1.0f; m_VerticesPhase[12] = 1.0f;
+    m_VerticesPhase[1] = -1.0f; m_VerticesPhase[5] = 1.0f; m_VerticesPhase[9] = 1.0f; m_VerticesPhase[13] = -1.0f;
 
     m_VerticesAmplitude[2] = 0.0f; m_VerticesAmplitude[6] = 0.0f; m_VerticesAmplitude[10] = 1.0f; m_VerticesAmplitude[14] = 1.0f;
     m_VerticesAmplitude[3] = 0.0f; m_VerticesAmplitude[7] = 1.0f; m_VerticesAmplitude[11] = 1.0f; m_VerticesAmplitude[15] = 0.0f;
