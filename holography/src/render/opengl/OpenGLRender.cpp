@@ -94,6 +94,24 @@ bool rctx::OpenGLRender::Load(HWND)
 			}
 		});
 
+	GLint maxWorkGroupSizeX, maxWorkGroupSizeY, maxWorkGroupSizeZ;
+
+	glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 0, &maxWorkGroupSizeX);
+	glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 1, &maxWorkGroupSizeY);
+	glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 2, &maxWorkGroupSizeZ);
+
+
+	std::cout << "Max work group size (x, y, z) = (" <<
+		maxWorkGroupSizeX << ", " << 
+		maxWorkGroupSizeY << ", " << 
+		maxWorkGroupSizeZ << ")" << std::endl;
+
+	GLint maxSharedMemorySize = 0;
+
+	glGetIntegerv(GL_MAX_COMPUTE_SHARED_MEMORY_SIZE, &maxSharedMemorySize);
+
+	std::cout << "Max shared memory size = " << maxSharedMemorySize / KBYTES << " KB" << std::endl;
+
 	return m_RenderScene->Load();
 }
 

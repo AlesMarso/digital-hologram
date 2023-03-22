@@ -23,6 +23,9 @@
 #include <render/opengl/secnes/OpenGLDoubleFFT128x128points.h>
 #include <render/opengl/secnes/OpenGLDoubleFFT2816x2816points.h>
 
+constexpr unsigned int KBYTES = 1024;
+constexpr unsigned int MBYTES = 1024 * 1024;
+
 namespace rctx
 {
 	enum TypeInfoItem

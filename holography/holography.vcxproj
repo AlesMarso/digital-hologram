@@ -204,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ribbon1.mfcribbon-ms" />
+    <None Include="src\render\opengl\shaders\EXP.glsl" />
     <None Include="src\render\opengl\shaders\FragmentShader.frag">
       <FileType>Document</FileType>
     </None>
