@@ -130,7 +130,7 @@ void load_from_texture_to_array(uint index)
 	{
 		uint reverse_i = BitReverse(i, Log2Levels);
 		array[i].r = imageLoad(AmplitudeTextureID, ivec2(reverse_i, texPosX)).r;
-		array[i].g = imageLoad(PhaseTextureID, ivec2(reverse_i, texPosX)).r;
+		array[i].g = imageLoad(PhaseTextureID, ivec2(reverse_i, texPosX)).r * M_2PI;
 	}
 }
 
