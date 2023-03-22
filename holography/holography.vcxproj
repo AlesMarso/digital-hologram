@@ -204,10 +204,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ribbon1.mfcribbon-ms" />
+    <None Include="src\render\opengl\shaders\ComputeShader.glsl" />
+    <None Include="src\render\opengl\shaders\DoubleFFT128x128.glsl" />
+    <None Include="src\render\opengl\shaders\DoubleFFT128x128_second.glsl" />
+    <None Include="src\render\opengl\shaders\DoubleFFT2048x2048.glsl" />
+    <None Include="src\render\opengl\shaders\DoubleFFT2816x2816.glsl" />
     <None Include="src\render\opengl\shaders\EXP_2048x2048.glsl" />
+    <None Include="src\render\opengl\shaders\FFT.glsl" />
     <None Include="src\render\opengl\shaders\FragmentShader.frag">
       <FileType>Document</FileType>
     </None>
+    <None Include="src\render\opengl\shaders\FragmentShader.glsl" />
     <None Include="src\render\opengl\shaders\PSI128x128.glsl" />
     <None Include="src\render\opengl\shaders\VertexShader.ver" />
     <None Include="x64\Debug\holo.ini" />
