@@ -344,9 +344,9 @@ void main()
 	for(uint id = 0; id < MAX_POINTS_COUNT_PER_THREAD; id++)
 	{
 		load_from_texture_to_array_3(id);
-	
+
 		sort();
-	
+
 		load_from_array_to_texture_3(id);
 	}
 
