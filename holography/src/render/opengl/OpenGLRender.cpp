@@ -112,6 +112,12 @@ bool rctx::OpenGLRender::Load(HWND)
 
 	std::cout << "Max shared memory size = " << maxSharedMemorySize / KBYTES << " KB" << std::endl;
 
+	GLint64 test;
+
+	glGetInteger64v(GL_MAX_SHADER_STORAGE_BLOCK_SIZE, &test);
+
+	std::cout << "Max shader storage block size = " << test << std::endl;
+
 	return m_RenderScene->Load();
 }
 
