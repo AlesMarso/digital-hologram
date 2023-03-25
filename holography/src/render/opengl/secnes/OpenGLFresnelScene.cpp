@@ -53,7 +53,7 @@ bool rctx::OpenGLFresnelScene::Load()
     m_PSIFourthTexture.CreateFromImage(holoIniFile.GetPSIFourthImage());
 
     m_AmplitudeTexture.CreateFromImage(holoIniFile.GetDoubleFFT128x128ImageFile());
-    m_PhaseTexture.Create(2048, 2048);
+    m_PhaseTexture.Create(4096, 4096);
 
     m_RenderProgram.LinkVertexShader(holoIniFile.GetVertexShaderFilePath());
     m_RenderProgram.LinkFragmentShader(holoIniFile.GetFragmentShaderFilePath());

@@ -4,15 +4,15 @@ layout(local_size_x = 1024) in;
 layout(binding = 0, rgba8) uniform image2D AmplitudeTextureID;
 layout(binding = 1, rgba8) uniform image2D PhaseTextureID;
 
-const uint PixelsX= 2048;
+const uint PixelsX= 4096;
 const uint Log2Levels = 11;
 
 const float M_PI = 3.14159265358979323846;
 const float M_2PI = 2 * M_PI;
 
-const uint MAX_POINTS_COUNT_PER_THREAD = 2;
-const uint MAX_SUB_ARRAY_COUNT = 2;
-const uint MAX_SUB_ARRAY_SIZE = 2048;
+const uint MAX_POINTS_COUNT_PER_THREAD = 4;
+const uint MAX_SUB_ARRAY_COUNT = 4;
+const uint MAX_SUB_ARRAY_SIZE = 4096;
 
 // right = a + bi, left = c + di
 // right + left = (a + bi) + (c + di) = 
@@ -80,7 +80,7 @@ float calc_phi(float a, float b)
 	return atan_val;
 }
 
-vec2 array[2048];
+vec2 array[4096];
 
 void fft_array()
 {
